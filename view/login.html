@@ -2,49 +2,171 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Login</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
-	<link rel="stylesheet" href="../styles/base.css">
+	<title>Blog</title>
+	<link href="../styles/css/bootstrap.css" rel="stylesheet">
+	<link href="../styles/css/base.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com" rel="preconnect">
+	<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500;600;700&display=swap" rel="stylesheet">
+	<link crossorigin="anonymous"
+	      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+	      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+	      referrerpolicy="no-referrer"
+	      rel="stylesheet"/>
+	<script crossorigin="anonymous"
+	        integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="
+	        referrerpolicy="no-referrer"
+	        src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
 </head>
 <body>
-	<div id="content">
-		<div id="login-panel">
-			<div id="hotel-img">
-				<img alt="hotel-img" src="../resources/img/hotel.png">
-			</div>
-			<div id="login-header">
-				<h1>Motel X</h1>
-			</div>
-			<div class="container">
-				<div class="front-panel">
-					<form action="#" id="login-form" method="post">
-						<div class="form-group">
-							<label class="control-label" for="email">Email address</label>
-							<input autofocus="autofocus" class="form-control" id="email" name="email" placeholder=" test@example.com"
-							       type="email">
+	<div class="grid-container" id="login-grid">
+		<header>
+			<nav class="navbar navbar-expand-md">
+				<div class="container d-flex align-items-center">
+					<a class="navbar-brand mx-0 border-0" href="../index.html"><img alt="Motel X Logo"
+					                                                                draggable="false"
+					                                                                height="70"
+					                                                                id="Mote-X-logo"
+					                                                                src="/resources/img/logo-no-background.png"/></a>
+					<button class="navbar-toggler"
+					        data-bs-target="#navbar"
+					        data-bs-toggle="collapse"
+					        type="button">
+						<i class="fas fa-bars"></i>
+					</button>
+					<div class="collapse navbar-collapse" id="navbar">
+						<ul class="navbar-nav ms-auto align-items-center">
+							<li class="nav-item">
+								<a class="nav-link mx-2" href="/view/blog.html"><i class="fa-solid fa-blog pe-2"></i>Blog</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link mx-2" href="/view/gallery.html"><i
+									class="fa-regular fa-images pe-2"></i>Gallery</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link mx-2" href="/view/help.html"><i class="fa-solid fa-circle-info pe-2"></i>Help
+								</a>
+							</li>
+							<li class="nav-item mx-2">
+								<a class="nav-link mx-2" href="/view/login.html"><i class="fa-solid fa-right-to-bracket pe-2"></i>Log In</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<main id="content">
+			<div class="container py-5 overflow-hidden">
+				<div class="row">
+					<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+						<div class="card border-0 shadow-lg rounded-3 text-dark">
+							<div class="card-body p-5 text-center">
+								<form class="mb-md-4 mt-md-4 pb-5">
+									<h2 class="fw-bold mb-2 text-uppercase text-center">Login</h2>
+									<p class="text-dark-50 mb-5">Please enter your login and password!</p>
+									
+									<div class="form-outline form-white form-floating mb-4">
+										<input type="email" id="typeEmailX"
+										       class="form-control" />
+										<label class="form-label" for="typeEmailX">Email</label>
+									</div>
+									
+									<div class="form-outline form-white mb-5 form-floating">
+										<input type="password" id="typePasswordX"
+										       class="form-control col-form-label-lg" />
+										<label class="form-label" for="typePasswordX">Password</label>
+									</div>
+									
+<!--									<p class="small mb-5 pb-lg-2"><a href="#!">Forgot password?</a></p>-->
+									
+									<button id="login-submit" class="btn text-light btn-lg px-5 btn rounded-3"
+									        type="submit">Login
+									</button>
+									
+									<!--									<div class="d-flex justify-content-center text-center mt-4 pt-1">-->
+									<!--										<a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>-->
+									<!--										<a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>-->
+									<!--										<a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>-->
+									<!--									</div>-->
+								</form>
+								<div>
+									<p class="mb-0 mx-auto text-center">Don't have an account? <a id="sign-up-link"
+										href="registration.html" class="fw-bold text-decoration-underline">Sign Up</a>
+									</p>
+								</div>
+							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label" for="passwd">
-								Password
-							</label>
-							<input name="passwd" type="password" id="passwd" class="form-control" placeholder=" Password">
-						</div>
-						<div class="form-group">
-							<button id="submit_login" name="submitLogin" type="submit">
-								<span>
-									Log in
-								</span>
-							</button>
-						</div>
-						<div class="form-group">
-							<a href="registration.html" target="_self">
-							Don't have an account yet?
-							</a>
-						</div>
-					</form>
+					</div>
 				</div>
 			</div>
-		</div>
+		</main>
+		<footer class="text-center text-lg-start py-1">
+			<!-- Grid container -->
+			<div class="container">
+				<!-- Section: Links -->
+				<section>
+					<!-- Grid row-->
+					<div class="row text-center d-flex justify-content-center py-4">
+						<!-- Grid column -->
+						<div class="col-md-2">
+							<h6 class="text-uppercase font-weight-bold">
+								<a class="text-decoration-none footer-link" href="impressum.html">About us</a>
+							</h6>
+						</div>
+						<!-- Grid column -->
+						
+						<!-- Grid column -->
+						<div class="col-md-2">
+							<h6 class="text-uppercase font-weight-bold">
+								<a class="text-decoration-none footer-link" href="blog.html">Blog</a>
+							</h6>
+						</div>
+						<!-- Grid column -->
+						
+						<!-- Grid column -->
+						<div class="col-md-2">
+							<h6 class="text-uppercase font-weight-bold">
+								<a class="text-decoration-none footer-link" href="help.html">Help</a>
+							</h6>
+						</div>
+						<!-- Grid column -->
+						
+						<!-- Grid column -->
+						<div class="col-md-2">
+							<h6 class="text-uppercase font-weight-bold">
+								<a class="text-decoration-none footer-link" href="contact.html">Contact</a>
+							</h6>
+						</div>
+						<!-- Grid column -->
+					</div>
+					<!-- Grid row-->
+				</section>
+				<!-- Section: Links -->
+				
+				<!-- Section: Social -->
+				<section class="text-center my-2">
+					<a class="text-white me-4 text-decoration-none" href="#">
+						<i class="fa-brands fa-facebook"></i>
+					</a>
+					<a class="text-white me-4 text-decoration-none" href="">
+						<i class="fa-brands fa-twitter"></i>
+					</a>
+					<a class="text-white me-4 text-decoration-none" href="">
+						<i class="fa-brands fa-google"></i>
+					</a>
+					<a class="text-white me-4 text-decoration-none" href="">
+						<i class="fa-brands fa-instagram"></i>
+					</a>
+					<a class="text-white me-4 text-decoration-none" href="#">
+						<i class="fa-brands fa-linkedin"></i>
+					</a>
+				</section>
+				<!-- Section: Social -->
+			</div>
+			<!-- Grid container -->
+		</footer>
 	</div>
+	<script src="../styles/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
