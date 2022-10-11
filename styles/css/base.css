@@ -1,6 +1,7 @@
 :root {
+    --gray-text: #605e5e;
     --link-color: #50e3c3;
-    --link-darker-color: #40b69c;
+    --link-darker-color: #34937f;
     --action-color: #50e3c3;
     --action-darker-color: #40b69c;
     --action-lighter-color: #b9f4e7;
@@ -43,12 +44,15 @@ nav {
     font-family: var(--heading-font), sans-serif;
     background-color: var(--header-color);
 }
+
 .nav-link {
     color: var(--header-footer-link-color);
 }
 
 .nav-link:hover {
-    color: var(--action-lighter-color);
+    color: var(--header-footer-link-color);
+    border-bottom: 0.14285714rem solid #fac600;
+    border-bottom-color: var(--action-color,#fac600);
 }
 
 /* HEADER + NAV CSS END */
@@ -115,3 +119,78 @@ footer {
 }
 
 /* FAQ CSS END */
+
+/* GALLERY CSS START */
+
+.carousel-inner,
+.carousel-item,
+.carousel-item.active {
+    height: 80vh;
+}
+
+.carousel-item {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.carousel-item:nth-child(1) {
+    background-image: url("/resources/img/hotel/hotel_beds_photo.jpg");
+}
+
+.carousel-item:nth-child(2) {
+    background-image: url('/resources/img/hotel/hotel_glass_wall_restaraunt.jpg');
+}
+
+.carousel-item:nth-child(3) {
+    background-image: url('/resources/img/hotel/hotel_hall_photo.jpg');
+}
+
+.carousel-item:nth-child(4) {
+    background-image: url('/resources/img/hotel/hotel_portier_photo.jpg');
+}
+
+.carousel-item:nth-child(5) {
+    background-image: url("/resources/img/hotel/liv_room_photo.jpg");
+}
+
+.carousel-item:nth-child(6) {
+    background-image: url('/resources/img/hotel/hotel_restaraunt_photo.jpg');
+}
+
+.carousel-item:nth-child(7) {
+    background-image: url('/resources/img/hotel/hotel_toilet_photo.jpg');
+}
+
+.carousel-item:nth-child(8) {
+    background-image: url('/resources/img/hotel/hotel_sw_pool_photo.jpg');
+}
+
+.carousel-item:nth-child(9) {
+    background-image: url('/resources/img/hotel/hotel_river_photo.jpg');
+}
+
+/* GALLERY CSS END */
+
+/* CONTACT CSS START */
+
+.guests-label {
+    background-color: white;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    #arr-dep-arrow {
+       transform: rotate(90deg);
+    }
+}
+
+textarea {
+    resize: none;
+}
+
+#submit-contact {
+    background-color: var(--action-color);
+}
+
+/* CONTACT CSS END */
