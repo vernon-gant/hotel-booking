@@ -73,11 +73,11 @@ footer {
 
 /* FOOTER CSS END */
 
-/* IMRESSUM CSS START */
+/* INDEX CSS START */
 
 
 
-/* IMPRESSUM CSS END */
+/* INDEX CSS END */
 
 /* LOGIN CSS START */
 
@@ -135,39 +135,39 @@ footer {
 }
 
 .carousel-item:nth-child(1) {
-    background-image: url("/resources/img/hotel/hotel_beds_photo.jpg");
+    background-image: url("/resources/img/gallery/hotel_beds_photo.jpg");
 }
 
 .carousel-item:nth-child(2) {
-    background-image: url('/resources/img/hotel/hotel_glass_wall_restaraunt.jpg');
+    background-image: url('/resources/img/gallery/hotel_glass_wall_restaraunt.jpg');
 }
 
 .carousel-item:nth-child(3) {
-    background-image: url('/resources/img/hotel/hotel_hall_photo.jpg');
+    background-image: url('/resources/img/gallery/hotel_hall_photo.jpg');
 }
 
 .carousel-item:nth-child(4) {
-    background-image: url('/resources/img/hotel/hotel_portier_photo.jpg');
+    background-image: url('/resources/img/gallery/hotel_portier_photo.jpg');
 }
 
 .carousel-item:nth-child(5) {
-    background-image: url("/resources/img/hotel/liv_room_photo.jpg");
+    background-image: url("/resources/img/gallery/liv_room_photo.jpg");
 }
 
 .carousel-item:nth-child(6) {
-    background-image: url('/resources/img/hotel/hotel_restaraunt_photo.jpg');
+    background-image: url('/resources/img/gallery/hotel_restaraunt_photo.jpg');
 }
 
 .carousel-item:nth-child(7) {
-    background-image: url('/resources/img/hotel/hotel_toilet_photo.jpg');
+    background-image: url('/resources/img/gallery/hotel_toilet_photo.jpg');
 }
 
 .carousel-item:nth-child(8) {
-    background-image: url('/resources/img/hotel/hotel_sw_pool_photo.jpg');
+    background-image: url('/resources/img/gallery/hotel_sw_pool_photo.jpg');
 }
 
 .carousel-item:nth-child(9) {
-    background-image: url('/resources/img/hotel/hotel_river_photo.jpg');
+    background-image: url('/resources/img/gallery/hotel_river_photo.jpg');
 }
 
 /* GALLERY CSS END */
