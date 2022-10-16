@@ -52,7 +52,7 @@ nav {
 .nav-link:hover {
     color: var(--header-footer-link-color);
     border-bottom: 0.14285714rem solid #fac600;
-    border-bottom-color: var(--action-color,#fac600);
+    border-bottom-color: var(--action-color, #fac600);
 }
 
 /* HEADER + NAV CSS END */
@@ -75,7 +75,9 @@ footer {
 
 /* INDEX CSS START */
 
-
+.fit-cover {
+    object-fit: cover;
+}
 
 /* INDEX CSS END */
 
@@ -181,7 +183,7 @@ footer {
 
 @media (max-width: 768px) {
     #arr-dep-arrow {
-       transform: rotate(90deg);
+        transform: rotate(90deg);
     }
 }
 
