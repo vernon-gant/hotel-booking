@@ -8,6 +8,7 @@
 				<div class="card shadow-lg p-4 p-md-5">
 					<h3 class="fw-bold card-title text-center mb-4">Registration Form</h3>
 					<div class="card-body container">
+<!--						TODO: continue designing registration form-->
 						<form action="#">
 							<div>
 								<div>

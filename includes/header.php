@@ -22,15 +22,12 @@
 	      rel="preconnect">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500;600;700&display=swap"
 	      rel="stylesheet">
-	<link crossorigin="anonymous"
-	      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-	      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-	      referrerpolicy="no-referrer"
-	      rel="stylesheet"/>
-	<script crossorigin="anonymous"
+	<link rel="stylesheet"
+	      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"
 	        integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="
-	        referrerpolicy="no-referrer"
-	        src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
+	        crossorigin="anonymous"
+	        referrerpolicy="no-referrer"></script>
 </head>
 <body>
 <div class="grid-container">

@@ -24,16 +24,11 @@
 			    data-bs-slide-to="6"></li>
 			<li data-bs-target="#introCarousel"
 			    data-bs-slide-to="7"></li>
-			<li data-bs-target="#introCarousel"
-			    data-bs-slide-to="8"></li>
 		</ol>
 		<!--Inner-->
 		<div class="carousel-inner">
 			<!-- Single Item -->
 			<div class="carousel-item active"></div>
-
-			<!-- Single Item -->
-			<div class="carousel-item"></div>
 
 			<!-- Single Item -->
 			<div class="carousel-item"></div>
