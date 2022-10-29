@@ -9,7 +9,7 @@
                 <!-- Grid column -->
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a class="text-decoration-none footer-link" href="../view/impressum.php">About us</a>
+                        <a class="text-decoration-none footer-link" href="<?php echo URL_ROOT . '/pages/about'?>">About us</a>
                     </h6>
                 </div>
                 <!-- Grid column -->
@@ -17,7 +17,7 @@
                 <!-- Grid column -->
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a class="text-decoration-none footer-link" href="../view/blog.php">Blog</a>
+                        <a class="text-decoration-none footer-link" href="<?php echo URL_ROOT . '/pages/blog'?>">Blog</a>
                     </h6>
                 </div>
                 <!-- Grid column -->
@@ -25,7 +25,7 @@
                 <!-- Grid column -->
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a class="text-decoration-none footer-link" href="../view/help.php">Help</a>
+                        <a class="text-decoration-none footer-link" href="<?php echo URL_ROOT . '/pages/help'?>">Help</a>
                     </h6>
                 </div>
                 <!-- Grid column -->
@@ -33,7 +33,7 @@
                 <!-- Grid column -->
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a class="text-decoration-none footer-link" href="../view/contact.php">Contact</a>
+                        <a class="text-decoration-none footer-link" href="<?php echo URL_ROOT . '/pages/contact'?>">Contact</a>
                     </h6>
                 </div>
                 <!-- Grid column -->
@@ -66,7 +66,7 @@
 </footer>
 </div>
 <!-- Required Bootstrap JS -->
-<script src="../styles/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo URL_ROOT;?>/js/bootstrap.bundle.min.js"></script>
 </body>
 <!-- Default page layout end -->
 </html>

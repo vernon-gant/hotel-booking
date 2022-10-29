@@ -1,6 +1,5 @@
 <?php
-	$title = "Login";
-	require_once '../includes/header.php'
+require_once APPROOT . '/views/includes/header.php'
 ?>
 	<div class="container py-5"
 	     id="content">
@@ -43,7 +42,7 @@
 						</form>
 						<div>
 							<p class="mb-0 mx-auto text-center">Don't have an account? <a id="sign-up-link"
-							                                                              href="registration.php"
+							                                                              href="<?php echo URL_ROOT . '/users/registration'?>"
 							                                                              class="fw-bold text-decoration-underline">Sign
 							                                                                                                        Up</a>
 							</p>
@@ -53,4 +52,4 @@
 			</div>
 		</div>
 	</div>
-<?php require_once '../includes/footer.php' ?>
+<?php require_once APPROOT . '/views/includes/footer.php' ?>

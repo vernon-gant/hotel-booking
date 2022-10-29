@@ -1,6 +1,5 @@
 <?php
-	$title = "Impressum";
-	require_once '../includes/header.php'
+    require_once APPROOT . '/views/includes/header.php'
 ?>
 	<article class="container-fluid px-lg-5 mt-3">
 		<h1 class="text-center my-5">Impressum</h1>
@@ -63,13 +62,13 @@
 						<div class="d-flex flex-column align-items-center p-1">
 							<img alt="Photo of Aldin"
 							     class="img-fluid rounded"
-							     src="../resources/img/team/aleks-photo.jpg">
+							     src="<?php echo URL_ROOT?>/img/team/aleks-photo.jpg">
 							<span class="w-auto my-1 text-center">Aldin Zehinovic (50%)</span>
 						</div>
 						<div class="d-flex flex-column align-items-center p-1 mx-5">
 							<img alt="Photo of Aleks"
 							     class="img-fluid rounded"
-							     src="../resources/img/team/aleks-photo.jpg">
+							     src="<?php echo URL_ROOT?>/img/team/aleks-photo.jpg">
 							<span class="w-auto my-1 text-center">Aleksandr Zakharov (50%)</span>
 						</div>
 					</div>
@@ -77,4 +76,4 @@
 			</div>
 		</section>
 	</article>
-<?php require_once '../includes/footer.php' ?>
+<?php require_once APPROOT . '/views/includes/footer.php' ?>

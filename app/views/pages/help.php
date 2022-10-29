@@ -1,6 +1,5 @@
 <?php
-	$title = "Help";
-	require_once '../includes/header.php'
+require_once APPROOT . '/views/includes/header.php'
 ?>
 	<div class="container py-md-5 py-4">
 		<div class="row justify-content-center mb-4 mb-md-5">
@@ -155,4 +154,4 @@
 			</div>
 		</div>
 	</div>
-<?php require_once '../includes/footer.php' ?>
+<?php require_once APPROOT . '/views/includes/footer.php' ?>

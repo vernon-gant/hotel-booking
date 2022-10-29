@@ -1,6 +1,5 @@
 <?php
-	$title = "Gallery";
-	require_once '../includes/header.php'
+require_once APPROOT . '/views/includes/header.php'
 ?>
 	<div id="introCarousel"
 	     class="carousel slide carousel-fade shadow-sm"
@@ -70,4 +69,4 @@
 			</a>
 		</div>
 	</div>
-<?php require_once '../includes/footer.php' ?>
+<?php require_once APPROOT . '/views/includes/footer.php' ?>

@@ -137,35 +137,35 @@ footer {
 }
 
 .carousel-item:nth-child(1) {
-    background-image: url("/resources/img/gallery/hotel_entrance_photo.jpg");
+    background-image: url("../img/gallery/hotel_entrance_photo.jpg");
 }
 
 .carousel-item:nth-child(2) {
-    background-image: url('/resources/img/gallery/hotel_hall_1_photo.jpg');
+    background-image: url('../img/gallery/hotel_hall_1_photo.jpg');
 }
 
 .carousel-item:nth-child(3) {
-    background-image: url('/resources/img/gallery/hotel_lounge_1_photo.jpg');
+    background-image: url('../img/gallery/hotel_lounge_1_photo.jpg');
 }
 
 .carousel-item:nth-child(4) {
-    background-image: url('/resources/img/gallery/hotel_towel_photo.jpg');
+    background-image: url('../img/gallery/hotel_towel_photo.jpg');
 }
 
 .carousel-item:nth-child(5) {
-    background-image: url('/resources/img/gallery/hotel_hall_2_photo.jpg');
+    background-image: url('../img/gallery/hotel_hall_2_photo.jpg');
 }
 
 .carousel-item:nth-child(6) {
-    background-image: url('/resources/img/gallery/hotel_bath_photo.jpg');
+    background-image: url('../img/gallery/hotel_bath_photo.jpg');
 }
 
 .carousel-item:nth-child(7) {
-    background-image: url('/resources/img/gallery/hotel_hall_3_photo.jpg');
+    background-image: url('../img/gallery/hotel_hall_3_photo.jpg');
 }
 
 .carousel-item:nth-child(8) {
-    background-image: url('/resources/img/gallery/hotel_outer_terasse.jpg');
+    background-image: url('../img/gallery/hotel_outer_terasse.jpg');
 }
 
 /* GALLERY CSS END */

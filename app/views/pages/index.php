@@ -1,13 +1,12 @@
 <?php
-$title = "Motel X";
-require_once 'includes/header.php'
+require_once APPROOT . '/views/includes/header.php'
 ?>
 	<div class="container p-5">
 		<!--		TODO: change text-->
 		<div class="card border-0 shadow-lg mx-auto mb-5 w-100">
 			<div class="row">
 				<div class="col-12 col-lg-6">
-					<img src="resources/img/home/bed.jpg"
+					<img src="<?php echo URL_ROOT?>/img/home/bed.jpg"
 					     alt="beds"
 					     class="card-img fit-cover w-100 h-100">
 				</div>
@@ -31,7 +30,7 @@ require_once 'includes/header.php'
 		<div class="card border-0 shadow-lg mx-auto mb-5 w-100">
 			<div class="row">
 				<div class="col-12 col-lg-6">
-					<img src="resources/img/home/lounge_bar.jpg"
+					<img src="<?php echo URL_ROOT?>/img/home/lounge_bar.jpg"
 					     alt="beds"
 					     class="card-img fit-cover w-100 h-100">
 				</div>
@@ -55,7 +54,7 @@ require_once 'includes/header.php'
 		<div class="card border-0 shadow-lg mx-auto mb-5 w-100">
 			<div class="row">
 				<div class="col-12 col-lg-6">
-					<img src="resources/img/home/terasse.jpg"
+					<img src="<?php echo URL_ROOT?>/img/home/terasse.jpg"
 					     alt="beds"
 					     class="card-img fit-cover w-100 h-100">
 				</div>
@@ -185,4 +184,4 @@ require_once 'includes/header.php'
 			</div>
 		</div>
 	</div>
-<?php require_once 'includes/footer.php' ?>
+<?php require_once APPROOT . '/views/includes/footer.php' ?>

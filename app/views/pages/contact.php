@@ -1,6 +1,5 @@
 <?php
-	$title = "Contact";
-	require_once '../includes/header.php'
+ require_once APPROOT . '/views/includes/header.php'
 ?>
 	<div class="container px-3">
 		<div class="row my-4">
@@ -27,7 +26,7 @@
 				mx-auto p-4">
 				<h3 class="fw-bold card-title text-center mb-4">Contact us</h3>
 				<div class="card-body container">
-					<form action="#"
+					<form action="target.php"
 					      class="col-12 w-100"
 					      id="contact-form"
 					      method="POST"
@@ -142,6 +141,7 @@
 						<div class="row my-4">
 							<button id="submit-contact"
 							        type="submit"
+                                    name="submit"
 							        class="btn rounded-pill w-50 mx-auto">Send
 							</button>
 						</div>
@@ -150,4 +150,4 @@
 			</div>
 		</div>
 	</div>
-<?php require_once '../includes/footer.php' ?>
+<?php require_once APPROOT . '/views/includes/footer.php' ?>

@@ -6,14 +6,14 @@
 	<meta content="width=device-width, initial-scale=1.0"
 	      name="viewport">
 	<!--Pass title variable according to website content-->
-	<title><?php if (isset($title)) {
-			echo $title;
+	<title><?php if (isset($data['title'])) {
+			echo $data['title'];
 		} ?>
 	</title>
 	<!--Required links to css, bootstrap and fontaweasome -->
-	<link href="../styles/css/bootstrap.min.css"
+	<link href="<?php echo URL_ROOT;?>/css/bootstrap.min.css"
 	      rel="stylesheet">
-	<link href="../styles/css/base.css"
+	<link href="<?php echo URL_ROOT;?>/css/base.css"
 	      rel="stylesheet">
 	<link href="https://fonts.googleapis.com"
 	      rel="preconnect">
@@ -35,11 +35,11 @@
 		<nav class="navbar navbar-expand-md">
 			<div class="container-fluid">
 				<a class="navbar-brand border-0 me-auto ms-3 ms-md-5"
-				   href="../index.php"><img alt="Motel X Logo"
-				                            draggable="false"
-				                            height="70"
-				                            id="Mote-X-logo"
-				                            src="/resources/img/gallery/hotel_logo.png"/></a>
+				   href="<?php echo URL_ROOT?>"><img alt="Motel X Logo"
+                                                          draggable="false"
+                                                          height="70"
+                                                          id="Mote-X-logo"
+                                                          src="<?php echo URL_ROOT;?>/img/gallery/hotel_logo.png"/></a>
 				<button class="navbar-toggler me-4"
 				        data-bs-target="#navbar"
 				        data-bs-toggle="collapse"
@@ -51,20 +51,20 @@
 					<ul class="navbar-nav ms-auto me-3 me-md-4 me-lg-5 align-items-center">
 						<li class="nav-item">
 							<a class="nav-link mx-2"
-							   href="/view/blog.php"><i class="fa-solid fa-blog pe-2"></i>Blog</a>
+							   href="<?php echo URL_ROOT . '/pages/blog'?>"><i class="fa-solid fa-blog pe-2"></i>Blog</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link mx-2"
-							   href="/view/gallery.php"><i class="fa-regular fa-images pe-2"></i>Gallery</a>
+							   href="<?php echo URL_ROOT . '/pages/gallery'?>"><i class="fa-regular fa-images pe-2"></i>Gallery</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link mx-2"
-							   href="/view/help.php"><i class="fa-solid fa-circle-info pe-2"></i>Help
+							   href="<?php echo URL_ROOT . '/pages/help'?>"><i class="fa-solid fa-circle-info pe-2"></i>Help
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link mx-2"
-							   href="/view/login.php"><i class="fa-solid fa-right-to-bracket pe-2"></i>Log In</a>
+							   href="<?php echo URL_ROOT . '/users/login'?>"><i class="fa-solid fa-right-to-bracket pe-2"></i>Log In</a>
 						</li>
 					</ul>
 				</div>
