@@ -65,7 +65,7 @@ class Database {
     }
 
     // Get single record as object
-    public function singleRow() : object {
+    public function singleRow() : mixed {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }

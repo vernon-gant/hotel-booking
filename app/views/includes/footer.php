@@ -1,5 +1,5 @@
-</main>
-<footer class="text-center text-lg-start py-2">
+    </main>
+    <footer class="text-center text-lg-start py-2">
     <!-- Grid container -->
     <div class="container">
         <!-- Section: Links -->
@@ -64,6 +64,8 @@
     </div>
     <!-- Grid container -->
 </footer>
+</div>
+</div>
 </div>
 <!-- Required Bootstrap JS -->
 <script src="<?php echo URL_ROOT;?>/js/bootstrap.bundle.min.js"></script>

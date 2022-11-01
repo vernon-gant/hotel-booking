@@ -1,55 +1,53 @@
 <?php
 require_once APPROOT . '/views/includes/header.php'
 ?>
-	<div class="container py-5"
-	     id="content">
-		<div class="row">
-			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-				<div class="card border-0 shadow-lg rounded-3 text-dark">
-					<div class="card-body p-5 text-center">
-						<form class="mb-md-4 mt-md-4 pb-5">
-							<h2 class="fw-bold mb-2 text-uppercase text-center">Login</h2>
-							<p class="text-dark-50 mb-5">Please enter your login and password!</p>
+    <div class="container py-5" id="content">
+        <div class="row">
+            <div class="col-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card border-0 shadow-lg rounded-3 text-dark">
+                    <div class="card-body p-5 text-center">
+                        <?php flash("register_success"); ?>
+                        <form class="mb-md-2 mt-md-4 pb-5" method="post"
+                              action="<?php echo URL_ROOT . '/users/login' ?>">
+                            <h2 class="fw-bold mb-2 text-uppercase text-center">Login</h2>
+                            <p class="text-dark-50 mt-3 mb-5">Please, enter your login and
+                                password</p>
 
-							<div class="form-outline form-white form-floating mb-4">
-								<input type="email"
-								       id="typeEmailX"
-								       class="form-control"/>
-								<label class="form-label"
-								       for="typeEmailX">Email</label>
-							</div>
+                            <div class="form-outline form-white form-floating mb-4">
+                                <input type="email"
+                                       id="email"
+                                       class="form-control <?php echo (!empty($data['email_err'])) ? 'is-invalid' : '' ?>"
+                                       value="<?php echo $data['email'] ?>"
+                                       name="email"/>
+                                <label class="form-label"
+                                       for="email">Email</label>
+                                <span class="invalid-feedback"><?php echo $data['email_err'] ?></span>
+                            </div>
 
-							<div class="form-outline form-white mb-5 form-floating">
-								<input type="password"
-								       id="typePasswordX"
-								       class="form-control col-form-label-lg"/>
-								<label class="form-label"
-								       for="typePasswordX">Password</label>
-							</div>
+                            <div class="form-outline form-white mb-5 form-floating">
+                                <input type="password"
+                                       id="password"
+                                       class="form-control <?php echo (!empty($data['pass_err'])) ? 'is-invalid' : '' ?>"
+                                       name="pass"/>
+                                <label class="form-label"
+                                       for="password">Password</label>
+                                <span class="invalid-feedback"><?php echo $data['pass_err'] ?></span>
+                            </div>
 
-							<!--									<p class="small mb-5 pb-lg-2"><a href="#!">Forgot password?</a></p>-->
+                            <button class="btn text-light btn-lg px-5 btn rounded-3 submit"
+                                    type="submit" value="login">Login
+                            </button>
 
-							<button id="login-submit"
-							        class="btn text-light btn-lg px-5 btn rounded-3"
-							        type="submit">Login
-							</button>
-
-							<!--									<div class="d-flex justify-content-center text-center mt-4 pt-1">-->
-							<!--										<a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>-->
-							<!--										<a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>-->
-							<!--										<a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>-->
-							<!--									</div>-->
-						</form>
-						<div>
-							<p class="mb-0 mx-auto text-center">Don't have an account? <a id="sign-up-link"
-							                                                              href="<?php echo URL_ROOT . '/users/registration'?>"
-							                                                              class="fw-bold text-decoration-underline">Sign
-							                                                                                                        Up</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        </form>
+                        <div>
+                            <p class="mb-0 mx-auto text-center">Don't have an account?
+                                <a href="<?php echo URL_ROOT . '/users/registration' ?>"
+                                   class="fw-bold text-decoration-underline sign-link">Sign Up</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php require_once APPROOT . '/views/includes/footer.php' ?>
