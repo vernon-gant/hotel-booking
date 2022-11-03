@@ -26,7 +26,7 @@
 				mx-auto p-4">
 				<h3 class="fw-bold card-title text-center mb-4">Contact us</h3>
 				<div class="card-body container">
-					<form action="target.php"
+					<form action="#"
 					      class="col-12 w-100"
 					      id="contact-form"
 					      method="POST"

@@ -121,6 +121,18 @@ footer {
     object-fit: cover;
 }
 
+.link-background {
+    background-color: var(--link-color);
+}
+
+.link-darker-background {
+    background-color: var(--link-darker-color);
+}
+
+.border-box {
+    box-sizing: border-box;
+}
+
 /* INDEX CSS END */
 
 /* LOGIN CSS START */
