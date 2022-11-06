@@ -1,7 +1,7 @@
 <?php
 require_once APPROOT . '/views/includes/header.php'
 ?>
-    <div class="w-100">
+    <div class="w-100 overflow-hidden">
         <div class="row my-5">
             <div class="col-8 px-0 shadow mx-auto rounded-pill d-none d-md-block">
                 <div class="shadow rounded-pill px-0 overflow-hidden row mx-0">
@@ -57,8 +57,10 @@ require_once APPROOT . '/views/includes/header.php'
                     <div class="col-3 overflow-hidden px-0 d-flex justify-content-center
                     align-items-center"
                          style="background-color: var(--link-color)">
-                        <span>Book Now</span>
-                        <i class="fa-solid fa-arrow-right ms-1 ms-lg-3"></i>
+                        <a href="<?php echo URL_ROOT?>/users/book">
+                            <span>Book Now</span>
+                            <i class="fa-solid fa-arrow-right ms-1 ms-lg-3"></i>
+                        </a>
                     </div>
                 </div>
             </div>
