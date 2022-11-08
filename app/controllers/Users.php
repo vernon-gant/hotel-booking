@@ -16,21 +16,32 @@ class Users extends Controller {
     }
 
     public function login() {
-        // Init data
-        $data = [
+		// Init data
+		$data = [
             'title' => 'Login',
             'email' => '',
             'pass' => '',
             'email_err' => '',
             'pass_err' => '',
         ];
-        // Check for POST
+
+		if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_SESSION['arrival'])) {
+			$_SESSION['bookingRedirect'] = true;
+		}
+
+		// Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             validateLoginInput($data,$this);
             // Check if empty errors
             if (validUser($data)) {
                 $user = $this->userModel->findUser($data['email']);
                 $this->userModel->createSession($user);
+				if (isset($_SESSION['bookingRedirect'])) {
+					unset($_SESSION['bookingRedirect']);
+					redirect("bookings/index");
+				} else {
+					redirect("pages/index");
+				}
             }
         }
         $this->view('users/login', $data);
@@ -71,19 +82,6 @@ class Users extends Controller {
         }
         $this->view('users/registration', $data);
     }
-
-	public function book() {
-		// Init data
-		$data = [
-			'title' => 'Booking',
-			'email' => '',
-			'pass' => '',
-			'email_err' => '',
-			'pass_err' => '',
-		];
-
-		$this->view('users/book', $data);
-	}
 
 	public function logout() {
 		$this->userModel->logout();

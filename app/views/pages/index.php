@@ -4,30 +4,34 @@ require_once APPROOT . '/views/includes/header.php'
     <div class="w-100 overflow-hidden">
         <div class="row my-5">
             <div class="col-8 px-0 shadow mx-auto rounded-pill d-none d-md-block">
-                <div class="shadow rounded-pill px-0 overflow-hidden row mx-0">
+                <form method="get" action="<?php echo URL_ROOT?>/bookings" class="shadow
+                rounded-pill px-0 overflow-hidden row mx-0">
                     <div class="col-9 overflow-hidden px-0">
                         <div class="px-2 mx-0 row">
                             <div class="col-9 d-flex flex-row px-0">
-                                <div class="col-5 form-floating">
+                                <div class="col-5 form-floating position-relative">
                                     <input required
-                                           class="form-control border-0"
+                                           class="form-control border-0 <?php echo (!empty($data['arrival_err'])) ? 'is-invalid' : ''?>"
                                            id="arrival"
                                            name="arrival"
                                            type="date">
                                     <label class="form-label"
                                            for="arrival">Arrival</label>
+                                    <span class="invalid-feedback"><?php if(!empty($data['arrival_err']))
+                                        echo $data['arrival_err']?></span>
                                 </div>
                                 <div class="col-2 d-flex justify-content-center align-items-center">
                                     <i class="fa-solid fa-arrow-right fa-lg"></i>
                                 </div>
                                 <div class="col-5 form-floating">
                                     <input required
-                                           class="form-control border-0"
+                                           class="form-control border-0 <?php echo (!empty($data['departure_err'])) ? 'is-invalid' : ''?>""
                                            id="departure"
                                            name="departure"
                                            type="date">
                                     <label class="form-label"
                                            for="departure">Departure</label>
+                                    <span class="invalid-feedback"><?php if(!empty($data['departure_err']))echo $data['departure_err']?></span>
                                 </div>
                             </div>
                             <div class="col-3 d-flex justify-content-center align-items-center
@@ -35,20 +39,17 @@ require_once APPROOT . '/views/includes/header.php'
                                 <div class="input-group row m-0 align-self-center">
                                     <select class="col-auto w-100 rounded-2 h-50 p-0"
                                             id="guests"
+                                            name="guests"
                                             required>
-                                        <option class="text-center"
-                                                selected
-                                                value="1">1 guests
-                                        </option>
-                                        <option class="text-center"
-                                                value="2">2 guests
-                                        </option>
-                                        <option class="text-center"
-                                                value="3">3 guests
-                                        </option>
-                                        <option class="text-center"
-                                                value="4">4 guests
-                                        </option>
+										<?php
+										for ($i = 1; $i < 7; $i++) : ?>
+                                            <option class="text-center"
+                                                    value="<?php
+													echo $i; ?>">
+                                                <?php echo $i . " guests"; ?>
+                                            </option>
+										<?php
+										endfor ?>
                                     </select>
                                 </div>
                             </div>
@@ -57,12 +58,12 @@ require_once APPROOT . '/views/includes/header.php'
                     <div class="col-3 overflow-hidden px-0 d-flex justify-content-center
                     align-items-center"
                          style="background-color: var(--link-color)">
-                        <a href="<?php echo URL_ROOT?>/users/book">
+                        <button type="submit">
                             <span>Book Now</span>
                             <i class="fa-solid fa-arrow-right ms-1 ms-lg-3"></i>
-                        </a>
+                        </button>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="row-cols-3 mx-auto d-flex justify-content-center d-md-none">
                 <button class="btn btn-primary btn-success"> Book Now</button>

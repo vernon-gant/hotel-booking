@@ -33,7 +33,6 @@ class User {
 		$_SESSION['user_email'] = $user->email;
 		$_SESSION['user_first_name'] = $user->first_name;
 		$_SESSION['user_last_name'] = $user->last_name;
-		redirect("pages/index");
 	}
 
 	public function logout(): void {

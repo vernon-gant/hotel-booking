@@ -8,16 +8,18 @@ class Booking {
 		$this->db = new Database();
 	}
 
-	public function findAvailable(int $arrivalDay, $departureDay): array {
-		$this->db->query("SELECT count(room_num) as 'Available', room_type
-						      FROM `rooms`
+	public function findAllAvailable(string $arrival, string $departure, int $guests): array {
+		$this->db->query("SELECT room_type, description, price
+						      FROM `rooms` JOIN room_types rt on rt.name = rooms.room_type
 							  WHERE room_num not IN (
 							      SELECT room_num
 							      FROM reservations
-							      WHERE (EXTRACT(DAY FROM reservations.arrival) between ? and ?) or (EXTRACT(DAY FROM reservations.departure) between ? and ?)
-							  )
-							  group by room_type"
-			, $arrivalDay, $departureDay, $arrivalDay, $departureDay);
+							      WHERE (reservations.arrival between ? and ?) or 
+							            (reservations.departure between ? and ?)
+							      )
+							  AND rt.max_person >= ?
+							  GROUP BY room_type"
+			, $arrival, $departure, $arrival, $departure,$guests);
 		return $this->db->resultSet();
 	}
 

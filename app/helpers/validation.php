@@ -118,3 +118,31 @@ function validRegisterInput(array $data): bool {
 		empty($data['pass_err']) and
 		empty($data['pass_repeat_err']);
 }
+
+function validateArrivalDeparture(array &$data): void {
+	$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+	$data['arrival'] = trim($_GET['arrival']);
+	$data['departure'] = trim($_GET['departure']);
+
+	if (empty($data['arrival'])) {
+		$data['arrival_err'] = 'Please, enter your arrival date';
+	}
+	if (empty($data['departure'])) {
+		$data['departure_err'] = 'Please, enter your departure date your password';
+	}
+
+	$arrival = date_create($data['arrival']);
+	$departure = date_create($data['departure']);
+
+	if (date_diff($arrival,$departure)->invert == 1 || date_diff($departure,$arrival)->days == 0) {
+		$data['arrival_err'] = 'Please, make sure your arrival is before your departure';
+	} elseif(date_diff(date_create(),$arrival)->invert == 1 && date_diff(date_create(),$arrival)
+			->days > 0) {
+		$data['arrival_err'] = 'Please, make sure your arrival date is correct!';
+	}
+}
+
+function validArrivalDeparture(array $data) : bool {
+	return empty($data['arrival_err']) and empty($data['departure_err']);
+}

@@ -79,7 +79,7 @@
                         <button class="btn btn-primary rounded-pill btn-success me-3 my-sm-3 my-lg-0
                         mx-auto">
                             <a class="mx-2 text-decoration-none text-white"
-                               href="<?php echo URL_ROOT . '/users/book' ?>">
+                               href="<?php echo URL_ROOT . '/bookings' ?>">
                                 <i class=" fa-solid fa-right-to-bracket pe-2"></i>Book Now!
                             </a>
                         </button>
