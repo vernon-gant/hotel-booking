@@ -32,19 +32,19 @@ function mapRoomToPhoto(string $roomType): string {
 	$path = URL_ROOT . "/img/rooms/";
 	switch ($roomType) {
 		case "Double Suite":
-			$path .= "double_suite.jpg";
+			$path .= "d_suite.jpg";
 			break;
 		case "Family Suite":
-			$path .= "family_suite.jpg";
+			$path .= "f_suite.jpg";
 			break;
 		case "Hollywood Twin Room":
-			$path .= "hollywood_twin_room.jpg";
+			$path .= "h_twin_room.jpg";
 			break;
 		case "King Standard":
-			$path .= "king_standard.jpg";
+			$path .= "k_standard.jpg";
 			break;
 		case "Single Room":
-			$path .= "single_room.jpg";
+			$path .= "s_room.jpg";
 	}
 	return $path;
 }
