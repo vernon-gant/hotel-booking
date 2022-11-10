@@ -120,10 +120,12 @@ function validRegisterInput(array $data): bool {
 }
 
 function validateArrivalDeparture(array &$data): void {
-	$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+	$_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 	$data['arrival'] = trim($_GET['arrival']);
 	$data['departure'] = trim($_GET['departure']);
+
+	if (isset($_SESSION['arrival'])) unset($_SESSION['arrival'], $_SESSION['departure']);
 
 	if (empty($data['arrival'])) {
 		$data['arrival_err'] = 'Please, enter your arrival date';

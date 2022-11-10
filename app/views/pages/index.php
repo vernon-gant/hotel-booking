@@ -17,8 +17,7 @@ require_once APPROOT . '/views/includes/header.php'
                                            type="date">
                                     <label class="form-label"
                                            for="arrival">Arrival</label>
-                                    <span class="invalid-feedback"><?php if(!empty($data['arrival_err']))
-                                        echo $data['arrival_err']?></span>
+                                    <span class="invalid-feedback"><?php if(!empty($data['arrival_err'])) echo $data['arrival_err']?></span>
                                 </div>
                                 <div class="col-2 d-flex justify-content-center align-items-center">
                                     <i class="fa-solid fa-arrow-right fa-lg"></i>

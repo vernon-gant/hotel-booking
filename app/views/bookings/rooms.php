@@ -1,7 +1,7 @@
 <?php
 require_once APPROOT . '/views/includes/header.php'
 ?>
-<div class="m-0 p-0 w-100">
+<div class="m-0 p-0 w-100 overflow-hidden">
     <div class="d-sm-flex d-md-none">
         <section id="filter-button">
             <button class="btn btn-default" type="button" data-bs-toggle="collapse"
@@ -54,7 +54,7 @@ require_once APPROOT . '/views/includes/header.php'
             </div>
         </section>
     </div>
-    <div class="row">
+    <div class="row overflow-hidden">
         <div class="row my-5">
             <div class="col-8 px-0 shadow mx-auto rounded-pill d-none d-md-block">
                 <form method="get" action="<?php echo URL_ROOT ?>/bookings" class="shadow
@@ -64,35 +64,27 @@ require_once APPROOT . '/views/includes/header.php'
                             <div class="col-9 d-flex flex-row px-0">
                                 <div class="col-5 form-floating position-relative">
                                     <input required
-                                           class="form-control border-0 <?php
-										   echo (!empty($data['arrival_err'])) ? 'is-invalid' : '' ?>"
+                                           class="form-control border-0 <?php echo (!empty($data['arrival_err'])) ? 'is-invalid' : '' ?>"
                                            id="arrival"
                                            name="arrival"
-                                           value="<?php
-										   echo $data['arrival'] ?>"
+                                           value="<?php if (empty($data['arrival_err']) and empty($data['departure_err'])) echo $data['arrival'] ?>"
                                            type="date">
                                     <label class="form-label"
                                            for="arrival">Arrival</label>
-                                    <span class="invalid-feedback"><?php
-										if (!empty($data['arrival_err']))
-											echo $data['arrival_err'] ?></span>
+                                    <span class="invalid-feedback"><?php if (!empty($data['arrival_err'])) echo $data['arrival_err'] ?></span>
                                 </div>
                                 <div class="col-2 d-flex justify-content-center align-items-center">
                                     <i class="fa-solid fa-arrow-right fa-lg"></i>
                                 </div>
                                 <div class="col-5 form-floating">
-                                    <input required class="form-control border-0 <?php
-									echo (!empty($data['departure_err'])) ? 'is-invalid' : '' ?>"
+                                    <input required class="form-control border-0 <?php echo (!empty($data['departure_err'])) ? 'is-invalid' : '' ?>"
                                            id="departure"
                                            name="departure"
-                                           value="<?php
-										   echo $data['departure'] ?>"
+                                           value="<?php if (empty($data['departure_err']) and empty($data['arrival_err'])) echo $data['departure'] ?>"
                                            type="date">
                                     <label class="form-label"
                                            for="departure">Departure</label>
-                                    <span class="invalid-feedback"><?php
-										if (!empty($data['departure_err']))
-											echo $data['departure_err'] ?></span>
+                                    <span class="invalid-feedback"><?php if (!empty($data['departure_err'])) echo $data['departure_err'] ?></span>
                                 </div>
                             </div>
                             <div class="col-3 d-flex justify-content-center align-items-center
@@ -102,40 +94,29 @@ require_once APPROOT . '/views/includes/header.php'
                                             id="guests"
                                             name="guests"
                                             required>
-										<?php
-										for ($i = 1; $i < 7; $i++) : ?>
-                                            <option class="text-center"
-                                                    value="<?php echo $i; ?>"
-												<?php
-												echo ($i == $data['guests']) ? ' selected' : ''; ?>><?php
-												echo $i . " guests";
-                                                ?>
+										<?php for ($i = 1; $i < 7; $i++) : ?>
+                                            <option class="text-center" value="<?php echo $i; ?>" <?php echo ($i == $data['guests']) ? ' selected' : ''; ?>>
+                                                <?php echo $i . " guests"; ?>
                                             </option>
-										<?php
-										endfor ?>
+										<?php endfor ?>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-3 overflow-hidden px-0 d-flex justify-content-center
-                    align-items-center"
-                         style="background-color: var(--link-color)">
-                        <button type="submit">
-                            <span>Book Now</span>
+                    align-items-center" style="background-color: var(--link-color)">
+                        <button type="submit" class="border-0 bg-transparent">
+                            <span class="link-dark fw-bold">Search</span>
                             <i class="fa-solid fa-arrow-right ms-1 ms-lg-3"></i>
                         </button>
                     </div>
                 </form>
             </div>
-            <div class="row-cols-3 mx-auto d-flex justify-content-center d-md-none">
-                <button class="btn btn-primary btn-success"> Book Now</button>
-            </div>
         </div>
-        <div class="col-9 mx-auto row">
-            <form id="filter_dashboard" class="d-sm-none d-md-flex col-3" action="<?php
-			echo
-			URL_ROOT ?>/bookings/filter" method="get">
+        <div class="col-10 mx-auto row">
+            <form id="filter_dashboard" class="d-sm-none d-md-flex col-3"
+                  action="<?php echo URL_ROOT ?>/bookings/filter" method="get">
                 <div class="container-fluid d-flex flex-column mt-5">
                     <div class="mb-3 border-bottom border-3">
                         <h5>Filter By</h5>
@@ -182,136 +163,69 @@ require_once APPROOT . '/views/includes/header.php'
                 </div>
             </form>
             <section id="rooms" class="col-9">
-                <h2><?php echo count($data['rooms'])?> Rooms found</h2>
-                <div class="container">
-                    <div class="row">
-						<?php foreach ($data['rooms'] as $room) : ?>
-                            <div class="m-2">
-                                <h2><?php echo $room['room_type']?></h2>
-                                <p><?php echo $room['description']?></p>
-                                <span><?php echo $room['price']?></span>
-                                <img src="<?php echo mapRoomToPhoto($room['room_type'])?>"
-                                    class="fit-cover img-fluid">
-                            </div>
-						<?php endforeach; ?>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
-                            <div class="card">
-                                <img class="card-img-top"
-                                     src="https://images.pexels.com/photos/963486/pexels-photo-963486.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                     alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Wooden chair with legs</p>
-                                    <p>$90</p>
-                                    <span class="fa fa-circle" id="red"></span>
-                                    <span class="fa fa-circle" id="teal"></span>
-                                    <span class="fa fa-circle" id="blue"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 offset-lg-0 col-sm-4 offset-sm-2 col-11 offset-1">
-                            <div class="card">
-                                <img class="card-img-top"
-                                     src="https://images.pexels.com/photos/1125137/pexels-photo-1125137.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                     alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Ugly chair and table set</p>
-                                    <p>$100</p>
-                                    <span class="fa fa-circle" id="red"></span>
-                                    <span class="fa fa-circle" id="teal"></span>
-                                    <span class="fa fa-circle" id="blue"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
-                            <div class="card">
-                                <img class="card-img-top"
-                                     src="https://images.pexels.com/photos/3757055/pexels-photo-3757055.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                     alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Leather Lounger</p>
-                                    <p>$950</p>
-                                    <span class="fa fa-circle" id="red"></span>
-                                    <span class="fa fa-circle" id="teal"></span>
-                                    <span class="fa fa-circle" id="blue"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 offset-lg-0 offset-sm-2 col-11 offset-1">
-                            <div class="card">
-                                <img class="card-img-top"
-                                     src="https://images.unsplash.com/photo-1537182534312-f945134cce34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                     alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Tree Trunk table set</p>
-                                    <p>$390</p>
-                                    <span class="fa fa-circle" id="red"></span>
-                                    <span class="fa fa-circle" id="teal"></span>
-                                    <span class="fa fa-circle" id="blue"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
-                            <div class="card">
-                                <img class="card-img-top"
-                                     src="https://images.pexels.com/photos/3230274/pexels-photo-3230274.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                     alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Red Leather Bar Stool</p>
-                                    <p>$30</p>
-                                    <span class="fa fa-circle" id="red"></span>
-                                    <span class="fa fa-circle" id="teal"></span>
-                                    <span class="fa fa-circle" id="blue"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 offset-lg-0 offset-sm-2 col-11 offset-1">
-                            <div class="card">
-                                <img class="card-img-top"
-                                     src="https://images.pexels.com/photos/3773571/pexels-photo-3773571.png?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                     alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Modern Dining Table</p>
-                                    <p>$740</p>
-                                    <span class="fa fa-circle" id="red"></span>
-                                    <span class="fa fa-circle" id="teal"></span>
-                                    <span class="fa fa-circle" id="blue"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
-                            <div class="card">
-                                <img class="card-img-top"
-                                     src="https://images.pexels.com/photos/534172/pexels-photo-534172.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                     alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Boring Dining Table</p>
-                                    <p>$760</p>
-                                    <span class="fa fa-circle" id="red"></span>
-                                    <span class="fa fa-circle" id="teal"></span>
-                                    <span class="fa fa-circle" id="blue"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 offset-lg-0 offset-sm-2 col-11 offset-1">
-                            <div class="card">
-                                <img class="card-img-top"
-                                     src="https://images.pexels.com/photos/37347/office-sitting-room-executive-sitting.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                     alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">An Ugly Office</p>
-                                    <p>$90</p>
-                                    <span class="fa fa-circle" id="red"></span>
-                                    <span class="fa fa-circle" id="teal"></span>
-                                    <span class="fa fa-circle" id="blue"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <?php if (empty($data['arrival_err'] and empty($data['departure_err']))): ?>
+                    <h2 class="ms-5 mb-3"><?php echo count($data['rooms']) ?> Rooms found</h2>
+                    <div class="container">
+                    <form action="<?php echo URL_ROOT ?>/bookings/book" method="post" class="overflow-hidden">
+                        <table class="table table-bordered table-responsive">
+                            <thead class="align-middle">
+                                <tr>
+                                    <th scope="col">Room Category</th>
+                                    <th scope="col">Guests</th>
+                                    <th scope="col">Price for <?php echo $data['nights'] ?> nights </th>
+                                    <th scope="col">Add ons</th>
+                                    <th scope="col">Choose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+							<?php foreach ($data['rooms'] as $room) : ?>
+                                <tr>
+                                    <td>
+                                        <div>
+											<?php echo $room['room_type'] ?>
+                                            <img src="<?php echo mapRoomToPhoto($room['room_type']) ?>"
+                                                 class="fit-cover img-fluid" alt="room photo">
+											<?php echo $room['description'] ?>
+                                        </div>
+                                    </td>
+                                    <td>
+										<?php for ($i = 0; $i < $data['guests']; $i++) : ?>
+                                            <i class="fa-regular fa-user"></i>
+										<?php endfor ?>
+                                    </td>
+                                    <td>
+										<?php echo $room['cost'] ?>
+                                    </td>
+                                    <td class="d-flex flex-column justify-content-start">
+                                            <div class="form-check border-0">
+                                                <input class="form-check-input" name="services<?php echo str_replace(" ", "",$room['room_type'])?>" type="checkbox" value="1" id="breakfast">
+                                                <label class="form-check-label" for="breakfast">Breakfast</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="services<?php echo str_replace(" ", "",$room['room_type'])?>" type="checkbox" value="1" id="parking">
+                                                <label class="form-check-label" for="parking">Parking</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="services<?php echo str_replace(" ", "",$room['room_type'])?>" type="checkbox" value="1" id="pets">
+                                                <label class="form-check-label" for="pets">Pets</label>
+                                            </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-center form-check">
+                                            <input class="form-check-input" type="radio" name="roomType" value="<?php echo str_replace(" ", "",$room['room_type'])?>">
+                                        </div>
+                                    </td>
+                                </tr>
+							<?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
+                <?php else: ?>
+                    <div class="text-center mx-auto">
+                        <h2>Nothing Found...</h2>
+                    </div>
+                <?php endif ?>
             </section>
         </div>
     </div>

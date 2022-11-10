@@ -11,22 +11,19 @@ class Bookings extends Controller {
 	public function index() {
 		$data = [
 			'title' => 'Booking',
-			'arrival' => date_create()->format("y-m-d"),
-			'departure' => date_create()->modify("+1 year")->format("y-m-d"),
-			'guests' => $_GET['guests'] ?? 1,
+			'arrival' => $_SESSION['arrival'] ?? date_create()->format("Y-m-d"),
+			'departure' => $_SESSION['departure'] ?? date_create()->modify("+2 days")->format("Y-m-d"),
+			'nights' => 2,
+			'guests' => $_GET['guests'] ?? 2,
 			'arrival_err' => '',
 			'departure_err' => '',
 		];
 
 		// Check if redirected from main page with filled formular and validate formular
-		if (isset($_GET['arrival']))
-			processArrivalDeparture($data);
-		// Check if logged in
-		if (!isset($_SESSION['user_email']))
-			redirect("users/login");
+		if (isset($_GET['arrival'])) processArrivalDeparture($data);
 
-		$data['rooms'] = $this->bookingModel->findAllAvailable($data['arrival'],
-			$data['departure'], $data['guests']);
+		$data['nights'] = extractDayFromDate($data['departure']) - extractDayFromDate($data['arrival']);
+		$data['rooms'] = $this->bookingModel->findAllAvailable($data['arrival'], $data['departure'], $data['guests']);
 
 		$this->view('bookings/rooms', $data);
 	}
