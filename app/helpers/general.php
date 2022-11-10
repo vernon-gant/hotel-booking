@@ -48,3 +48,15 @@ function mapRoomToPhoto(string $roomType): string {
 	}
 	return $path;
 }
+
+function extractPrice(string $priceRange) : array {
+	return array_map(fn ($price):int =>  (int) trim($price),explode("-",$priceRange));
+}
+
+function filterGet() : void {
+	$_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+}
+
+function filterPost() : void {
+	$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+}

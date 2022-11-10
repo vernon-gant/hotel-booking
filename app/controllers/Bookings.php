@@ -9,12 +9,13 @@ class Bookings extends Controller {
 	}
 
 	public function index() {
+		filterGet();
 		$data = [
 			'title' => 'Booking',
 			'arrival' => $_SESSION['arrival'] ?? date_create()->format("Y-m-d"),
 			'departure' => $_SESSION['departure'] ?? date_create()->modify("+2 days")->format("Y-m-d"),
 			'nights' => 2,
-			'guests' => $_GET['guests'] ?? 2,
+			'guests' => $_GET['guests'] ?? 1,
 			'arrival_err' => '',
 			'departure_err' => '',
 		];
@@ -29,6 +30,17 @@ class Bookings extends Controller {
 	}
 
 	public function filter() {
-
+		filterGet();
+		$data = [
+			'title' => 'Booking',
+			'arrival' => $_GET['arrival'],
+			'departure' => $_GET['departure'],
+			'nights' => $_GET['nights'],
+			'guests' => $_GET['guests'],
+			'arrival_err' => '',
+			'departure_err' => '',
+		];
+		$data['rooms'] = $this->bookingModel->filterRooms($data);
+		$this->view('bookings/rooms', $data);
 	}
 }

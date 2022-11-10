@@ -18,6 +18,7 @@ class Database {
 	private mysqli $dbh;
 	private mysqli_stmt $stmt;
 	private string $error;
+	private mysqli_result $result;
 
 	public function __construct() {
 		mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
@@ -43,6 +44,7 @@ class Database {
 				call_user_func_array(array($this->stmt, 'bind_param'), $args_ref);
 			}
 			$this->stmt->execute();
+			$this->result = $this->stmt->get_result();
 		} else {
 			exit('Unable to prepare MySQL statement (check your syntax) - ' .
 				$this->dbh->error);
@@ -51,19 +53,16 @@ class Database {
 
 	// Get single record as object
 	public function singleRow() {
-		$result = $this->stmt->get_result();
-		return $result->fetch_object();
+		return $this->result->fetch_object();
 	}
 
 	// Get result set as array of objects
 	public function resultSet(): array {
-		$result = $this->stmt->get_result();
-		return $result->fetch_all(MYSQLI_ASSOC);
+		return $this->result->fetch_all(MYSQLI_ASSOC);
 	}
 
 	public function rowCount(): int|string {
-		$this->stmt->store_result();
-		return $this->stmt->num_rows;
+		return $this->result->num_rows;
 	}
 
 	public function affectedRows(): int|string {
