@@ -44,7 +44,9 @@ class Database {
 				call_user_func_array(array($this->stmt, 'bind_param'), $args_ref);
 			}
 			$this->stmt->execute();
-			$this->result = $this->stmt->get_result();
+			if (str_contains($sql,"SELECT")) {
+				$this->result = $this->stmt->get_result();
+			}
 		} else {
 			exit('Unable to prepare MySQL statement (check your syntax) - ' .
 				$this->dbh->error);

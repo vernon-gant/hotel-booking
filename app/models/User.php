@@ -37,6 +37,7 @@ class User {
 
 	public function logout(): void {
 		unset($_SESSION['user_email'], $_SESSION['user_first_name'], $_SESSION['user_last_name']);
+		session_destroy();
 		redirect("pages/index");
 	}
 }

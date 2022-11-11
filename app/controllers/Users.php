@@ -4,8 +4,11 @@ class Users extends Controller {
 
     private User $userModel;
 
+	private Booking $bookingModel;
+
     public function __construct() {
         $this->userModel = $this->model('User');
+		$this->bookingModel = $this->model('Booking');
     }
 
     /**
@@ -44,6 +47,7 @@ class Users extends Controller {
 				}
             }
         }
+
         $this->view('users/login', $data);
     }
 
