@@ -10,6 +10,7 @@
     }
   ],
   "require": {
-    "ext-mysqli": "*"
+    "ext-mysqli": "*",
+    "php-ds/php-ds": "^1.4"
   }
 }

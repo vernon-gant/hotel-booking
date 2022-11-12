@@ -57,15 +57,15 @@ require_once APPROOT . '/views/includes/header.php'
     <div class="row overflow-hidden">
         <div class="row my-5">
             <div class="col-8 px-0 shadow mx-auto rounded-pill d-none d-md-block">
-                <form method="get" action="<?php
-				echo URL_ROOT ?>/bookings" class="shadow
+                <form method="get" action="<?php echo URL_ROOT ?>/bookings" class="shadow
                 rounded-pill px-0 overflow-hidden row mx-0">
                     <div class="col-9 overflow-hidden px-0">
                         <div class="px-2 mx-0 row">
                             <div class="col-9 d-flex flex-row px-0">
                                 <div class="col-5 form-floating position-relative">
                                     <input required
-                                           class="form-control border-0 <?php echo (!empty($data['arrival_err'])) ? 'is-invalid' : '' ?>"
+                                           class="form-control border-0 <?php
+										   echo (!empty($data['arrival_err'])) ? 'is-invalid' : '' ?>"
                                            id="arrival"
                                            name="arrival"
                                            value="<?php
@@ -141,7 +141,7 @@ require_once APPROOT . '/views/includes/header.php'
                             <div class="form-inline border rounded p-sm-2 my-2">
                                 <input type="radio" name="floor" id="1" value="1"
 									<?php
-									if (isset($data['pets']) and (int) $data['floor'] == 1)
+									if (isset($data['pets']) and (int)$data['floor'] == 1)
 										echo "checked"
 									?>
                                 >
@@ -150,7 +150,7 @@ require_once APPROOT . '/views/includes/header.php'
                             <div class="form-inline border rounded p-md-2 p-sm-1 mb-2">
                                 <input type="radio" name="floor" id="2" value="2"
 									<?php
-									if (isset($data['pets']) and (int) $data['floor'] == 2)
+									if (isset($data['pets']) and (int)$data['floor'] == 2)
 										echo "checked"
 									?>
                                 >
@@ -159,7 +159,7 @@ require_once APPROOT . '/views/includes/header.php'
                             <div class="form-inline border rounded p-md-2 p-sm-1 mb-2">
                                 <input type="radio" name="floor" id="3" value="3"
 									<?php
-									if (isset($data['pets']) and (int) $data['floor'] == 3)
+									if (isset($data['pets']) and (int)$data['floor'] == 3)
 										echo "checked"
 									?>
                                 >
@@ -168,7 +168,7 @@ require_once APPROOT . '/views/includes/header.php'
                             <div class="form-inline border rounded p-md-2 p-sm-1 mb-2">
                                 <input type="radio" name="floor" id="4" value="4"
 									<?php
-									if (isset($data['pets']) and (int) $data['floor'] == 4)
+									if (isset($data['pets']) and (int)$data['floor'] == 4)
 										echo "checked"
 									?>
                                 >
@@ -177,7 +177,7 @@ require_once APPROOT . '/views/includes/header.php'
                             <div class="form-inline border rounded p-md-2 p-sm-1 mb-2">
                                 <input type="radio" name="floor" id="5" value="5"
 									<?php
-									if (isset($data['pets']) and (int) $data['floor'] == 5)
+									if (isset($data['pets']) and (int)$data['floor'] == 5)
 										echo "checked"
 									?>
                                 >
@@ -191,7 +191,7 @@ require_once APPROOT . '/views/includes/header.php'
                             <div class="form-inline border rounded p-sm-2 my-2">
                                 <input type="radio" name="pets" id="yes" value="1"
 									<?php
-									if (isset($data['pets']) and (int) $data['pets'] == 1)
+									if (isset($data['pets']) and (int)$data['pets'] == 1)
 										echo "checked"
 									?>
                                 >
@@ -200,7 +200,7 @@ require_once APPROOT . '/views/includes/header.php'
                             <div class="form-inline border rounded p-md-2 p-sm-1 mb-2">
                                 <input type="radio" name="pets" id="no" value="0"
 									<?php
-									if (isset($data['pets']) and (int) $data['pets'] == 0)
+									if (isset($data['pets']) and (int)$data['pets'] == 0)
 										echo "checked"
 									?>
                                 >
@@ -213,17 +213,17 @@ require_once APPROOT . '/views/includes/header.php'
                         <fieldset class="ml-md-2">
                             <div class="form-inline border rounded p-sm-2 my-2">
                                 <input type="radio" name="price" id="1" value="0-100"
-                                    <?php
-                                    if (isset($data['price']) and implode("-",$data['price']) == "0-100")
-                                        echo "checked"
-                                    ?>
+									<?php
+									if (isset($data['price']) and implode("-", $data['price']) == "0-100")
+										echo "checked"
+									?>
                                 >
                                 <label for="1" class="pl-1 pt-sm-0 pt-1">< 100</label>
                             </div>
                             <div class="form-inline border rounded p-md-2 p-sm-1 mb-2">
                                 <input type="radio" name="price" id="2" value="100-200"
 									<?php
-									if (isset($data['price']) and implode("-",$data['price']) == "100-200")
+									if (isset($data['price']) and implode("-", $data['price']) == "100-200")
 										echo "checked"
 									?>
                                 >
@@ -232,7 +232,7 @@ require_once APPROOT . '/views/includes/header.php'
                             <div class="form-inline border rounded p-md-2 p-sm-1 mb-2">
                                 <input type="radio" name="price" id="3" value="200-300"
 									<?php
-									if (isset($data['price']) and implode("-",$data['price']) == "200-300")
+									if (isset($data['price']) and implode("-", $data['price']) == "200-300")
 										echo "checked"
 									?>
                                 >
@@ -241,7 +241,7 @@ require_once APPROOT . '/views/includes/header.php'
                             <div class="form-inline border rounded p-md-2 p-sm-1 mb-2">
                                 <input type="radio" name="price" id="4" value="300-400"
 									<?php
-									if (isset($data['price']) and implode("-",$data['price']) == "300-400")
+									if (isset($data['price']) and implode("-", $data['price']) == "300-400")
 										echo "checked"
 									?>
                                 >
@@ -250,7 +250,7 @@ require_once APPROOT . '/views/includes/header.php'
                             <div class="form-inline border rounded p-md-2 p-sm-1 mb-2">
                                 <input type="radio" name="price" id="5" value="400-1000"
 									<?php
-									if (isset($data['price']) and implode("-",$data['price']) == "400-1000")
+									if (isset($data['price']) and implode("-", $data['price']) == "400-1000")
 										echo "checked"
 									?>
                                 >
@@ -272,86 +272,105 @@ require_once APPROOT . '/views/includes/header.php'
                 </div>
             </form>
             <section id="rooms" class="col-9">
-				<?php if (empty($data['arrival_err']) and empty($data['departure_err']) and $data['rooms'] != null): ?>
+				<?php
+				if (empty($data['arrival_err']) and empty($data['departure_err']) and $data['rooms'] != null): ?>
                     <h2 class="ms-5 mb-3"><?php
 						echo count($data['rooms']) ?> Rooms found</h2>
-                    <div class="container">
-                        <form action="<?php
-						echo URL_ROOT ?>/bookings/book" method="post" class="overflow-hidden">
-                            <table class="table table-bordered table-responsive">
-                                <thead class="align-middle">
-                                <tr>
-                                    <th scope="col">Room Category</th>
-                                    <th scope="col">Guests</th>
-                                    <th scope="col">Price for <?php
-										echo $data['nights'] ?> nights
-                                    </th>
-                                    <th scope="col">Add ons</th>
-                                    <th scope="col">Choose</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-								<?php
-								foreach ($data['rooms'] as $room) : ?>
+                    <div class="container my-5">
+                        <form action="<?php echo URL_ROOT ?>/bookings/guest" method="get" class="overflow-hidden">
+                            <div class="d-flex flex-column align-items-center">
+                                <table class="table table-bordered table-responsive">
+                                    <thead class="align-middle">
                                     <tr>
-                                        <td>
-                                            <div>
-												<?php
-												echo $room['room_type'] ?>
-                                                <img src="<?php
-												echo mapRoomToPhoto($room['room_type']) ?>"
-                                                     class="fit-cover img-fluid" alt="room photo">
-												<?php
-												echo $room['description'] ?>
-                                            </div>
-                                        </td>
-                                        <td>
-											<?php
-											for ($i = 0; $i < $data['guests']; $i++) : ?>
-                                                <i class="fa-regular fa-user"></i>
-											<?php
-											endfor ?>
-                                        </td>
-                                        <td>
-											<?php
-											echo $room['cost'] ?>
-                                        </td>
-                                        <td class="d-flex flex-column justify-content-start">
-                                            <div class="form-check border-0">
-                                                <input class="form-check-input" name="services<?php
-												echo str_replace(" ", "", $room['room_type']) ?>" type="checkbox" value="1" id="breakfast">
-                                                <label class="form-check-label" for="breakfast">Breakfast</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" name="services<?php
-												echo str_replace(" ", "", $room['room_type']) ?>" type="checkbox" value="1" id="parking">
-                                                <label class="form-check-label" for="parking">Parking</label>
-                                            </div>
-                                            <?php if ($room['pets_allowed'] == 1): ?>
-                                            <div class="form-check">
-                                                <input class="form-check-input" name="services<?php
-												echo str_replace(" ", "", $room['room_type']) ?>" type="checkbox" value="1" id="pets">
-                                                <label class="form-check-label" for="pets">Pets</label>
-                                            </div>
-                                            <?php endif ?>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-center form-check">
-                                                <input class="form-check-input" type="radio" name="roomType" value="<?php
-												echo str_replace(" ", "", $room['room_type']) ?>">
-                                            </div>
-                                        </td>
+                                        <th scope="col">Room Category</th>
+                                        <th scope="col">Guests</th>
+                                        <th scope="col">Price for <?php
+											echo $data['nights'] ?> nights
+                                        </th>
+                                        <th scope="col">Add ons</th>
+                                        <th scope="col">Choose</th>
                                     </tr>
-								<?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+									<?php
+									foreach ($data['rooms'] as $room) : ?>
+                                        <tr>
+                                            <td>
+                                                <div>
+													<?php
+													echo $room['room_type'] ?>
+                                                    <img src="<?php
+													echo mapRoomToPhoto($room['room_type']) ?>"
+                                                         class="fit-cover img-fluid" alt="room photo">
+													<?php
+													echo $room['description'] ?>
+                                                </div>
+                                            </td>
+                                            <td>
+												<?php
+												for ($i = 0; $i < $data['guests']; $i++) : ?>
+                                                    <i class="fa-regular fa-user"></i>
+												<?php
+												endfor ?>
+                                            </td>
+                                            <td>
+												<?php echo $room['cost'] ?>
+                                            </td>
+                                            <td class="d-flex flex-column justify-content-start">
+                                                <div class="form-check border-0">
+                                                    <input class="form-check-input" name="services<?php
+													echo str_replace(" ", "", $room['room_type']) ?>[]" type="checkbox" value="breakfast" id="breakfast">
+                                                    <label class="form-check-label" for="breakfast">Breakfast</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" name="services<?php
+													echo str_replace(" ", "", $room['room_type']) ?>[]" type="checkbox" value="parking" id="parking">
+                                                    <label class="form-check-label" for="parking">Parking</label>
+                                                </div>
+												<?php
+												if ($room['pets_allowed'] == 1): ?>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" name="services<?php
+														echo str_replace(" ", "", $room['room_type']) ?>[]" type="checkbox" value="pets" id="pets">
+                                                        <label class="form-check-label" for="pets">Pets</label>
+                                                    </div>
+												<?php
+												endif ?>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-center form-check">
+                                                    <input class="form-check-input" type="radio" name="room_type" value="<?php
+													echo str_replace(" ", "", $room['room_type']) ?>">
+                                                    <input name="cost<?php echo str_replace(" ", "", $room['room_type']) ?>" class="d-none" type="number" value="<?php echo $room['cost'] ?>">
+                                                </div>
+                                            </td>
+                                        </tr>
+									<?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <div class="mt-3">
+                                    <button class="btn btn-success position-sticky" type="submit">Book</button>
+                                </div>
+                                <div class="d-none">
+                                    <input name="arrival" type="date" value="<?php
+									echo $data['arrival'] ?>">
+                                    <input name="departure" type="date" value="<?php
+									echo $data['departure'] ?>">
+                                    <input name="guests" type="number" value="<?php
+									echo $data['guests'] ?>">
+                                    <input name="nights" type="number" value="<?php
+									echo $data['nights'] ?>">
+                                </div>
+                            </div>
                         </form>
                     </div>
-				<?php else: ?>
+				<?php
+				else: ?>
                     <div class="text-center mx-auto">
                         <h2>Nothing Found...</h2>
                     </div>
-				<?php endif ?>
+				<?php
+				endif ?>
             </section>
         </div>
     </div>

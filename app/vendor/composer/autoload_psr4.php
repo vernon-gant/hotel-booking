@@ -6,4 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Ds\\' => array($vendorDir . '/php-ds/php-ds/src'),
 );

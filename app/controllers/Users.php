@@ -4,7 +4,7 @@ class Users extends Controller {
 
     private User $userModel;
 
-	private Booking $bookingModel;
+	private Room $bookingModel;
 
     public function __construct() {
         $this->userModel = $this->model('User');

@@ -14,3 +14,22 @@ function flash($name = '', $message = '', $class = 'alert alert-success') : void
         unset($_SESSION[$name],$_SESSION[$name . '_class']);
     }
 }
+
+function saveRoom() : void {
+	$_SESSION['booking'] = [
+		'room_type' => $_GET['room_type'],
+		'room_services' => $_GET['services' . $_GET['room_type']],
+		'arrival' => date_create($_GET['arrival']),
+		'departure' => date_create($_GET['departure']),
+		'guests' => (int) $_GET['guests'],
+		'nights' => (int) $_GET['nights'],
+		'room_cost' => (int) $_GET['cost' . $_GET['room_type']]
+	];
+}
+
+function saveGuest($data) : void {
+	$_SESSION['guest'] = array();
+	foreach ($data as $field => $value) {
+		if (!str_contains($field,"err")) $_SESSION['guest'][$field] = $value;
+	}
+}

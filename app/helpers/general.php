@@ -1,5 +1,11 @@
 <?php
 
+use Ds\Map;
+
+require_once APPROOT . "/helpers/DBUtils.php";
+
+$utils = new DBUtils();
+
 // Simple page redirect
 function redirect($page): void {
 	header('Location: ' . URL_ROOT . '/' . $page);
@@ -12,7 +18,7 @@ function processArrivalDeparture(&$data): void {
 			$_SESSION['arrival'] = $data['arrival'];
 			$_SESSION['departure'] = $data['departure'];
 			redirect("users/login");
-		}
+		} else unset($_SESSION['arrival'],$_SESSION['departure']);
 	} else {
 		$redirectedFromIndex = !str_contains($_SERVER['HTTP_REFERER'], "bookings");
 		if ($redirectedFromIndex) {
@@ -59,4 +65,8 @@ function filterGet() : void {
 
 function filterPost() : void {
 	$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+}
+
+function addCosts(array $services) {
+	$map = new Map();
 }

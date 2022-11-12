@@ -2,10 +2,10 @@
 
 class Bookings extends Controller {
 
-	private Booking $bookingModel;
+	private Room $roomModel;
 
 	public function __construct() {
-		$this->bookingModel = $this->model("Booking");
+		$this->roomModel = $this->model("Room");
 	}
 
 	public function index() {
@@ -24,7 +24,7 @@ class Bookings extends Controller {
 		if (isset($_GET['arrival'])) processArrivalDeparture($data);
 
 		$data['nights'] = extractDayFromDate($data['departure']) - extractDayFromDate($data['arrival']);
-		$data['rooms'] = $this->bookingModel->findAllAvailable($data['arrival'], $data['departure'], $data['guests']);
+		$data['rooms'] = $this->roomModel->findAllAvailable($data['arrival'], $data['departure'], $data['guests']);
 
 		$this->view('bookings/rooms', $data);
 	}
@@ -40,7 +40,60 @@ class Bookings extends Controller {
 			'arrival_err' => '',
 			'departure_err' => '',
 		];
-		$data['rooms'] = $this->bookingModel->filterRooms($data);
+		$data['rooms'] = $this->roomModel->filterRooms($data);
 		$this->view('bookings/rooms', $data);
+	}
+
+	public function guest() {
+		filterGet();
+
+		$data = [
+			'title' => 'Guest info',
+			'first_name' => '',
+			'last_name' => '',
+			'address' => '',
+			'city' => '',
+			'country' => '',
+			'zip' => '',
+			'dob' => '',
+			'phone' => '',
+			'fname_err' => '',
+			'lname_err' => '',
+			'address_err' => '',
+			'city_err' => '',
+			'country_err' => '',
+			'zip_err' => '',
+			'dob_err' => '',
+			'phone_err' => ''
+		];
+
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			validateGuest($data);
+			if (validGuest($data)) {
+				saveGuest($data);
+				redirect("bookings/checkout");
+				return;
+			}
+		} else saveRoom();
+
+		$this->view("bookings/guest",$data);
+	}
+
+	public function checkout() {
+		$data = [
+			'booking' => $_SESSION['booking'],
+			'guest' => $_SESSION['guest'],
+		];
+
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			validateGuest($data);
+			if (validGuest($data)) {
+				saveGuest($data);
+				redirect("bookings/checkout");
+				return;
+			}
+		}
+
+		$this->view("bookings/checkout",$data);
 	}
 }

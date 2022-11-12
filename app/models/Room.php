@@ -1,6 +1,6 @@
 <?php
 
-class Booking {
+class Room {
 
 	private Database $db;
 

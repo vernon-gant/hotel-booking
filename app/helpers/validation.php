@@ -2,7 +2,7 @@
 
 function validateLoginInput(array &$data, Users $users): void {
 	// Sanitize input
-	$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+	filterPost();
 
 	$data = [
 		'email' => trim($_POST['email']),
@@ -38,7 +38,7 @@ function validUser(array $data): bool {
 
 function validateRegisterInput(array &$data, Users $users): void {
 	// Sanitize input
-	$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+	filterPost();
 
 	$data = [
 		'first_name' => trim($_POST['first_name']),
@@ -48,9 +48,9 @@ function validateRegisterInput(array &$data, Users $users): void {
 		'pass_repeat' => trim($_POST['pass_repeat']),
 	];
 
-	checkEmptyFields($data);
+	checkEmptyRegisterFields($data);
 	validateRegisterPassword($data);
-	validateRegisterName($data);
+	validateName($data);
 
 	if ($users->getUserModel()->emailExists($data['email'])) {
 		$data['email_err'] = 'Email is already taken';
@@ -58,7 +58,7 @@ function validateRegisterInput(array &$data, Users $users): void {
 
 }
 
-function validateRegisterName(array &$data) : void {
+function validateName(array &$data) : void {
 	if (preg_match("@[^a-zA-Z]+@",$data['first_name'])) {
 		$data['fname_err'] = "First name must contain only characters";
 	}
@@ -88,7 +88,7 @@ function validateRegisterPassword(array &$data): void {
 	}
 }
 
-function checkEmptyFields(array &$data): void {
+function checkEmptyRegisterFields(array &$data): void {
 
 	if (empty($data['email'])) {
 		$data['email_err'] = 'Please, enter your email';
@@ -147,4 +147,87 @@ function validateArrivalDeparture(array &$data): void {
 
 function validArrivalDeparture(array $data) : bool {
 	return empty($data['arrival_err']) and empty($data['departure_err']);
+}
+
+function validGuest(array &$data) : bool {
+	return empty($data['fname_err']) and empty($data['lanme_err'])
+		and empty($data['address_err']) and empty($data['city_err'])
+		and empty($data['country_err']) and empty($data['zip_err'])
+		and empty($data['dob_err']) and empty($data['phone_err']);
+}
+
+function validateGuest(array &$data) : void {
+	filterPost();
+
+	$data = [
+		'first_name' => trim($_POST['first_name']),
+		'last_name' => trim($_POST['last_name']),
+		'address' => trim($_POST['address']),
+		'city' => trim($_POST['city']),
+		'country' => trim($_POST['country']),
+		'zip' => trim($_POST['country']),
+		'dob' => trim($_POST['dob']),
+		'phone' => trim($_POST['phone'])
+	];
+
+	checkEmptyGuestFields($data);
+	validateName($data);
+	validateGuestAddress($data);
+	validateGuestDob($data);
+}
+
+function checkEmptyGuestFields(array &$data) : void {
+
+	if (empty($data['first_name'])) {
+		$data['fname_err'] = 'Please, enter your first name';
+	}
+
+	if (empty($data['last_name'])) {
+		$data['lname_err'] = 'Please, enter your last name';
+	}
+
+	if (empty($data['address'])) {
+		$data['address_err'] = 'Please, enter your address';
+	}
+
+	if (empty($data['city'])) {
+		$data['city_err'] = 'Please, enter your city';
+	}
+
+	if (empty($data['dob'])) {
+		$data['dob_err'] = 'Please, enter your date of birthday';
+	}
+
+	if (empty($data['phone'])) {
+		$data['phone_err'] = 'Please, enter your phone';
+	}
+}
+
+function validateGuestAddress(array &$data) : void {
+	$addressZipRegex = '@[A-Za-z0-9\-\\,.]+$@';
+	$cityCountryRegex = '@[a-zA-Z]+@';
+	$phoneRegex = '@^\\+?[1-9][0-9]{7,14}$@';
+
+	if (!preg_match($addressZipRegex,$data['address'])) {
+		$data['address_err'] = "Invalid address format";
+	}
+	if (!preg_match($addressZipRegex,$data['zip'])) {
+		$data['zip_err'] = "Invalid post code format";
+	}
+
+	if (!preg_match($cityCountryRegex,$data['city'])) {
+		$data['city_err'] = "Invalid city format";
+	}
+	if (!preg_match($cityCountryRegex,$data['country'])) {
+		$data['country_err'] = "Invalid country format";
+	}
+	if (!preg_match($phoneRegex,$data['phone'])) {
+		$data['phone_err'] = "Invalid phone format";
+	}
+}
+
+function validateGuestDob(array &$data) : void {
+	$dob = date_create($data['dob']);
+	if (date_diff($dob,date_create(),true)->y > 90 ||
+		date_diff($dob,date_create(),true)->y < 5) $data['dob_err'] = "Are you kidding?";
 }
