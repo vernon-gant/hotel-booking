@@ -35,10 +35,10 @@ class Room {
 							  ) AND rt.name = ?
 							  order by room_num
 							  limit 1",
-			date_format($_SESSION['booking']['arrival'],DateTimeInterface::RFC2822),
-			date_format($_SESSION['booking']['departure'],DateTimeInterface::RFC2822),
-			date_format($_SESSION['booking']['arrival'],DateTimeInterface::RFC2822),
-			date_format($_SESSION['booking']['departure'],DateTimeInterface::RFC2822),
+			date_format($_SESSION['booking']['arrival'],"Y-m-d"),
+			date_format($_SESSION['booking']['departure'],"Y-m-d"),
+			date_format($_SESSION['booking']['arrival'],"Y-m-d"),
+			date_format($_SESSION['booking']['departure'],"Y-m-d"),
 			$_SESSION['booking']['room_type']);
 			return $this->db->singleRow()->room_num;
 	}
