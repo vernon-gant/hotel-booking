@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2022 at 04:46 PM
+-- Generation Time: Nov 15, 2022 at 03:23 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -42,7 +42,13 @@ CREATE TABLE `guests` (
 --
 
 INSERT INTO `guests` (`guest_id`, `first_name`, `last_name`, `address`, `city`, `dob`, `phone`) VALUES
-(1, 'Aleksandr', 'Zakharov', 'Matthias Schönerer Gasse 11/1/404', 'Wien', '2001-06-14', '4367762905384');
+(17, 'Daniil', 'Zakaka', 'Maafe SChn G 11', 'workss', '2001-06-14', '+79107796812'),
+(18, 'Daniil', 'Fisher', 'Maafe SChn G 11', 'Wien', '2001-06-14', '+79107796812'),
+(19, 'Daniil', 'adfAef', 'Maafe SChn G 11', 'dbb', '2001-06-14', '+79107796812'),
+(20, 'Daniil', '/adfAef', 'Maafe SChn G 11', 'sdgerg', '2001-06-14', '+79107796812'),
+(21, 'Daniil', 'adfAef', 'Maafe SChn G 11', 'Wien', '2001-08-14', '+79107796812'),
+(22, 'Daniil', 'Slepen', 'Maafe SChn G 11', 'Wien', '2001-06-14', '+79107796812'),
+(23, 'Daniil', 'Sleptsov', 'Maafe SChn G 11', 'sverbvg', '2001-06-14', '+79107796812');
 
 -- --------------------------------------------------------
 
@@ -55,6 +61,7 @@ CREATE TABLE `reservations` (
   `user_email` varchar(255) NOT NULL,
   `guest_id` int(11) NOT NULL,
   `room_num` int(11) NOT NULL,
+  `guests` int(11) NOT NULL,
   `arrival` date NOT NULL,
   `departure` date NOT NULL,
   `total_price` float NOT NULL,
@@ -65,10 +72,12 @@ CREATE TABLE `reservations` (
 -- Dumping data for table `reservations`
 --
 
-INSERT INTO `reservations` (`res_id`, `user_email`, `guest_id`, `room_num`, `arrival`, `departure`, `total_price`, `transaction_date`) VALUES
-('1L874TZ', 'aleks@gmail.com', 1, 3, '2022-11-07', '2022-11-10', 230, '2022-11-06 13:32:39'),
-('BA3456PI', 'admin@gmail.com', 1, 10, '2022-11-08', '2022-11-09', 100, '2022-11-06 15:34:43'),
-('KAF4563', 'garoshinvien@gmail.com', 1, 20, '2022-11-05', '2022-11-07', 500, '2022-11-06 15:36:44');
+INSERT INTO `reservations` (`res_id`, `user_email`, `guest_id`, `room_num`, `guests`, `arrival`, `departure`, `total_price`, `transaction_date`) VALUES
+('AZ6SJ77CF5', 'admin@gmail.com', 19, 1, 1, '2022-11-15', '2022-11-17', 145, '2022-11-15 13:42:53'),
+('D1EEYGD051', 'admin@gmail.com', 21, 7, 1, '2022-11-15', '2022-11-17', 145, '2022-11-15 13:50:20'),
+('EMWE6A0GPM', 'admin@gmail.com', 23, 12, 1, '2022-11-15', '2022-11-17', 145, '2022-11-15 13:53:09'),
+('OB7XO27RKA', 'admin@gmail.com', 22, 9, 1, '2022-11-15', '2022-11-17', 145, '2022-11-15 13:51:56'),
+('VWXAV0DH9J', 'admin@gmail.com', 20, 2, 1, '2022-11-15', '2022-11-17', 145, '2022-11-15 13:43:56');
 
 -- --------------------------------------------------------
 
@@ -78,11 +87,22 @@ INSERT INTO `reservations` (`res_id`, `user_email`, `guest_id`, `room_num`, `arr
 
 CREATE TABLE `reservation_events` (
   `res_id` varchar(50) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
   `status` enum('new','confirmed','canceled') NOT NULL,
   `details` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reservation_events`
+--
+
+INSERT INTO `reservation_events` (`res_id`, `user_email`, `status`, `details`, `created_at`) VALUES
+('AZ6SJ77CF5', 'admin@gmail.com', 'new', ' ', '2022-11-15 13:42:53'),
+('D1EEYGD051', 'admin@gmail.com', 'new', ' ', '2022-11-15 13:50:20'),
+('EMWE6A0GPM', 'admin@gmail.com', 'new', ' ', '2022-11-15 13:53:09'),
+('OB7XO27RKA', 'admin@gmail.com', 'new', ' ', '2022-11-15 13:51:56'),
+('VWXAV0DH9J', 'admin@gmail.com', 'new', ' ', '2022-11-15 13:43:56');
 
 -- --------------------------------------------------------
 
@@ -100,8 +120,21 @@ CREATE TABLE `reservation_services` (
 --
 
 INSERT INTO `reservation_services` (`res_id`, `service_name`) VALUES
-('1L874TZ', 'breakfast'),
-('1L874TZ', 'parking');
+('AZ6SJ77CF5', 'breakfast'),
+('AZ6SJ77CF5', 'parking'),
+('AZ6SJ77CF5', 'pets'),
+('D1EEYGD051', 'breakfast'),
+('D1EEYGD051', 'parking'),
+('D1EEYGD051', 'pets'),
+('EMWE6A0GPM', 'breakfast'),
+('EMWE6A0GPM', 'parking'),
+('EMWE6A0GPM', 'pets'),
+('OB7XO27RKA', 'breakfast'),
+('OB7XO27RKA', 'parking'),
+('OB7XO27RKA', 'pets'),
+('VWXAV0DH9J', 'breakfast'),
+('VWXAV0DH9J', 'parking'),
+('VWXAV0DH9J', 'pets');
 
 -- --------------------------------------------------------
 
@@ -209,12 +242,17 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`email`, `password`, `first_name`, `last_name`, `role`, `created_at`, `status`) VALUES
 ('admin@gmail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Admin', 'Admin', 'Administrator', '2022-10-29 09:51:40', 'active'),
+('aleks1234567@gmail.com', '235aa633f6490359c9267ee2f8d2f4720d933924', 'Kok', 'Cecov', 'User', '2022-11-11 08:52:07', 'active'),
 ('aleks123@gmail.com', 'e6730c649a6e001841db082f7cd139604a8fe3ad', 'Aleks', 'Zakaka', 'User', '2022-11-06 09:49:42', 'active'),
 ('aleks1@gmail.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Aleks', 'Zakzak', 'User', '2022-10-29 16:49:39', 'active'),
 ('aleks@gmail.com', '9cc83c052af47f58031faad027531a40c5411c05', 'Aleksandr', 'Zakharov', 'User', '2022-10-29 09:55:27', 'active'),
 ('andrew_fisher@gmail.com', '3c5ecae19eb9b8d6b80e02dd6a3b197759e30679', 'Andrew', 'Fisher', 'User', '2022-11-06 11:12:28', 'active'),
 ('gamil@sg.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Kok', 'Cec', 'User', '2022-10-31 09:33:54', 'active'),
 ('garoshinvien@gmail.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Daniil', 'Slepen', 'User', '2022-10-31 12:26:02', 'active'),
+('info@levus.co', '166602b8fd26ca36c7ce2fc701eb998365c50654', 'Daniil', 'Sleptsov', 'User', '2022-11-11 08:36:32', 'active'),
+('infolfhfjzjftj@levus.co', '235aa633f6490359c9267ee2f8d2f4720d933924', 'Daniil', 'Slepen', 'User', '2022-11-11 08:45:06', 'active'),
+('infolfhftj@levus.co', '235aa633f6490359c9267ee2f8d2f4720d933924', 'Daniil', 'Slepen', 'User', '2022-11-11 08:41:17', 'active'),
+('infolol@levus.co', '166602b8fd26ca36c7ce2fc701eb998365c50654', 'Daniil', 'Slepen', 'User', '2022-11-11 08:39:49', 'active'),
 ('lalka@gmail.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Kok', 'Coc', 'User', '2022-10-31 09:44:21', 'active'),
 ('rebi@gmail.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Andrei', 'Ribin', 'User', '2022-10-31 09:32:13', 'active'),
 ('slep@gmail.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Daniil', 'Slepen', 'User', '2022-10-31 12:24:20', 'active'),
@@ -235,15 +273,16 @@ ALTER TABLE `guests`
 --
 ALTER TABLE `reservations`
   ADD PRIMARY KEY (`res_id`),
-  ADD KEY `fk_reservations_user_id` (`user_email`),
   ADD KEY `fk_reservations_guest_id` (`guest_id`),
-  ADD KEY `fk_reservations_room_num` (`room_num`);
+  ADD KEY `fk_reservations_room_num` (`room_num`),
+  ADD KEY `fk_reservations_user_id` (`user_email`);
 
 --
 -- Indexes for table `reservation_events`
 --
 ALTER TABLE `reservation_events`
-  ADD PRIMARY KEY (`res_id`);
+  ADD PRIMARY KEY (`res_id`,`status`),
+  ADD KEY `fk_reservation_events_user_email` (`user_email`);
 
 --
 -- Indexes for table `reservation_services`
@@ -285,7 +324,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `guests`
 --
 ALTER TABLE `guests`
-  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
@@ -295,21 +334,22 @@ ALTER TABLE `guests`
 -- Constraints for table `reservations`
 --
 ALTER TABLE `reservations`
-  ADD CONSTRAINT `fk_reservations_guest_id` FOREIGN KEY (`guest_id`) REFERENCES `guests` (`guest_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_reservations_room_num` FOREIGN KEY (`room_num`) REFERENCES `rooms` (`room_num`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_reservations_user_id` FOREIGN KEY (`user_email`) REFERENCES `users` (`email`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_reservations_guest_id` FOREIGN KEY (`guest_id`) REFERENCES `guests` (`guest_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_reservations_room_num` FOREIGN KEY (`room_num`) REFERENCES `rooms` (`room_num`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_reservations_user_id` FOREIGN KEY (`user_email`) REFERENCES `users` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `reservation_events`
 --
 ALTER TABLE `reservation_events`
-  ADD CONSTRAINT `fk_reservation_events_res_id` FOREIGN KEY (`res_id`) REFERENCES `reservations` (`res_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_reservation_events_res_id` FOREIGN KEY (`res_id`) REFERENCES `reservations` (`res_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_reservation_events_user_email` FOREIGN KEY (`user_email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `reservation_services`
 --
 ALTER TABLE `reservation_services`
-  ADD CONSTRAINT `fk_res_id` FOREIGN KEY (`res_id`) REFERENCES `reservations` (`res_id`),
+  ADD CONSTRAINT `fk_res_id` FOREIGN KEY (`res_id`) REFERENCES `reservations` (`res_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_service_name` FOREIGN KEY (`service_name`) REFERENCES `services` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
