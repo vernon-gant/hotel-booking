@@ -93,8 +93,11 @@ class Bookings extends Controller {
 		];
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			$bookingCreated = $this->bookingModel->createBooking();
-			if ($bookingCreated);
+			$bookingCreated = $this->bookingModel->createBooking($this->roomModel);
+			if ($bookingCreated) {
+				flash("booking_created","You have successfully made a booking!");
+				redirect("pages/index");
+			}
 			else die("ERROR");
 		}
 
