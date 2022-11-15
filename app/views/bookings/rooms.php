@@ -339,7 +339,7 @@ require_once APPROOT . '/views/includes/header.php'
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-center form-check">
-                                                    <input class="form-check-input" type="radio" name="room_type" value="<?php
+                                                    <input required class="form-check-input" type="radio" name="room_type" value="<?php
 													echo str_replace(" ", "", $room['room_type']) ?>">
                                                     <input name="cost<?php echo str_replace(" ", "", $room['room_type']) ?>" class="d-none" type="number" value="<?php echo $room['cost'] ?>">
                                                 </div>
@@ -348,9 +348,6 @@ require_once APPROOT . '/views/includes/header.php'
 									<?php endforeach; ?>
                                     </tbody>
                                 </table>
-                                <div class="mt-3">
-                                    <button class="btn btn-success position-sticky" type="submit">Book</button>
-                                </div>
                                 <div class="d-none">
                                     <input name="arrival" type="date" value="<?php
 									echo $data['arrival'] ?>">
@@ -360,6 +357,9 @@ require_once APPROOT . '/views/includes/header.php'
 									echo $data['guests'] ?>">
                                     <input name="nights" type="number" value="<?php
 									echo $data['nights'] ?>">
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-success position-sticky" type="submit">Book</button>
                                 </div>
                             </div>
                         </form>

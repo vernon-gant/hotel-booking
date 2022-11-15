@@ -33,7 +33,7 @@ class Database {
 	// Prepare statement with query
 	public function query(string $sql, ...$values): void {
 		if ($this->stmt = $this->dbh->prepare($sql)) {
-			if (array_count_values($values) > 0) {
+			if (count($values) > 0) {
 				$types = '';
 				$args_ref = array();
 				foreach ($values as &$value) {

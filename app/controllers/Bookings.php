@@ -4,8 +4,14 @@ class Bookings extends Controller {
 
 	private Room $roomModel;
 
+	private Booking $bookingModel;
+
+	private DBUtils $utils;
+
 	public function __construct() {
 		$this->roomModel = $this->model("Room");
+		$this->bookingModel = $this->model("Booking");
+		$this->utils = new DBUtils();
 	}
 
 	public function index() {
@@ -74,24 +80,22 @@ class Bookings extends Controller {
 				redirect("bookings/checkout");
 				return;
 			}
-		} else saveRoom();
+		} else saveRoom($this->utils);
 
 		$this->view("bookings/guest",$data);
 	}
 
 	public function checkout() {
 		$data = [
+			'title' => 'Checkout',
 			'booking' => $_SESSION['booking'],
 			'guest' => $_SESSION['guest'],
 		];
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			validateGuest($data);
-			if (validGuest($data)) {
-				saveGuest($data);
-				redirect("bookings/checkout");
-				return;
-			}
+			$bookingCreated = $this->bookingModel->createBooking();
+			if ($bookingCreated);
+			else die("ERROR");
 		}
 
 		$this->view("bookings/checkout",$data);

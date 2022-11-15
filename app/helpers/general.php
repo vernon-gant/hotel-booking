@@ -4,7 +4,6 @@ use Ds\Map;
 
 require_once APPROOT . "/helpers/DBUtils.php";
 
-$utils = new DBUtils();
 
 // Simple page redirect
 function redirect($page): void {
@@ -67,6 +66,13 @@ function filterPost() : void {
 	$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 }
 
-function addCosts(array $services) {
-	$map = new Map();
+function mapServicesToCosts(array $userServices, DBUtils $utils) : ?Map {
+	$allServices = $utils->findServicesPrices();
+	$result = new Map();
+	foreach ($allServices as $service) {
+		if (in_array($service['name'],$userServices)) {
+			$result->put($service['name'],$service['price']);
+		}
+	}
+	return $result;
 }
