@@ -23,7 +23,7 @@
                             </a>
                         </li>
                         <li class="nav-item my-0 my-sm-3">
-                            <a href="<?php echo URL_ROOT . '/admin/blog'?>" class="nav-link px-2 text-truncate">
+                            <a href="<?php echo URL_ROOT . '/admin/posts'?>" class="nav-link px-2 text-truncate">
                                 <i class="fa-solid fa-blog fs-5"></i>
                                 <span class="d-none d-sm-inline">Blog</span>
                             </a>

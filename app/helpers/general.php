@@ -87,9 +87,13 @@ function prepareAdminLoginData(array &$data): void {
 	];
 }
 
-function prepareAdminBlogData(array &$data): void {
+function prepareAddPostData(array &$data): void {
 	$data = [
-		'title' => 'Posts Overview',
-		'posts' => null
+		'title' => 'Add Post',
+		'post_title' => '',
+		'body' => '',
+		'post_title_err' => '',
+		'body_err' =>''
 	];
 }
+

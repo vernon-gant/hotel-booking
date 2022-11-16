@@ -17,20 +17,25 @@ class Admin extends Controller {
 		$this->view("admin/index",$this->data);
 	}
 
-	public function blog() {
-		prepareAdminBlogData($this->data);
-		switch ($_SERVER['REQUEST_METHOD']) {
-			case 'GET' : {
+	public function posts() {
+		$methodArgs = func_get_args();
+		switch (true) {
+			case in_array("add",$methodArgs) : {
+				prepareAddPostData($this->data);
+				if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+				}
+				$this->view("admin/posts/add",$this->data);
 				break;
 			}
-			case 'POST' : {
+			case in_array("delete",$methodArgs) : {
+				$id = $methodArgs[1];
 				break;
 			}
-			case 'DELETE' : {
-				break;
+			default : {
+				$this->view("admin/posts/dashboard",$this->data);
 			}
 		}
-		$this->view("admin/blog",$this->data);
 	}
 
 	public function login() {

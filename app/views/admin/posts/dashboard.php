@@ -5,7 +5,8 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
 <div class="d-flex flex-column h-100">
     <div class="py-5 px-2 bg-light rounded-3 d-flex flex-grow-1">
         <div class="container-fluid d-flex flex-column align-items-center justify-content-between">
-            <h1>Posts</h1>
+            <?php flash("post_added"); ?>
+            <h1 class="my-2">Posts</h1>
             <div class="row mx-auto">
 				<?php if (isset($data['posts'])) : ?>
 					<?php foreach ($data['posts'] as $post) : ?>
@@ -28,7 +29,7 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
                     <h2>No posts yet...</h2>
 				<?php endif ?>
             </div>
-            <a href="<?php echo URL_ROOT; ?>/posts/add" class="btn btn-primary pull-right">
+            <a href="<?php echo URL_ROOT; ?>/admin/posts/add" class="btn btn-primary pull-right">
                 <i class="fa fa-pencil"></i> Add Post
             </a>
         </div>
