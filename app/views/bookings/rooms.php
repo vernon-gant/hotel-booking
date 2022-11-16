@@ -1,5 +1,6 @@
 <?php
-require_once APPROOT . '/views/includes/header.php'
+require_once APPROOT . '/views/includes/head.php';
+require_once APPROOT . '/views/includes/navbar.php'
 ?>
 <div class="m-0 p-0 w-100 overflow-hidden">
     <div class="d-sm-flex d-md-none">

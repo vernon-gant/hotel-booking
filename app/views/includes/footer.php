@@ -63,9 +63,7 @@
         <!-- Section: Social -->
     </div>
     <!-- Grid container -->
-</footer>
-</div>
-</div>
+    </footer>
 </div>
 <!-- Required Bootstrap JS -->
 <script src="<?php echo URL_ROOT;?>/js/bootstrap.bundle.min.js"></script>

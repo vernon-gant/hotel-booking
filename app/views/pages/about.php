@@ -1,5 +1,6 @@
 <?php
-    require_once APPROOT . '/views/includes/header.php'
+require_once APPROOT . '/views/includes/head.php';
+require_once APPROOT . '/views/includes/navbar.php'
 ?>
 	<article class="container-fluid px-lg-5 mt-3">
 		<h1 class="text-center my-5">Impressum</h1>

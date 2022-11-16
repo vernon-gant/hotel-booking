@@ -76,3 +76,13 @@ function mapServicesToCosts(array $userServices, DBUtils $utils) : ?Map {
 	}
 	return $result;
 }
+
+function prepareAdminLoginData(array &$data): void {
+	$data = [
+		'title' => 'Admin Login',
+		'email' => '',
+		'pass' => '',
+		'email_err' => '',
+		'pass_err' =>''
+	];
+}

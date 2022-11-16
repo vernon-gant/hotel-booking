@@ -16,6 +16,7 @@ function validateLoginInput(array &$data, Users $users): void {
 	// Validate password
 	if (empty($data['pass'])) {
 		$data['pass_err'] = 'Please, enter your password';
+		return;
 	}
 
 	$emailExists = $users->getUserModel()->emailExists($data['email']);
@@ -230,4 +231,28 @@ function validateGuestDob(array &$data) : void {
 	$dob = date_create($data['dob']);
 	if (date_diff($dob,date_create(),true)->y > 90 ||
 		date_diff($dob,date_create(),true)->y < 5) $data['dob_err'] = "Are you kidding?";
+}
+
+function validateAdminLogin(array &$data,AdminModel $adminModel): void {
+	filterPost();
+	$data['email'] = trim($_POST['email']);
+	$data['pass'] = empty($_POST['pass']) ? "" : sha1($_POST['pass']);
+	// Check email errors
+	if (empty($data['email'])) {
+		$data['email_err'] = 'Please, enter your email';
+	}
+	// Validate password
+	if (empty($data['pass'])) {
+		$data['pass_err'] = 'Please, enter your password';
+	}
+	if (validUser($data)) {
+		$emailExists = $adminModel->adminEmailExists($data['email']);
+		$correctPassword = $adminModel->correctAdminPassword($data['email'], $data['pass']);
+		if (!$emailExists) {
+			$data['email_err'] = 'Admin with this email does not exist';
+			$data['email'] = '';
+		} else if (!$correctPassword) {
+			$data['pass_err'] = 'Incorrect password for this admin';
+		}
+	}
 }

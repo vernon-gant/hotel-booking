@@ -1,5 +1,6 @@
 <?php
-require_once APPROOT . '/views/includes/header.php'
+require_once APPROOT . '/views/includes/head.php';
+require_once APPROOT . '/views/includes/navbar.php'
 ?>
 	<div class="container py-md-5 py-4">
 		<div class="row justify-content-center mb-4 mb-md-5">
