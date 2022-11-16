@@ -17,6 +17,22 @@ class Admin extends Controller {
 		$this->view("admin/index",$this->data);
 	}
 
+	public function blog() {
+		prepareAdminBlogData($this->data);
+		switch ($_SERVER['REQUEST_METHOD']) {
+			case 'GET' : {
+				break;
+			}
+			case 'POST' : {
+				break;
+			}
+			case 'DELETE' : {
+				break;
+			}
+		}
+		$this->view("admin/blog",$this->data);
+	}
+
 	public function login() {
 		prepareAdminLoginData($this->data);
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {

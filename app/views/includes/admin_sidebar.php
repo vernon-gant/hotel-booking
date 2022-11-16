@@ -1,7 +1,7 @@
 <body class="d-flex flex-column vh-100 overflow-hidden">
-<div class="container-fluid pb-3 flex-grow-1 d-flex flex-column flex-sm-row overflow-auto">
-    <div class="row flex-grow-sm-1 flex-grow-0 p-3">
-        <aside class="col-sm-4 col-md-3 col-lg-2 flex-grow-sm-1 flex-shrink-1 flex-grow-0 sticky-top pb-sm-0 pb-3">
+    <div class="container-fluid d-flex flex-sm-row flex-column flex-grow-1 pb-3 overflow-auto">
+        <div class="row flex-grow-sm-1 flex-grow-0 p-3">
+            <aside class="col-sm-4 col-md-3 col-lg-2 flex-grow-sm-1 flex-shrink-1 flex-grow-0 sticky-top pb-sm-0 pb-3">
             <div class="bg-light border rounded-3 p-1 h-100 sticky-top">
                 <ul class="mt-3 nav nav-pills flex-sm-column flex-row mb-auto justify-content-between text-truncate align-items-center">
                     <li class="nav-item my-3">
@@ -37,6 +37,6 @@
                 </ul>
             </div>
         </aside>
-        <main class="col overflow-auto h-100">
+            <main class="col overflow-auto h-100">
 
 

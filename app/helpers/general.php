@@ -86,3 +86,10 @@ function prepareAdminLoginData(array &$data): void {
 		'pass_err' =>''
 	];
 }
+
+function prepareAdminBlogData(array &$data): void {
+	$data = [
+		'title' => 'Posts Overview',
+		'posts' => null
+	];
+}
