@@ -22,12 +22,16 @@ class Admin extends Controller {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			validateAdminLogin($this->data,$this->adminModel);
 			if (validUser($this->data)) {
-				$admin = $this->adminModel->findAdmin($this->data['email']);
-				$this->adminModel->createSession($admin);
+				$admin = $this->adminModel->getUserModel()->findUser($this->data['email']);
+				$this->adminModel->createAdminSession($admin);
 				redirect("admin/index");
 			}
 		}
 		$this->view("admin/login",$this->data);
+	}
+
+	public function logout() {
+		$this->adminModel->getUserModel()->logout("admin");
 	}
 
 }

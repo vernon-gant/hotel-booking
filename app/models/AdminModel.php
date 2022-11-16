@@ -8,6 +8,34 @@ class AdminModel {
 
 	private User $userModel;
 
+	/**
+	 * @return Room
+	 */
+	public function getRoomModel(): Room {
+		return $this->roomModel;
+	}
+
+	/**
+	 * @return Booking
+	 */
+	public function getBookingModel(): Booking {
+		return $this->bookingModel;
+	}
+
+	/**
+	 * @return User
+	 */
+	public function getUserModel(): User {
+		return $this->userModel;
+	}
+
+	/**
+	 * @return Database
+	 */
+	public function getDb(): Database {
+		return $this->db;
+	}
+
 	private Database $db;
 
 	public function __construct() {
@@ -17,21 +45,7 @@ class AdminModel {
 		$this->db = new Database();
 	}
 
-	public function adminEmailExists($email): bool {
-		$this->db->query("SELECT * FROM users WHERE email = ? AND role = 'Admin'", $email);
-		return $this->db->rowCount() > 0;
-	}
-
-	public function correctAdminPassword(string $email, string $password): bool {
-		$this->db->query("SELECT * FROM users where email = ? AND password = ? AND role = 'Admin'", $email, $password);
-		return $this->db->rowCount() > 0;
-	}
-
-	public function findAdmin(string $email): mixed {
-		return $this->userModel->findUser($email);
-	}
-
-	public function createSession(mixed $admin): void {
+	public function createAdminSession(mixed $admin): void {
 		$_SESSION['admin_email'] = $admin->email;
 	}
 

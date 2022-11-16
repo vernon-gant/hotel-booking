@@ -7,15 +7,18 @@
  */
 class Core {
 
-    protected $currentController = 'Pages';
-    protected $currentMethod = 'index';
-    protected array $params = [];
+	protected mixed $currentController = 'Pages';
+	protected string $currentMethod = 'index';
+	protected array $params = [];
 
     public function __construct() {
+
         $url = $this->getUrl();
 
-        // Look in controllers for first value
+		if (isset($_SESSION['admin_email']) and !in_array("admin",$url)) redirect("admin/index");
+		elseif (isset($_SESSION['user_email']) and in_array("admin",$url)) redirect("pages/index");
 
+        // Look in controllers for first value
         if (file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
             // If exists set as controllers
             $this->currentController = ucwords($url[0]);

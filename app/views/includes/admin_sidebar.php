@@ -22,10 +22,16 @@
                             <span class="d-none d-sm-inline">Bookings</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mb-3">
                         <a href="<?php echo URL_ROOT . '/admin/blog'?>" class="nav-link px-2 text-truncate">
                             <i class="fa-solid fa-blog fs-5"></i>
                             <span class="d-none d-sm-inline">Blog</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo URL_ROOT . '/admin/logout'?>" class="nav-link px-2 text-truncate">
+                            <i class="fa-solid fa-egg fs-5"></i>
+                            <span class="d-none d-sm-inline">Logout</span>
                         </a>
                     </li>
                 </ul>

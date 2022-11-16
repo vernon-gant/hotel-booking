@@ -1,4 +1,5 @@
 <?php
+require_once APPROOT . '/views/includes/head.php';
 require_once APPROOT . '/views/includes/navbar.php'
 ?>
     <div class="container py-5" id="content">

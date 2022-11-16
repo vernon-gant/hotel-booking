@@ -8,13 +8,13 @@ class User {
 		$this->db = new Database();
 	}
 
-	public function emailExists($email): bool {
-		$this->db->query("SELECT * FROM users where email = ?", $email);
+	public function emailExists($email,$role): bool {
+		$this->db->query("SELECT * FROM users WHERE email = ? AND role = ?", $email,$role);
 		return $this->db->rowCount() > 0;
 	}
 
-	public function correctPassword(string $email, string $password): bool {
-		$this->db->query("SELECT * FROM users where email = ? AND password = ?", $email, $password);
+	public function correctPassword(string $email, string $password,$role): bool {
+		$this->db->query("SELECT * FROM users where email = ? AND password = ? AND role = ?", $email, $password,$role);
 		return $this->db->rowCount() > 0;
 	}
 
@@ -29,14 +29,14 @@ class User {
 		return $this->db->affectedRows() > 0;
 	}
 
-	public function createSession($user): void {
-		$_SESSION['user_email'] = $user->email;
-		$_SESSION['user_first_name'] = $user->first_name;
-		$_SESSION['user_last_name'] = $user->last_name;
+	public function createSession($user,string $role): void {
+		$_SESSION[$role . '_email'] = $user->email;
+		$_SESSION[$role . '_first_name'] = $user->first_name;
+		$_SESSION[$role . '_last_name'] = $user->last_name;
 	}
 
-	public function logout(): void {
-		unset($_SESSION['user_email'], $_SESSION['user_first_name'], $_SESSION['user_last_name']);
+	public function logout(string $role): void {
+		unset($_SESSION[$role . '_email'], $_SESSION[$role . '_first_name'], $_SESSION[$role . '_last_name']);
 		session_destroy();
 		redirect("pages/index");
 	}

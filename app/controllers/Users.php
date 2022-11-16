@@ -38,7 +38,7 @@ class Users extends Controller {
             // Check if empty errors
             if (validUser($data)) {
                 $user = $this->userModel->findUser($data['email']);
-                $this->userModel->createSession($user);
+                $this->userModel->createSession($user,"user");
 				if (isset($_SESSION['bookingRedirect'])) {
 					unset($_SESSION['bookingRedirect']);
 					redirect("bookings/index");
@@ -88,6 +88,6 @@ class Users extends Controller {
     }
 
 	public function logout() {
-		$this->userModel->logout();
+		$this->userModel->logout("user");
 	}
 }

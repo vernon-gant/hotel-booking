@@ -19,8 +19,8 @@ function validateLoginInput(array &$data, Users $users): void {
 		return;
 	}
 
-	$emailExists = $users->getUserModel()->emailExists($data['email']);
-	$correctPassword = $users->getUserModel()->correctPassword($data['email'], $data['pass']);
+	$emailExists = $users->getUserModel()->emailExists($data['email'],"User");
+	$correctPassword = $users->getUserModel()->correctPassword($data['email'], $data['pass'],"User");
 
 	if (!$emailExists) {
 		$data['email_err'] = 'User with this email does not exist';
@@ -51,13 +51,21 @@ function validateRegisterInput(array &$data, Users $users): void {
 
 	checkEmptyRegisterFields($data);
 	validateRegisterPassword($data);
+	validateEmail($data);
 	validateName($data);
 
-	if ($users->getUserModel()->emailExists($data['email'])) {
+	if ($users->getUserModel()->emailExists($data['email'],"User")) {
 		$data['email_err'] = 'Email is already taken';
 	}
 
 }
+
+function validateEmail(array &$data) : void {
+	if (!filter_var($data['email'],FILTER_VALIDATE_EMAIL)) {
+		$data['email_err'] = "Invalid email";
+	}
+}
+
 
 function validateName(array &$data) : void {
 	if (preg_match("@[^a-zA-Z]+@",$data['first_name'])) {
@@ -150,7 +158,7 @@ function validArrivalDeparture(array $data) : bool {
 	return empty($data['arrival_err']) and empty($data['departure_err']);
 }
 
-function validGuest(array &$data) : bool {
+function validGuest(array $data) : bool {
 	return empty($data['fname_err']) and empty($data['lanme_err'])
 		and empty($data['address_err']) and empty($data['city_err'])
 		and empty($data['country_err']) and empty($data['zip_err'])
@@ -205,7 +213,7 @@ function checkEmptyGuestFields(array &$data) : void {
 }
 
 function validateGuestAddress(array &$data) : void {
-	$addressZipRegex = '@[A-Za-z0-9\-\\,.]+$@';
+	$addressZipRegex = '@[A-Za-z0-9\-,.]+$@';
 	$cityCountryRegex = '@[a-zA-Z]+@';
 	$phoneRegex = '@^\\+?[1-9][0-9]{7,14}$@';
 
@@ -246,8 +254,8 @@ function validateAdminLogin(array &$data,AdminModel $adminModel): void {
 		$data['pass_err'] = 'Please, enter your password';
 	}
 	if (validUser($data)) {
-		$emailExists = $adminModel->adminEmailExists($data['email']);
-		$correctPassword = $adminModel->correctAdminPassword($data['email'], $data['pass']);
+		$emailExists = $adminModel->getUserModel()->emailExists($data['email'],"Admin");
+		$correctPassword = $adminModel->getUserModel()->correctPassword($data['email'], $data['pass'],"Admin");
 		if (!$emailExists) {
 			$data['email_err'] = 'Admin with this email does not exist';
 			$data['email'] = '';
