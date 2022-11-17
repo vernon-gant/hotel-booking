@@ -47,6 +47,17 @@ class Admin extends Controller {
 		}
 	}
 
+	public function users() {
+		$methodArgs = func_get_args();
+
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') $this->adminModel->getUserModel()->changeStatus(email: $_POST['user_email']);
+		elseif (in_array("delete",$methodArgs)) $this->adminModel->getUserModel()->deleteUser(email: $methodArgs[1]);
+
+		prepareAdminUsersData($this->data,$this->adminModel->getUserModel());
+
+		$this->view("admin/users",$this->data);
+	}
+
 	public function login() {
 		prepareAdminLoginData($this->data);
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
