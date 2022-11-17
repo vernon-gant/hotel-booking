@@ -8,6 +8,17 @@ class AdminModel {
 
 	private User $userModel;
 
+	private Post $postModel;
+
+	private Database $db;
+
+	/**
+	 * @return Post
+	 */
+	public function getPostModel(): Post {
+		return $this->postModel;
+	}
+
 	/**
 	 * @return Room
 	 */
@@ -36,17 +47,22 @@ class AdminModel {
 		return $this->db;
 	}
 
-	private Database $db;
-
 	public function __construct() {
 		$this->roomModel = new Room();
 		$this->bookingModel = new Booking();
 		$this->userModel = new User();
+		$this->postModel = new Post();
 		$this->db = new Database();
 	}
 
 	public function createAdminSession(mixed $admin): void {
 		$_SESSION['admin_email'] = $admin->email;
+	}
+
+	public function getEmailName(): string {
+		return substr($_SESSION['admin_email'],
+			0, strpos($_SESSION['admin_email'], "@")
+		);
 	}
 
 
