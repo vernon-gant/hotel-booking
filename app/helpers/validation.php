@@ -21,16 +21,24 @@ function validateLoginInput(array &$data, Users $users): void {
 
 	$emailExists = $users->getUserModel()->emailExists($data['email'],"User");
 	$correctPassword = $users->getUserModel()->correctPassword($data['email'], $data['pass'],"User");
+	$isActive = $users->getUserModel()->isActive($data['email']);
 
-	if (!$emailExists) {
-		$data['email_err'] = 'User with this email does not exist';
-		$data['email'] = '';
-	} else if (!$correctPassword) {
-		$data['pass_err'] = 'Incorrect password';
-		echo "<audio autoplay='true' style='display:none;'>
+	if (validUser($data)) {
+		if (!$emailExists) {
+			$data['email_err'] = 'User with this email does not exist';
+			$data['email'] = '';
+		} else if (!$correctPassword) {
+			$data['pass_err'] = 'Incorrect password';
+			echo "<audio autoplay='true' style='display:none;'>
                 <source src='" . URL_ROOT . "/audio/reminder.mp3" . "' type='audio/mpeg'>
               </audio>";
+		} else if (!$isActive) {
+			$data['email_err'] = ' ';
+			$data['email'] = '';
+			flash("user_inactive","This user account was blocked. Please, contact administrator",class: "alert alert-danger");
+		}
 	}
+
 }
 
 function validUser(array $data): bool {

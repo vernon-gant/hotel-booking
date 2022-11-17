@@ -135,3 +135,10 @@ function preparePostDashboardData(array &$data,Post $postModel) : void {
 function mapImagePathToPhoto(string $path) : string {
 	return URL_ROOT . "/public/img/blog/" . $path;
 }
+
+function prepareAdminUsersData(array &$data,User $userModel) : void {
+	$data = [
+		'title' => 'Users dashboard',
+		'users' => $userModel->fetchUsers()
+	];
+}
