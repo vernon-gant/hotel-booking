@@ -2,8 +2,10 @@
 
 class Pages extends Controller {
 
-	public function __construct() {
+	private Post $postModel;
 
+	public function __construct() {
+		$this->postModel = $this->model("Post");
 	}
 
 	public function about() {
@@ -15,7 +17,8 @@ class Pages extends Controller {
 
 	public function blog() {
 		$data = [
-			'title' => 'Blog'
+			'title' => 'Blog',
+			'posts' => $this->postModel->fetchAllPosts()
 		];
 		$this->view('pages/blog', $data);
 	}
