@@ -23,7 +23,15 @@ class Admin extends Controller {
 			case in_array("add",$methodArgs) : {
 				prepareAddPostData($this->data);
 				if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+					processPost($this->data);
+					if (validPost($this->data)) {
+						$this->data = preparePost($this->data,$this->adminModel);
+						if ($this->adminModel->getPostModel()->createPost($this->data)) {
+							flash("post_added","Post has been successfully added!");
+							redirect("admin/posts/dashboard");
+							return;
+						} else die("Something went wrong...");
+					}
 				}
 				$this->view("admin/posts/add",$this->data);
 				break;
@@ -33,6 +41,7 @@ class Admin extends Controller {
 				break;
 			}
 			default : {
+				preparePostDashboardData($this->data,$this->adminModel->getPostModel());
 				$this->view("admin/posts/dashboard",$this->data);
 			}
 		}
