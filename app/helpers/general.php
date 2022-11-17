@@ -97,3 +97,41 @@ function prepareAddPostData(array &$data): void {
 	];
 }
 
+function preparePost(array $data,AdminModel $adminModel) : array {
+	$id = $adminModel->getPostModel()->getGenerator()->generate(Post::$idLength);
+	return [
+		'id' => $id,
+		'user_email' => $_SESSION['admin_email'],
+		'post_title' => $data['post_title'],
+		'body' => $data['body'],
+		'img' => processImage($data,$adminModel,$id)
+	];
+}
+
+function processImage(array $data, AdminModel $adminModel, string $id) : ?string {
+	if ($data['image'] == null) return null;
+	else {
+		$userName = $adminModel->getEmailName();
+		$blogPath = "../public/img/blog/";
+		$userDir = $blogPath . $userName;
+		$userDirExists = file_exists($userDir) and is_dir($userDir);
+
+		if (!$userDirExists) mkdir( $userDir,0777,true);
+
+		$img_path = "/post_" . $id . ".jpg";
+
+		$success = move_uploaded_file($_FILES['image']["tmp_name"], $userDir . $img_path);
+		return $success ? $userName . $img_path : null;
+	}
+}
+
+function preparePostDashboardData(array &$data,Post $postModel) : void {
+	$data = [
+		'title' => 'Posts dashboard',
+		'posts' => $postModel->getAdminPosts()
+	];
+}
+
+function mapImagePathToPhoto(string $path) : string {
+	return URL_ROOT . "/public/img/blog/" . $path;
+}
