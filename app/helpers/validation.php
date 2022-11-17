@@ -264,3 +264,20 @@ function validateAdminLogin(array &$data,AdminModel $adminModel): void {
 		}
 	}
 }
+
+function processPost(array &$data) : void {
+	filterPost();
+	$data['post_title'] = trim($_POST['post_title']);
+	$data['body'] = trim($_POST['body']);
+	$data['image'] = $_FILES['image'] ?? null;
+	if (empty($data['post_title'])) {
+		$data['post_title_err'] = 'Please, enter post title';
+	}
+	if (empty($data['body'])) {
+		$data['body_err'] = 'Please, enter post body';
+	}
+}
+
+function validPost(array $data): bool {
+	return empty($data['post_title_err']) and empty($data['body_err']);
+}
