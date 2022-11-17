@@ -21,7 +21,7 @@ require_once APPROOT . '/views/includes/navbar.php'
                             </div>
                         </div>
 
-				    <?php if ($index % 2 == 0 and $index != 0) echo "</div>"?>
+				    <?php if (($index + 1) % 3 == 0 and $index != 0) echo "</div>"?>
 
                 <?php endforeach?>
         <?php else: ?>
