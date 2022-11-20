@@ -49,6 +49,10 @@ nav {
     color: var(--header-footer-link-color);
 }
 
+.nav-link-color {
+    color: var(--header-footer-link-color);
+}
+
 .nav-link:hover {
     color: var(--header-footer-link-color);
     border-bottom: 0.14285714rem solid #fac600;

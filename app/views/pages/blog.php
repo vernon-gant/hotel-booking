@@ -7,9 +7,9 @@ require_once APPROOT . '/views/includes/navbar.php'
 
                 <?php foreach ($data['posts'] as $index => $post): ?>
 
-                    <?php if ($index % 3 == 0) echo "<div class='row mx-auto mb-5'>"?>
+                    <?php if ($index % 3 == 0) echo "<div class='row mx-auto'>"?>
 
-                        <div class="col-12 col-md-4 mx-auto d-flex align-items-stretch">
+                        <div class="col-12 col-md-4 mx-auto d-flex align-items-stretch mb-3">
                             <div class="card">
                                 <div class="card-block d-flex flex-column justify-content-between h-100">
 					    			<?php if (isset($post['img'])) echo '<img class="card-img-top" alt="post photo" src="' . mapImagePathToPhoto($post["img"]) .'">'?>

@@ -55,7 +55,7 @@
                                  class="align-items-center justify-content-center d-lg-block">
                                 <i class="fa-regular fa-user me-1"></i>
                                 <span class="mb-0 text-sm font-weight-bold footer-link
-                                text-center align-self-center">
+                                text-center align-self-center nav-link-color">
                                     <?php echo $_SESSION['user_first_name'] . " " . $_SESSION['user_last_name'] ?>
                                 </span>
                             </div>

@@ -26,7 +26,7 @@ require_once APPROOT . '/views/includes/navbar.php';
                                 </div>
                                 <div class="col-5 form-floating">
                                     <input required
-                                           class="form-control border-0 <?php echo (!empty($data['departure_err'])) ? 'is-invalid' : ''?>""
+                                           class="form-control border-0 <?php echo (!empty($data['departure_err'])) ? 'is-invalid' : ''?>"
                                            id="departure"
                                            name="departure"
                                            type="date">
@@ -59,9 +59,9 @@ require_once APPROOT . '/views/includes/navbar.php';
                     <div class="col-3 overflow-hidden px-0 d-flex justify-content-center
                     align-items-center"
                          style="background-color: var(--link-color)">
-                        <button type="submit">
-                            <span>Book Now</span>
-                            <i class="fa-solid fa-arrow-right ms-1 ms-lg-3"></i>
+                        <button type="submit" class="bg-transparent border-0">
+                            <span class="fw-bold">Book Now</span>
+                            <i class="fa-solid fa-arrow-right ms-1 ms-lg-2"></i>
                         </button>
                     </div>
                 </form>
