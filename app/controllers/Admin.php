@@ -58,6 +58,22 @@ class Admin extends Controller {
 		$this->view("admin/users",$this->data);
 	}
 
+	public function bookings() {
+		$methodArgs = func_get_args();
+		switch (true) {
+			case in_array("show",$methodArgs) : {
+				$res_id = $methodArgs[1];
+				prepareShowBookingData($this->data,$this->adminModel->getBookingModel(),$res_id);
+				$this->view("admin/bookings/show",$this->data);
+				break;
+			}
+			default : {
+				prepareBookingDashboardData($this->data,$this->adminModel->getBookingModel());
+				$this->view("admin/bookings/dashboard",$this->data);
+			}
+		}
+	}
+
 	public function login() {
 		prepareAdminLoginData($this->data);
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -6,10 +6,10 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
     <div class="py-5 px-2 bg-light rounded-3 d-flex flex-grow-1">
         <div class="container-fluid d-flex flex-column align-items-center justify-content-between">
 			<?php flash("post_added"); ?>
-            <h1 class="my-2">Posts</h1>
+            <h1 class="my-2 fs-1">Posts</h1>
 			<?php if (isset($data['posts'])) : ?>
 				<?php foreach ($data['posts'] as $post) : ?>
-                    <div class="card card-body mb-3 w-50 mb-5">
+                    <div class="card card-body mb-3 w-50 my-5">
                         <?php if (isset($post['img'])) : ?>
                             <img alt="post photo" class="card-img-top img-fluid mb-2" src="<?php echo mapImagePathToPhoto($post['img'])?>">
                         <?php endif;?>
@@ -25,7 +25,7 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
 			<?php else: ?>
                 <h2>No posts yet...</h2>
 			<?php endif ?>
-            <a href="<?php echo URL_ROOT; ?>/admin/posts/add" class="btn btn-primary pull-right">
+            <a href="<?php echo URL_ROOT; ?>/admin/posts/add" class="btn btn-primary mt-5">
                 <i class="fa fa-pencil"></i> Add Post
             </a>
         </div>

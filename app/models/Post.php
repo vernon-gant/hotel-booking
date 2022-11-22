@@ -30,14 +30,16 @@ class Post {
 	public function getAdminPosts(): ?array {
 		$this->db->query("SELECT id, title, body, img, posts.created_at, first_name, last_name 
 							  FROM posts join users u on u.email = posts.user_email 
-							  WHERE user_email = ?", $_SESSION['admin_email']);
+							  WHERE user_email = ?
+							  ORDER BY posts.created_at desc", $_SESSION['admin_email']);
 		if ($this->db->rowCount() > 0) return $this->db->resultSet();
 		else return null;
 	}
 
 	public function fetchAllPosts(): ?array {
 		$this->db->query("SELECT id, title, body, img, posts.created_at, first_name, last_name 
-						      FROM posts join users u on u.email = posts.user_email");
+						      FROM posts join users u on u.email = posts.user_email
+						      ORDER BY posts.created_at desc");
 		if ($this->db->rowCount() > 0) return $this->db->resultSet();
 		else return null;
 	}

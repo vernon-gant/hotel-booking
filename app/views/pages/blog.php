@@ -2,7 +2,7 @@
 require_once APPROOT . '/views/includes/head.php';
 require_once APPROOT . '/views/includes/navbar.php'
 ?>
-	<div class="container p-5">
+	<div class="container p-5 h-100">
         <?php if (isset($data['posts'])) : ?>
 
                 <?php foreach ($data['posts'] as $index => $post): ?>
@@ -25,8 +25,8 @@ require_once APPROOT . '/views/includes/navbar.php'
 
                 <?php endforeach?>
         <?php else: ?>
-        <div class="d-flex flex-column flex-grow-1 w-100 justify-content-center">
-            <h1>No posts yet...</h1>
+        <div class="h-100 d-flex flex-column justify-content-center">
+            <h1 class="text-center mb-0">No posts yet...</h1>
         </div>
         <?php endif;?>
 	</div>

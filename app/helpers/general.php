@@ -108,23 +108,6 @@ function preparePost(array $data,AdminModel $adminModel) : array {
 	];
 }
 
-function processImage(array $data, AdminModel $adminModel, string $id) : ?string {
-	if ($data['image'] == null) return null;
-	else {
-		$userName = $adminModel->getEmailName();
-		$blogPath = "../public/img/blog/";
-		$userDir = $blogPath . $userName;
-		$userDirExists = file_exists($userDir) and is_dir($userDir);
-
-		if (!$userDirExists) mkdir( $userDir,0777,true);
-
-		$img_path = "/post_" . $id . ".jpg";
-
-		$success = move_uploaded_file($_FILES['image']["tmp_name"], $userDir . $img_path);
-		return $success ? $userName . $img_path : null;
-	}
-}
-
 function preparePostDashboardData(array &$data,Post $postModel) : void {
 	$data = [
 		'title' => 'Posts dashboard',
@@ -142,3 +125,46 @@ function prepareAdminUsersData(array &$data,User $userModel) : void {
 		'users' => $userModel->fetchUsers()
 	];
 }
+
+function prepareBookingDashboardData(array &$data, Booking $bookingModel): void {
+	$data = [
+		'title' => 'Bookings dashboard',
+		'bookings' => $bookingModel->fetchAll()
+	];
+}
+
+function prepareShowBookingData(array &$data, Booking $bookingModel,string $res_id): void {
+	$data = [
+		'title' => 'Booking ' . $res_id,
+		'booking' => $bookingModel->fetchSingle($res_id)
+	];
+}
+
+function processImage(array $data, AdminModel $adminModel, string $id) : ?string {
+	if ($data['image'] == null) return null;
+	else {
+		$userName = $adminModel->getEmailName();
+		$blogPath = "../public/img/blog/";
+		$userDir = $blogPath . $userName;
+		$userDirExists = file_exists($userDir) and is_dir($userDir);
+		if (!$userDirExists) mkdir( $userDir,0777,true);
+		$img_path = "/post_" . $id . ".jpg";
+		$success = createThumb($_FILES['image']["tmp_name"], $userDir . $img_path);
+		return $success ? $userName . $img_path : null;
+	}
+}
+
+function createThumb($sourceImagePath, $destImagePath) : bool {
+	$sourceImage = imagecreatefromjpeg($sourceImagePath);
+	$orgWidth = imagesx($sourceImage);
+	$orgHeight = imagesy($sourceImage);
+	$thumbWidth= 720;
+	$thumbHeight = 480;
+	$destImage = imagecreatetruecolor($thumbWidth, $thumbHeight);
+	$success = imagecopyresampled($destImage, $sourceImage, 0, 0, 0, 0, $thumbWidth, $thumbHeight, $orgWidth, $orgHeight);
+	imagejpeg($destImage, $destImagePath);
+	imagedestroy($sourceImage);
+	imagedestroy($destImage);
+	return $success;
+}
+
