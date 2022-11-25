@@ -5,6 +5,7 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
 <div class="container h-100 py-5">
     <div class="table-responsive">
         <div class="table-wrapper">
+			<?php flash("delete_success")?>
             <?php flash("user_change_success")?>
             <div class="table-title mb-5">
                 <h2 class="fw-bold text-center">User Management</h2>

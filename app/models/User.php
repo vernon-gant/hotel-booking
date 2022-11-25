@@ -50,8 +50,8 @@ class User {
 		$user = $this->findUser($email);
 		if ($user->status == 'active') {
 			$this->db->query("update users
-							  	  set status = 'inactive'
-                                 where email = ?",$email);
+							  	  set status = 'inactive' 
+                                  where email = ?",$email);
 		} else {
 			$this->db->query("update users
 							  	  set status = 'active'
@@ -64,6 +64,12 @@ class User {
 		$_SESSION[$role . '_email'] = $user->email;
 		$_SESSION[$role . '_first_name'] = $user->first_name;
 		$_SESSION[$role . '_last_name'] = $user->last_name;
+	}
+
+	public function changeUser(mixed $baseUser,array $fields) : bool {
+		$changesBuilder = (new UserChangesBuilder($baseUser))->build($fields);
+		$this->db->query($changesBuilder->getQuery(),...$changesBuilder->getArgs());
+		return $this->db->affectedRows() > 0;
 	}
 
 	public function logout(string $role): void {

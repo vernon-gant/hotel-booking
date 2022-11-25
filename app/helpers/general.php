@@ -175,3 +175,20 @@ function prepareFilteredBookings(array &$data, Booking $bookingModel,string $sta
 	];
 }
 
+function prepareEditUserData(array &$data, User $userModel,string $email) : void {
+	$data = [
+		'title' => 'Edit User',
+		'user' => $userModel->findUser($email)
+	];
+}
+
+function userFormData() : array {
+	filterPost();
+	return [
+		'email' => empty(trim($_POST['email'])) ? null : trim($_POST['email']),
+		'first_name' => empty(trim($_POST['first_name'])) ? null : trim($_POST['first_name']),
+		'last_name' => empty(trim($_POST['last_name'])) ? null : trim($_POST['last_name']),
+		'password' => empty(trim($_POST['pass'])) ? null : sha1(trim($_POST['pass']))
+	];
+}
+
