@@ -63,7 +63,7 @@ class Users extends Controller {
             'fname_err' => '',
             'lname_err' => '',
             'email_err' => '',
-            'pass_error' => '',
+            'pass_err' => '',
             'pass_repeat_err' => ''
         ];
 
@@ -71,7 +71,7 @@ class Users extends Controller {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             validateRegisterInput($data,$this);
             // Make sure errors are empty
-            if (validRegisterInput($data)) {
+            if (validRegisterOrChangeInput($data)) {
                 $data['pass'] = sha1($data['pass']);
                 switch ($this->userModel->register($data)) {
                     case true:
@@ -86,6 +86,37 @@ class Users extends Controller {
         }
         $this->view('users/registration', $data);
     }
+
+	public function account() {
+		$data = array();
+		switch (func_get_args()[0]) {
+			case "profile" : {
+				if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+					$baseUser = $this->userModel->findUser($_SESSION['user_email']);
+					prepareEditProfileData($data,$baseUser);
+					validateChangeProfile($baseUser,$data,$this->userModel);
+					if (validRegisterOrChangeInput($data) and empty($data['old_pass_err'])) {
+						$formData = userFormData();
+						$success = $this->getUserModel()->changeUser($baseUser,$formData);
+						if ($success) {
+							flash("user_change_success","Your profile was successfully changed!");
+							$newUser = $this->userModel->findUser($formData['email']);
+							$this->userModel->createSession($newUser,"user");
+						}
+						else die("Something went wrong...");
+					}
+					$this->view('users/account/profile', $data);
+				}
+				$baseUser = $this->userModel->findUser($_SESSION['user_email']);
+				prepareEditProfileData($data,$baseUser);
+				$this->view('users/account/profile', $data);
+				break;
+			}
+			case "bookings" : {
+				$this->view('users/account/bookings', $data);
+			}
+		}
+	}
 
 	public function logout() {
 		$this->userModel->logout("user");

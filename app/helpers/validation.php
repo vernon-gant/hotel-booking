@@ -128,7 +128,7 @@ function checkEmptyRegisterFields(array &$data): void {
 	}
 }
 
-function validRegisterInput(array $data): bool {
+function validRegisterOrChangeInput(array $data): bool {
 	return empty($data['email_err']) and
 		empty($data['fname_err']) and
 		empty($data['lname_err']) and
@@ -299,4 +299,40 @@ function validChangeEmail(mixed $baseUser, User $userModel,string $email): bool 
 		$adminExists = $userModel->emailExists($email, "Admin");
 		return !($adminExists or $userExists);
 	}
+}
+
+function validateChangeProfile(mixed $baseUser, array &$data,User $userModel) : void {
+	filterPost();
+	$data['email'] = empty(trim($_POST['email'])) ? null : trim($_POST['email']);
+	$data['first_name'] = empty(trim($_POST['first_name'])) ? null : trim($_POST['first_name']);
+	$data['last_name'] = empty(trim($_POST['last_name'])) ? null : trim($_POST['last_name']);
+	$data['pass'] = empty(trim($_POST['pass'])) ? null : trim($_POST['pass']);
+	$data['old_pass'] = empty(trim($_POST['old_pass'])) ? null : sha1(trim($_POST['old_pass']));
+	$data['pass_repeat'] = empty(trim($_POST['pass_repeat'])) ? null : trim($_POST['pass_repeat']);
+
+	if (!empty($data['pass'])) {
+		if (empty($data['old_pass'])) $data['old_pass_err'] = "You must enter your old password to set a new one!";
+		elseif ($data['old_pass'] != $baseUser->password) $data['old_pass_err'] = "Wrong password!";
+		else validateRegisterPassword($data);
+	}
+	if (!empty($data['first_name']) or !empty($data['last_name'])) validateName($data);
+	if (!validChangeEmail($baseUser,$userModel,$data['email'])) $data['email_err'] = "This user already exists! Choose other email...";
+}
+
+function prepareEditProfileData(array &$data, mixed $user) : void {
+	$data = [
+		'title' => 'Profile',
+		'first_name' => $user->first_name,
+		'last_name' => $user->last_name,
+		'email' => $user->email,
+		'pass' => '',
+		'pass_repeat' => '',
+		'old_pass' => '',
+		'old_pass_err' => '',
+		'fname_err' => '',
+		'lname_err' => '',
+		'email_err' => '',
+		'pass_err' => '',
+		'pass_repeat_err' => ''
+	];
 }
