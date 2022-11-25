@@ -68,8 +68,10 @@ class User {
 
 	public function changeUser(mixed $baseUser,array $fields) : bool {
 		$changesBuilder = (new UserChangesBuilder($baseUser))->build($fields);
-		$this->db->query($changesBuilder->getQuery(),...$changesBuilder->getArgs());
-		return $this->db->affectedRows() > 0;
+		if (count($changesBuilder->getArgs()) > 1) {
+			$this->db->query($changesBuilder->getQuery(),...$changesBuilder->getArgs());
+			return $this->db->affectedRows() > 0;
+		} else return true;
 	}
 
 	public function logout(string $role): void {
