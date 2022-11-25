@@ -66,13 +66,9 @@
                                 </a>
                                 <a href="#" class="dropdown-item">
                                     <i class="ni ni-settings-gear-65"></i>
-                                    <span>Settings</span>
+                                    <span>Bookings</span>
                                 </a>
-                                <a href="#" class="dropdown-item">
-                                    <i class="ni ni-calendar-grid-58"></i>
-                                    <span>Activity</span>
-                                </a>
-                                <a href="#" class="dropdown-item">
+                                <a href="<?php echo URL_ROOT . '/pages/contact'?>" class="dropdown-item">
                                     <i class="ni ni-support-16"></i>
                                     <span>Support</span>
                                 </a>
@@ -86,7 +82,7 @@
                         </div>
                     </div>
 				<?php
-				else : ?>
+                else : ?>
                     <div class="d-inline-flex me-3">
                         <button class="btn rounded-pill btn-success me-lg-4">
                             <a class="mx-2 text-decoration-none text-white"
