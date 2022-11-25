@@ -5,8 +5,9 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
 <div class="container h-100 py-5">
     <div class="table-responsive">
         <div class="table-wrapper">
+            <?php flash("user_change_success")?>
             <div class="table-title mb-5">
-                <h2 class="fw-bold text-center">UserManagement</h2>
+                <h2 class="fw-bold text-center">User Management</h2>
             </div>
             <table class="table table-striped table-hover align-items-center">
                 <thead>
@@ -36,8 +37,11 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
                                         </select>
                                     </form>
                                 </td>
-                                <td>
-                                    <a href="<?php echo URL_ROOT . '/admin/users/delete/' . $user['email']?>"><i class="fa-solid fa-trash ms-3"></i></a>
+                                <td class="ps-0">
+                                    <div class="d-flex flex-row justify-content-start">
+                                        <a href="<?php echo URL_ROOT . '/admin/users/delete/' . $user['email']?>"><i class="fa-solid fa-trash ms-3"></i></a>
+                                        <a href="<?php echo URL_ROOT . '/admin/users/edit/' . $user['email']?>"><i class="fa-solid fa-pen ms-3"></i></a>
+                                    </div>
                                 </td>
                             </tr>
 						<?php if ($index == count($data['users']) - 1) echo "</tbody>"?>
