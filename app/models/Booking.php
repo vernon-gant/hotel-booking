@@ -141,4 +141,41 @@ class Booking {
 		else return null;
 	}
 
+	public function changeStatus(string $res_id, string $status) : bool {
+		$this->db->query("INSERT INTO reservation_events (res_id, user_email, status, details)
+							  VALUES (?,?,?,?)",$res_id,$_SESSION['admin_email'],$status,"");
+		return $this->db->affectedRows() > 0;
+	}
+
+	public function filter(string $status) : ?array {
+		$this->db->query("SELECT r.res_id,
+							         r.user_email,
+							         g.first_name,
+							         g.last_name,
+							         g.address,
+							         g.city,
+							         g.phone,
+							         r.room_num,
+							         r.guests,
+							         r.arrival,
+							         r.departure,
+							         r.transaction_date,
+							         re1.status,
+							         r.total_price,
+							         GROUP_CONCAT(service_name) as services
+							  FROM reservations r
+							           JOIN reservation_events re1 on r.res_id = re1.res_id
+							           JOIN reservation_services rs on r.res_id = rs.res_id
+							           JOIN guests g on g.guest_id = r.guest_id
+							  WHERE re1.created_at = (SELECT MAX(re2.created_at)
+							                         from reservation_events re2
+							                         where re1.res_id = re2.res_id)
+							  		AND re1.status = ?
+							  GROUP BY r.res_id, r.transaction_date
+							  order by r.transaction_date",$status);
+		if ($this->db->rowCount() > 0)
+			return $this->db->resultSet();
+		else return null;
+	}
+
 }

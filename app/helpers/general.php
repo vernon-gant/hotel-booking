@@ -168,3 +168,10 @@ function createThumb($sourceImagePath, $destImagePath) : bool {
 	return $success;
 }
 
+function prepareFilteredBookings(array &$data, Booking $bookingModel,string $status) : void {
+	$data = [
+		'title' => 'Bookings dashboard',
+		'bookings' => $bookingModel->filter($status)
+	];
+}
+
