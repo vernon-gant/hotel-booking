@@ -60,11 +60,11 @@
                                 </span>
                             </div>
                             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                                <a href="#" class="dropdown-item">
+                                <a href="<?php echo URL_ROOT . '/users/account/profile'?>" class="dropdown-item">
                                     <i class="ni ni-single-02"></i>
                                     <span>My profile</span>
                                 </a>
-                                <a href="#" class="dropdown-item">
+                                <a href="<?php echo URL_ROOT . '/users/account/bookings'?>" class="dropdown-item">
                                     <i class="ni ni-settings-gear-65"></i>
                                     <span>Bookings</span>
                                 </a>
