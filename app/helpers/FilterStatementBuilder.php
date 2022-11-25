@@ -25,22 +25,19 @@ class FilterStatementBuilder {
 		$this->args = $args;
 	}
 
-	public function price(int $from, int $to) : self {
+	private function price(int $from, int $to) : void {
 		$this->query .= " AND price >= ? and price < ?";
 		array_push($this->args,$from,$to);
-		return $this;
 	}
 
-	public function floor(int $floor) : self {
+	private function floor(int $floor) : void {
 		$this->query .= " AND floor = ?";
 		$this->args[] = $floor;
-		return $this;
 	}
 
-	public function pets(int $pets) : self {
+	private function pets(int $pets) : void {
 		$this->query .= " AND pets_allowed = ?";
 		$this->args[] = $pets;
-		return $this;
 	}
 
 	public function build(array $filters) : self {
