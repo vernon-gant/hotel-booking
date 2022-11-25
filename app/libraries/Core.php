@@ -17,6 +17,9 @@ class Core {
 
 		if (isset($_SESSION['admin_email']) and !in_array("admin",$url)) redirect("admin/index");
 		elseif (isset($_SESSION['user_email']) and in_array("admin",$url)) redirect("pages/index");
+		elseif ($url[0] == 'admin' and !isset($_SESSION['admin_email']) and $url[1] != 'login') redirect("admin/login");
+		elseif ($url[0] == 'bookings' and !isset($_SESSION['user_email'])) redirect("pages/index");
+		elseif ($url[0] == 'users' and !($url[1] == 'login' or $url[1] == 'registration') and !isset($_SESSION['user_email'])) redirect("users/login");
 
         // Look in controllers for first value
         if (file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
