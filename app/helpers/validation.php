@@ -1,6 +1,6 @@
 <?php
 
-function validateLoginInput(array &$data, Users $users): void {
+function validateLoginInput(array &$data, User $userModel): void {
 	// Sanitize input
 	filterPost();
 
@@ -19,9 +19,9 @@ function validateLoginInput(array &$data, Users $users): void {
 		return;
 	}
 
-	$emailExists = $users->getUserModel()->emailExists($data['email'], "User");
-	$correctPassword = $users->getUserModel()->correctPassword($data['email'], $data['pass'], "User");
-	$isActive = $users->getUserModel()->isActive($data['email']);
+	$emailExists = $userModel->emailExists($data['email'], "User");
+	$correctPassword = $userModel->correctPassword($data['email'], $data['pass'], "User");
+	$isActive = $userModel->isActive($data['email']);
 
 	if (validUser($data)) {
 		if (!$emailExists) {
@@ -45,7 +45,7 @@ function validUser(array $data): bool {
 	return empty($data['email_err']) and empty($data['pass_err']);
 }
 
-function validateRegisterInput(array &$data, Users $users): void {
+function validateRegisterInput(array &$data, User $userModel): void {
 	// Sanitize input
 	filterPost();
 
@@ -62,7 +62,7 @@ function validateRegisterInput(array &$data, Users $users): void {
 	validateEmail($data);
 	validateName($data);
 
-	if ($users->getUserModel()->emailExists($data['email'], "User")) {
+	if ($userModel->emailExists($data['email'], "User")) {
 		$data['email_err'] = 'Email is already taken';
 	}
 

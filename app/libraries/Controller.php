@@ -16,8 +16,16 @@ class Controller {
         return new $model();
     }
 
+	public function service($service) {
+		// Require service file
+		require_once '../app/services/' . $service . '.php';
+
+		// Instantiate service
+		return new $service;
+	}
+
     // Load view
-    public function view($view, $data = []) {
+    public function view($view, $data = []): void {
         // Check for view file
         if (file_exists('../app/views/' . $view . '.php')) {
             require_once '../app/views/' . $view . '.php';
