@@ -3,93 +3,65 @@ require_once APPROOT . '/views/includes/head.php';
 require_once APPROOT . '/views/includes/navbar.php'
 ?>
 <div class="container py-5">
-	<div class="row">
-		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-			<nav class="navbar navbar-light bg-light">
-				<ul class="navbar-nav col-12 d-flex flex-row justify-content-around">
-					<li class="active nav-item">
-						<a class="nav-link" href="<?php echo URL_ROOT . "/users/account/profile" ?>">Profile</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="<?php echo URL_ROOT . "/users/account/" ?>">Bookings</a>
-					</li>
-				</ul>
-			</nav>
-			<div class="card border-0 shadow-lg rounded-3 text-dark">
-				<div class="card-body p-5 text-center">
-					<form class="mb-md-2 mt-md-4 pb-5 form" action="<?php echo URL_ROOT . "/users/registration" ?>" method="post">
-						<div class="form-label">
-							<h2 class="fw-bold mb-2 text-uppercase text-center">Create an account</h2>
-							<p class="text-dark-50 mt-3 mb-5">Please, fill out this form to register with us</p>
-						</div>
-
-						<div class="form-outline form-white form-floating mb-4">
-							<input type="text"
-								   id="first_name"
-								   class="form-control <?php echo (!empty($data['fname_err'])) ? 'is-invalid' : '' ?>"
-								   name="first_name"
-								   value="<?php echo $data['first_name'] ?>"/>
-							<label class="form-label"
-								   for="first_name">First name <sup class="fs-6 text-danger">*</sup></label>
-							<span class="invalid-feedback"><?php echo $data['fname_err'] ?></span>
-						</div>
-
-						<div class="form-outline form-white form-floating mb-4">
-							<input type="text"
-								   id="last_name"
-								   class="form-control <?php echo (!empty($data['lname_err'])) ? 'is-invalid' : '' ?>"
-								   value="<?php echo $data['last_name'] ?>"
-								   name="last_name"/>
-							<label class="form-label"
-								   for="last_name">Last name <sup class="fs-6 text-danger">*</sup></label>
-							<span class="invalid-feedback"><?php echo $data['lname_err'] ?></span>
-						</div>
-
-						<div class="form-outline form-white form-floating mb-4">
-							<input type="email"
-								   id="email"
-								   class="form-control <?php echo (!empty($data['email_err'])) ? 'is-invalid' : '' ?>"
-								   value="<?php echo $data['email'] ?>"
-								   name="email"/>
-							<label class="form-label"
-								   for="email">Email <sup class="fs-6 text-danger">*</sup></label>
-							<span class="invalid-feedback"><?php echo $data['email_err'] ?></span>
-						</div>
-
-						<div class="form-outline form-white form-floating mb-4">
-							<input type="password"
-								   id="pass"
-								   class="form-control <?php echo (!empty($data['pass_err'])) ? 'is-invalid' : '' ?>"
-								   name="pass"/>
-							<label class="form-label"
-								   for="pass">Password <sup class="fs-6 text-danger">*</sup></label>
-							<span class="invalid-feedback"><?php echo $data['pass_err'] ?></span>
-						</div>
-
-						<div class="form-outline form-white mb-5 form-floating">
-							<input type="password"
-								   id="pass_repeat"
-								   class="form-control <?php echo (!empty($data['pass_repeat_err'])) ? 'is-invalid' : '' ?>"
-								   name="pass_repeat">
-							<label class="form-label"
-								   for="pass_repeat">Repeat password <sup class="fs-6 text-danger">*</sup></label>
-							<span class="invalid-feedback"><?php echo $data['pass_repeat_err'] ?></span>
-						</div>
-
-						<button class="submit btn text-light btn-lg px-5 btn rounded-3 submit"
-								type="submit" value="login">Sign Up
-						</button>
-
-					</form>
-					<div>
-						<p class="mb-0 mx-auto text-center">Already have an account? <a
-								href="<?php echo URL_ROOT . '/users/login' ?>"
-								class="fw-bold text-decoration-underline sign-link">Sign In</a>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-sm-11 col-md-10 col-lg-9 mx-auto">
+            <nav class="navbar navbar-light bg-light">
+                <ul class="navbar-nav col-12 d-flex flex-row justify-content-around">
+                    <li class="active nav-item">
+                        <a class="nav-link" href="<?php echo URL_ROOT . "/users/account/profile" ?>">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo URL_ROOT . "/users/account/" ?>">Bookings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="card border-0 shadow-lg rounded-3 text-dark">
+				<?php if (!empty($data['bookings'])): ?>
+                    <div class="card-body">
+                        <table class="table table-striped table-hover align-items-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center">Reservation ID</th>
+                                <th class="text-center">Room No.</th>
+                                <th class="text-center">Guests</th>
+                                <th class="text-center">Arrival</th>
+                                <th class="text-center">Departure</th>
+                                <th class="text-center">Services</th>
+                                <th class="text-center pb-1">Status</th>
+                                <th class="text-center">Total paid</th>
+                            </tr>
+                            </thead>
+							<?php foreach ($data['bookings'] as $index => $booking) : ?>
+								<?php if ($index == 0)
+									echo "<tbody>" ?>
+                                <tr>
+                                    <td class="text-center"><?php echo $booking['res_id'] ?></td>
+                                    <td class="text-center"><?php echo $booking['room_num'] ?></td>
+                                    <td class="text-center"><?php echo $booking['guests'] ?></td>
+                                    <td class="text-center"><?php echo date_format(date_create($booking['arrival']), "d/m/Y") ?></td>
+                                    <td class="text-center"><?php echo date_format(date_create($booking['departure']), "d/m/Y") ?></td>
+                                    <td class="text-center"><?php echo $booking['services'] ?></td>
+                                    <td class="text-center
+                                    <?php echo match ($booking['status']) {
+										'new' => "bg-success",
+										'confirmed' => "bg-primary",
+										'canceled' => "bg-danger"
+									}
+									?> text-white"><?php echo $booking['status'] ?></td>
+                                    <td class="text-center"><?php echo $booking['total_price'] ?>€</td>
+                                </tr>
+								<?php if ($index == count($data['bookings']) - 1)
+									echo "</tbody>" ?>
+							<?php endforeach; ?>
+                        </table>
+                    </div>
+				<?php else: ?>
+                    <div class="card p-5 text-center">
+                        <h3>No bookings yet</h3>
+                    </div>
+				<?php endif; ?>
+            </div>
+        </div>
+    </div>
 </div>
 <?php require_once APPROOT . '/views/includes/footer.php' ?>

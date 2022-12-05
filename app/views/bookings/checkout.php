@@ -35,24 +35,21 @@ require_once APPROOT . '/views/includes/navbar.php'
 
                             <div class="mx-n5 px-5 py-4">
                                 <div class="row">
-                                    <div class="col-md-8 col-lg-9">
+                                    <div class="col-md-8 col-lg-9 text-start">
                                         <p><?php echo $data['booking']['room_type'] . " for " . $data['booking']['nights'] . " night(s)" ?></p>
                                     </div>
-                                    <div class="col-md-4 col-lg-3">
-                                        <p><?php echo $data['booking']['room_cost'] ?></p>
+                                    <div class="col-md-4 col-lg-3 text-end">
+                                        <p><?php echo $data['booking']['room_cost'] ?>€</p>
                                     </div>
                                 </div>
 								<?php if (isset($data['booking']['services'])): ?>
                                     <div class="row">
-                                        <div class="col-md-8 col-lg-9">
-                                            <p class="mb-0">Services</p>
-                                        </div>
 										<?php foreach ($data['booking']['services'] as $name => $price): ?>
-                                            <div class="col-md-8 col-lg-9">
-                                                <p class="mb-0 ms-3"><?php echo $name?></p>
+                                            <div class="col-md-8 col-lg-9 text-start">
+                                                <p class="mb-0 ms-0 fw-bold"><?php echo $name?></p>
                                             </div>
-                                            <div class="col-md-4 col-lg-3">
-                                                <p class="mb-0"><?php echo $price?></p>
+                                            <div class="col-md-4 col-lg-3 text-end">
+                                                <p class="mb-0"><?php echo $price?>€</p>
                                             </div>
 										<?php endforeach;?>
                                     </div>
@@ -60,8 +57,8 @@ require_once APPROOT . '/views/includes/navbar.php'
                             </div>
 
                             <div class="row my-4">
-                                <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
-                                    <p class="lead fw-bold mb-0" style="color: #f37a27;"><?php echo $data['booking']['total_costs']?></p>
+                                <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-8">
+                                    <p class="lead fw-bold mb-0 text-center" style="color: #f37a27;"><?php echo $data['booking']['total_costs']?>€</p>
                                 </div>
                             </div>
 

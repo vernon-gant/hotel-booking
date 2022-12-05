@@ -135,7 +135,7 @@ class Booking {
 							                         from reservation_events re2
 							                         where re1.res_id = re2.res_id)
 							  GROUP BY r.res_id, r.transaction_date
-							  order by r.transaction_date");
+							  order by r.transaction_date desc");
 		if ($this->db->rowCount() > 0)
 			return $this->db->resultSet();
 		else return null;

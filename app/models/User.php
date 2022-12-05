@@ -48,15 +48,16 @@ class User {
 
 	public function changeStatus(string $email) : bool {
 		$user = $this->findUser($email);
-		if ($user->status == 'active') {
-			$this->db->query("update users
-							  	  set status = 'inactive' 
-                                  where email = ?",$email);
-		} else {
-			$this->db->query("update users
-							  	  set status = 'active'
-                                  where email = ?",$email);
-		}
+		$query = match ($user->status) {
+			'active' => "update users
+						 set status = 'inactive' 
+                         where email = ?",
+			default => 	"update users
+						 set status = 'active'
+                         where email = ?"
+
+		};
+		$this->db->query($query,$email);
 		return $this->db->affectedRows() > 0;
 	}
 
@@ -72,6 +73,36 @@ class User {
 			$this->db->query($changesBuilder->getQuery(),...$changesBuilder->getArgs());
 			return $this->db->affectedRows() > 0;
 		} else return true;
+	}
+
+	public function fetchBookings(): ?array {
+		$this->db->query("SELECT r.res_id,
+							         r.user_email,
+							         g.first_name,
+							         g.last_name,
+							         g.address,
+							         g.city,
+							         g.phone,
+							         r.room_num,
+							         r.guests,
+							         r.arrival,
+							         r.departure,
+							         r.transaction_date,
+							         re1.status,
+							         r.total_price,
+							         GROUP_CONCAT(service_name) as services
+							  FROM reservations r
+							           JOIN reservation_events re1 on r.res_id = re1.res_id
+							           JOIN reservation_services rs on r.res_id = rs.res_id
+							           JOIN guests g on g.guest_id = r.guest_id
+							  WHERE re1.created_at = (SELECT MAX(re2.created_at)
+							                         from reservation_events re2
+							                         where re1.res_id = re2.res_id)
+							  AND r.user_email = ?
+							  GROUP BY r.res_id, r.transaction_date
+							  order by r.transaction_date",$_SESSION['user_email']);
+		if ($this->db->rowCount() > 0) return $this->db->resultSet();
+		else return null;
 	}
 
 	public function logout(string $role): void {

@@ -131,7 +131,7 @@ require_once APPROOT . '/views/includes/navbar.php'
             </div>
         </div>
         <div class="col-10 mx-auto row">
-            <form id="filter_dashboard" class="d-sm-none d-md-flex col-3" action="<?php echo URL_ROOT ?>/bookings/filter" method="get">
+            <form id="filter_dashboard" class="d-none d-md-flex col-3" action="<?php echo URL_ROOT ?>/bookings/filter" method="get">
                 <div class="container-fluid d-flex flex-column mt-5">
                     <div class="mb-3 border-bottom border-3">
                         <h5>Filter By</h5>
@@ -283,13 +283,11 @@ require_once APPROOT . '/views/includes/navbar.php'
                                 <table class="table table-bordered table-responsive">
                                     <thead class="align-middle">
                                     <tr>
-                                        <th scope="col">Room Category</th>
-                                        <th scope="col">Guests</th>
-                                        <th scope="col">Price for <?php
-											echo $data['nights'] ?> nights
-                                        </th>
-                                        <th scope="col">Add ons</th>
-                                        <th scope="col">Choose</th>
+                                        <th class="text-center" scope="col">Room Category</th>
+                                        <th class="text-center" scope="col">Guests</th>
+                                        <th class="text-center" scope="col">Price for <?php echo $data['nights'] ?> nights</th>
+                                        <th class="text-center" scope="col">Add ons</th>
+                                        <th class="text-center" scope="col">Choose</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -314,8 +312,8 @@ require_once APPROOT . '/views/includes/navbar.php'
 												<?php
 												endfor ?>
                                             </td>
-                                            <td>
-												<?php echo $room['cost'] ?>
+                                            <td class="text-center">
+												<?php echo $room['cost'] . "€" ?>
                                             </td>
                                             <td class="d-flex flex-column justify-content-start">
                                                 <div class="form-check border-0">

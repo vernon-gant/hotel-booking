@@ -336,3 +336,10 @@ function prepareEditProfileData(array &$data, mixed $user) : void {
 		'pass_repeat_err' => ''
 	];
 }
+
+function prepareUserBookingsData(array &$data, mixed $bookings) : void {
+	$data = [
+		'title' => 'Bookings',
+		'bookings' => $bookings
+	];
+}
