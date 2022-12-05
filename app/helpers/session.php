@@ -25,7 +25,7 @@ function saveRoom(DBUtils $utils) : void {
 		'nights' => (int) $_GET['nights'],
 		'room_cost' => (int) $_GET['cost' . $_GET['room_type']]
 	];
-	$_SESSION['booking']['services_cost'] = isset($_SESSION['booking']['services']) ? $_SESSION['booking']['services']->sum() : 0;
+	$_SESSION['booking']['services_cost'] = isset($_SESSION['booking']['services']) ? array_sum(array_values($_SESSION['booking']['services'])) : 0;
 	$_SESSION['booking']['total_costs'] = $_SESSION['booking']['services_cost'] + $_SESSION['booking']['room_cost'];
 }
 
