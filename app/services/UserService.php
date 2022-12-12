@@ -21,11 +21,11 @@ class UserService extends Service {
 		}
 		// Check for POST
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			validateLoginInput($data,$this->userModel);
+			validateLoginInput($data, $this->userModel);
 			// Check if empty errors
 			if (validUser($data)) {
 				$user = $this->userModel->findUser($data['email']);
-				$this->userModel->createSession($user,"user");
+				$this->userModel->createSession($user, "user");
 				if (isset($_SESSION['bookingRedirect'])) {
 					unset($_SESSION['bookingRedirect']);
 					redirect("bookings/index");
@@ -37,7 +37,7 @@ class UserService extends Service {
 		return $data;
 	}
 
-	public function registration() : array {
+	public function registration(): array {
 		$data = [
 			'title' => 'Register',
 			'first_name' => '',
@@ -53,13 +53,13 @@ class UserService extends Service {
 		];
 		// Check for POST
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			validateRegisterInput($data,$this->userModel);
+			validateRegisterInput($data, $this->userModel);
 			// Make sure errors are empty
 			if (validRegisterOrChangeInput($data)) {
 				$data['pass'] = sha1($data['pass']);
 				switch ($this->userModel->register($data)) {
 					case true:
-						flash("register_success","You are registered and can log in");
+						flash("register_success", "You are registered and can log in");
 						redirect("users/login");
 						break;
 					case false:
@@ -70,36 +70,33 @@ class UserService extends Service {
 		return $data;
 	}
 
-	public function profile() : array {
+	public function profile(): array {
 		$data = array();
+		$baseUser = $this->userModel->findUser($_SESSION['user_email']);
+		prepareEditProfileData($data, $baseUser);
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			$baseUser = $this->userModel->findUser($_SESSION['user_email']);
-			prepareEditProfileData($data,$baseUser);
-			validateChangeProfile($baseUser,$data,$this->userModel);
+			validateChangeProfile($baseUser, $data, $this->userModel);
 			if (validRegisterOrChangeInput($data) and empty($data['old_pass_err'])) {
 				$formData = userFormData();
-				$success = $this->userModel->changeUser($baseUser,$formData);
+				$success = $this->userModel->changeUser($baseUser, $formData);
 				if ($success) {
-					flash("user_change_success","Your profile was successfully changed!");
+					flash("user_change_success", "Your profile was successfully changed!");
 					$newUser = $this->userModel->findUser($formData['email']);
-					$this->userModel->createSession($newUser,"user");
-				}
-				else die("Something went wrong...");
+					$this->userModel->createSession($newUser, "user");
+				} else die("Something went wrong...");
 			}
 		}
-		$baseUser = $this->userModel->findUser($_SESSION['user_email']);
-		prepareEditProfileData($data,$baseUser);
 		return $data;
 	}
 
-	public function bookings() : array {
+	public function bookings(): array {
 		$data = array();
 		$bookings = $this->userModel->fetchBookings();
-		prepareUserBookingsData($data,$bookings);
+		prepareUserBookingsData($data, $bookings);
 		return $data;
 	}
 
-	public function logout() : void {
+	public function logout(): void {
 		$this->userModel->logout("user");
 	}
 }

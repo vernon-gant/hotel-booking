@@ -5,7 +5,8 @@ class Pages extends Controller {
 	private Post $postModel;
 
 	public function __construct() {
-		$this->postModel = $this->model("Post");
+		require_once APPROOT . '/models/Post.php';
+		$this->postModel = new Post();
 	}
 
 	public function about() {

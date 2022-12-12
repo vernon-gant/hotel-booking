@@ -5,7 +5,7 @@ class Bookings extends Controller {
 	private BookingService $bookingService;
 
 	public function __construct() {
-		$this->bookingService = $this->model("BookingService");
+		$this->bookingService = $this->service("BookingService");
 	}
 
 	public function index() {
