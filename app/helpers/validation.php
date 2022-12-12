@@ -251,7 +251,7 @@ function validateGuestDob(array &$data): void {
 		$data['dob_err'] = "Are you kidding?";
 }
 
-function validateAdminLogin(array &$data, AdminModel $adminModel): void {
+function validateAdminLogin(array &$data, User $userModel): void {
 	filterPost();
 	$data['email'] = trim($_POST['email']);
 	$data['pass'] = empty($_POST['pass']) ? "" : sha1($_POST['pass']);
@@ -264,8 +264,8 @@ function validateAdminLogin(array &$data, AdminModel $adminModel): void {
 		$data['pass_err'] = 'Please, enter your password';
 	}
 	if (validUser($data)) {
-		$emailExists = $adminModel->getUserModel()->emailExists($data['email'], "Admin");
-		$correctPassword = $adminModel->getUserModel()->correctPassword($data['email'], $data['pass'], "Admin");
+		$emailExists = $userModel->emailExists($data['email'], "Admin");
+		$correctPassword = $userModel->correctPassword($data['email'], $data['pass'], "Admin");
 		if (!$emailExists) {
 			$data['email_err'] = 'Admin with this email does not exist';
 			$data['email'] = '';

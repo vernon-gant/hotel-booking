@@ -75,8 +75,8 @@ function mapServicesToCosts(array $userServices, DBUtils $utils): array {
 	return $result;
 }
 
-function prepareAdminLoginData(array &$data): void {
-	$data = [
+function prepareAdminLoginData(): array {
+	return [
 		'title' => 'Admin Login',
 		'email' => '',
 		'pass' => '',
@@ -85,8 +85,8 @@ function prepareAdminLoginData(array &$data): void {
 	];
 }
 
-function prepareAddPostData(array &$data): void {
-	$data = [
+function prepareAddPostData(): array {
+	return [
 		'title' => 'Add Post',
 		'post_title' => '',
 		'body' => '',
@@ -95,19 +95,19 @@ function prepareAddPostData(array &$data): void {
 	];
 }
 
-function preparePost(array $data, AdminModel $adminModel): array {
-	$id = $adminModel->getPostModel()->getGenerator()->generate(Post::$idLength);
+function preparePost(array $data, Post $postModel,string $adminName): array {
+	$id = $postModel->getGenerator()->generate(Post::$idLength);
 	return [
 		'id' => $id,
 		'user_email' => $_SESSION['admin_email'],
 		'post_title' => $data['post_title'],
 		'body' => $data['body'],
-		'img' => processImage($data, $adminModel, $id)
+		'img' => processImage($data, $adminName, $id)
 	];
 }
 
-function preparePostDashboardData(array &$data, Post $postModel): void {
-	$data = [
+function preparePostDashboardData(Post $postModel): array {
+	return [
 		'title' => 'Posts dashboard',
 		'posts' => $postModel->getAdminPosts()
 	];
@@ -117,32 +117,32 @@ function mapImagePathToPhoto(string $path): string {
 	return URL_ROOT . "/public/img/blog/" . $path;
 }
 
-function prepareAdminUsersData(array &$data, User $userModel): void {
-	$data = [
+function prepareAdminUsersData(User $userModel): array {
+	return [
 		'title' => 'Users dashboard',
 		'users' => $userModel->fetchUsers()
 	];
 }
 
-function prepareBookingDashboardData(array &$data, Booking $bookingModel): void {
-	$data = [
+function prepareBookingDashboardData(Booking $bookingModel): array {
+	return [
 		'title' => 'Bookings dashboard',
 		'bookings' => $bookingModel->fetchAll()
 	];
 }
 
-function prepareShowBookingData(array &$data, Booking $bookingModel, string $res_id): void {
-	$data = [
+function prepareShowBookingData(Booking $bookingModel, string $res_id): array {
+	return [
 		'title' => 'Booking ' . $res_id,
 		'booking' => $bookingModel->fetchSingle($res_id)
 	];
 }
 
-function processImage(array $data, AdminModel $adminModel, string $id): ?string {
+function processImage(array $data, string $adminName, string $id): ?string {
 	if ($data['image'] == null)
 		return null;
 	else {
-		$userName = $adminModel->getEmailName();
+		$userName = $adminName;
 		$blogPath = "../public/img/blog/";
 		$userDir = $blogPath . $userName;
 		$userDirExists = file_exists($userDir) and is_dir($userDir);
@@ -168,15 +168,15 @@ function createThumb($sourceImagePath, $destImagePath): bool {
 	return $success;
 }
 
-function prepareFilteredBookings(array &$data, Booking $bookingModel, string $status): void {
-	$data = [
+function prepareFilteredBookings(Booking $bookingModel, string $status): array {
+	return [
 		'title' => 'Bookings dashboard',
 		'bookings' => $bookingModel->filter($status)
 	];
 }
 
-function prepareEditUserData(array &$data, User $userModel, string $email): void {
-	$data = [
+function prepareEditUserData(User $userModel, string $email): array {
+	return [
 		'title' => 'Edit User',
 		'user' => $userModel->findUser($email)
 	];
