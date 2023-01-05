@@ -5,9 +5,7 @@ require_once 'config/config.php';
 require_once 'helpers/general.php';
 require_once 'helpers/validation.php';
 require_once 'helpers/session.php';
-//	require_once 'helpers/FilterStatementBuilder.php';
-//	require_once 'helpers/RandomStringGenerator.php';
-//	require_once 'helpers/DBUtils.php';
+require_once 'helpers/dataPreparing.php';
 // Autoload core libraries
 spl_autoload_register(function ($className) {
 	$path_to_file = APPROOT . '/libraries/' . $className . '.php';

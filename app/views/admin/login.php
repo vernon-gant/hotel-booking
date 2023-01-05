@@ -6,6 +6,7 @@ require_once APPROOT . '/views/includes/head.php';
         <div class="container py-5" id="content">
             <div class="row">
                 <div class="col-9 col-md-7 col-lg-5 mx-auto">
+                    <?php flash('admin_login_needed'); ?>
                     <div class="card border-0 shadow-lg rounded-3 text-dark">
                         <div class="card-body p-5 text-center">
                             <form class="mb-md-2 mt-md-4 pb-5" method="post" action="<?php echo URL_ROOT . '/admin/login' ?>">

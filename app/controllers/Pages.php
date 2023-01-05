@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Class for rendering static pages
+ * Only one page with data from the database - blog
+ */
 class Pages extends Controller {
 
 	private Post $postModel;
@@ -9,14 +13,18 @@ class Pages extends Controller {
 		$this->postModel = new Post();
 	}
 
-	public function about() {
+	public function about() : void {
 		$data = [
 			'title' => 'About'
 		];
 		$this->view('pages/about', $data);
 	}
 
-	public function blog() {
+	/**
+	 * Renders all posts from the database
+	 * @return void
+	 */
+	public function blog(): void {
 		$data = [
 			'title' => 'Blog',
 			'posts' => $this->postModel->fetchAllPosts()
@@ -24,28 +32,33 @@ class Pages extends Controller {
 		$this->view('pages/blog', $data);
 	}
 
-	public function contact() {
+	public function contact() : void {
 		$data = [
 			'title' => 'Contact'
 		];
 		$this->view('pages/contact', $data);
 	}
 
-	public function gallery() {
+	public function gallery(): void {
 		$data = [
 			'title' => 'Gallery'
 		];
 		$this->view('pages/gallery', $data);
 	}
 
-	public function help() {
+	public function help(): void {
 		$data = [
 			'title' => 'Help'
 		];
 		$this->view('pages/help', $data);
 	}
 
-	public function index() {
+	/**
+	 * Renders main page
+	 * Called with args when booking form on main page has errors
+	 * @return void
+	 */
+	public function index(): void {
 		$data = [
 			'title' => "Motel X"
 		];

@@ -299,7 +299,7 @@ require_once APPROOT . '/views/includes/navbar.php'
 													<?php
 													echo $room['room_type'] ?>
                                                     <img src="<?php
-													echo mapRoomToPhoto($room['room_type']) ?>"
+													echo mapRoomTypeToPhoto($room['room_type']) ?>"
                                                          class="fit-cover img-fluid" alt="room photo">
 													<?php
 													echo $room['description'] ?>

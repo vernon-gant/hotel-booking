@@ -12,7 +12,7 @@ require_once APPROOT . '/views/includes/navbar.php'
                         <div class="col-12 col-md-4 mx-auto d-flex align-items-stretch mb-3">
                             <div class="card">
                                 <div class="card-block d-flex flex-column justify-content-between h-100">
-					    			<?php if (isset($post['img'])) echo '<img class="card-img-top" alt="post photo" src="' . mapImagePathToPhoto($post["img"]) .'">'?>
+					    			<?php if (isset($post['img'])) echo '<img class="card-img-top" alt="post photo" src="' . bakeBlogImagePath($post["img"]) .'">'?>
                                     <h4 class="card-title text-center my-2 <?php if (!isset($post['img'])) echo "p-4" ?>"><?php echo $post['title']?></h4>
                                     <h6 class="card-subtitle text-muted text-center mt-2">Written by <?php echo $post['first_name'] . " " . $post['last_name']?></h6>
                                     <p class="card-text p-3 my-2 text-center"><?php echo substr($post['body'],0,60) . "..."?></p>

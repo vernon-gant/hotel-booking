@@ -1,9 +1,6 @@
 <?php
 
 function validateLoginInput(array &$data, User $userModel): void {
-	// Sanitize input
-	filterPost();
-
 	$data = [
 		'email' => trim($_POST['email']),
 		'pass' => sha1(trim($_POST['pass'])),
@@ -35,7 +32,7 @@ function validateLoginInput(array &$data, User $userModel): void {
 		} else if (!$isActive) {
 			$data['email_err'] = ' ';
 			$data['email'] = '';
-			flash("user_inactive", "This user account was blocked. Please, contact administrator", class: "alert alert-danger");
+			flash("user_inactive", "This user account was blocked. Please, contact administrator", "alert-danger");
 		}
 	}
 
@@ -46,9 +43,6 @@ function validUser(array $data): bool {
 }
 
 function validateRegisterInput(array &$data, User $userModel): void {
-	// Sanitize input
-	filterPost();
-
 	$data = [
 		'first_name' => trim($_POST['first_name']),
 		'last_name' => trim($_POST['last_name']),
@@ -175,8 +169,6 @@ function validGuest(array $data): bool {
 }
 
 function validateGuest(array &$data): void {
-	filterPost();
-
 	$data = [
 		'first_name' => trim($_POST['first_name']),
 		'last_name' => trim($_POST['last_name']),
@@ -252,7 +244,7 @@ function validateGuestDob(array &$data): void {
 }
 
 function validateAdminLogin(array &$data, User $userModel): void {
-	filterPost();
+	;
 	$data['email'] = trim($_POST['email']);
 	$data['pass'] = empty($_POST['pass']) ? "" : sha1($_POST['pass']);
 	// Check email errors
@@ -276,7 +268,6 @@ function validateAdminLogin(array &$data, User $userModel): void {
 }
 
 function processPost(array &$data): void {
-	filterPost();
 	$data['post_title'] = trim($_POST['post_title']);
 	$data['body'] = trim($_POST['body']);
 	$data['image'] = $_FILES['image'] ?? null;
@@ -301,8 +292,7 @@ function validChangeEmail(mixed $baseUser, User $userModel,string $email): bool 
 	}
 }
 
-function validateChangeProfile(mixed $baseUser, array &$data,User $userModel) : void {
-	filterPost();
+function validateChangeProfile(mixed $baseUser, array &$data,User $userModel) : void {;
 	$data['email'] = empty(trim($_POST['email'])) ? null : trim($_POST['email']);
 	$data['first_name'] = empty(trim($_POST['first_name'])) ? null : trim($_POST['first_name']);
 	$data['last_name'] = empty(trim($_POST['last_name'])) ? null : trim($_POST['last_name']);

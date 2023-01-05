@@ -11,7 +11,7 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
 				<?php foreach ($data['posts'] as $post) : ?>
                     <div class="card card-body mb-3 w-50 my-5">
                         <?php if (isset($post['img'])) : ?>
-                            <img alt="post photo" class="card-img-top img-fluid mb-2" src="<?php echo mapImagePathToPhoto($post['img'])?>">
+                            <img alt="post photo" class="card-img-top img-fluid mb-2" src="<?php echo bakeBlogImagePath($post['img'])?>">
                         <?php endif;?>
                         <h4 class="card-title mx-auto"><?php echo $post['title']; ?></h4>
                         <div class="bg-light p-2 mb-3 mx-auto">

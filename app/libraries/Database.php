@@ -30,7 +30,8 @@ class Database {
 		}
 	}
 
-	// Prepare statement with query
+	// Prepare statement with query and bind values
+	// or just execute a query without binding values
 	public function query(string $sql, ...$values): void {
 		if ($this->stmt = $this->dbh->prepare($sql)) {
 			if (count($values) > 0) {
@@ -44,6 +45,8 @@ class Database {
 				call_user_func_array(array($this->stmt, 'bind_param'), $args_ref);
 			}
 			$this->stmt->execute();
+			// Saves the result of the query if it is a SELECT query
+			// (needed for the singleRow, resultSet and rowCount methods)
 			if (str_contains($sql,"SELECT")) {
 				$this->result = $this->stmt->get_result();
 			}
@@ -63,18 +66,22 @@ class Database {
 		return $this->result->fetch_all(MYSQLI_ASSOC);
 	}
 
+	// Get row count
 	public function rowCount(): int|string {
 		return $this->result->num_rows;
 	}
 
+	// Get affected rows
 	public function affectedRows(): int|string {
 		return $this->stmt->affected_rows;
 	}
 
+	// Get last inserted ID
 	public function lastInsertID(): int|string {
 		return $this->stmt->insert_id;
 	}
 
+	// Get type of variable
 	private function _gettype($var): string {
 		if (is_string($var))
 			return 's';
@@ -85,6 +92,7 @@ class Database {
 		return 'b';
 	}
 
+	// Close connection to database
 	public function close(): bool {
 		return $this->dbh->close();
 	}

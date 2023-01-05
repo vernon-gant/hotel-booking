@@ -3,35 +3,64 @@
 require_once APPROOT . "/helpers/DBUtils.php";
 
 
-// Simple page redirect
+/**
+ * Simple page redirect
+ * @param $page
+ * @return void
+ */
 function redirect($page): void {
 	header('Location: ' . URL_ROOT . '/' . $page);
 }
 
+/**
+ * Function to process room search form from main page
+ * If validation is successful, it checks if suer is logged in and if so, it unsets session variables
+ * as they are already set in data array in index booking service method and returns nothing.
+ * If user is not logged in, it sets departure and arrival session variables and redirects to login page.
+ * Considering scenario when validation failed, it calls PagesController and renders index view with errors.
+ * @param $data
+ * @return void
+ */
 function processArrivalDeparture(&$data): void {
 	validateArrivalDeparture($data);
 	if (validArrivalDeparture($data)) {
+		// If user is logged in, unset session variables as they are already set in data array in index booking service method
 		if (!isset($_SESSION['user_email'])) {
 			$_SESSION['arrival'] = $data['arrival'];
 			$_SESSION['departure'] = $data['departure'];
 			redirect("users/login");
 		} else unset($_SESSION['arrival'], $_SESSION['departure']);
 	} else {
+		// True when redirected not from url containing "bookings"
 		$redirectedFromIndex = !str_contains($_SERVER['HTTP_REFERER'], "bookings");
 		if ($redirectedFromIndex) {
+			// Instantiate PagesController and render index view with errors
 			require_once APPROOT . "/controllers/Pages.php";
 			$pages = new Pages();
 			call_user_func_array(array($pages, 'index'), array($data['arrival_err'], $data['departure_err']));
+			exit();
 		}
 	}
 }
 
+/**
+ * Function to retrieve day from date, needed for computing number of days between arrival and departure
+ * @param $date
+ * @return int
+ */
 function extractDayFromDate($date): int {
 	$date = DateTime::createFromFormat("Y-m-d", $date);
 	return (int)$date->format("d");
 }
 
-function mapRoomToPhoto(string $roomType): string {
+/**
+ * Function to map room type to room type photo
+ * after retrieving room type from database for displaying on room search results page.
+ * Returns photo path.
+ * @param string $roomType
+ * @return string
+ */
+function mapRoomTypeToPhoto(string $roomType): string {
 	$path = URL_ROOT . "/img/rooms/";
 	switch ($roomType) {
 		case "Double Suite":
@@ -52,22 +81,27 @@ function mapRoomToPhoto(string $roomType): string {
 	return $path;
 }
 
+/**
+ * Splits price string into array of two integer elements, first one being lower price and second one being higher price.
+ * @param string $priceRange - price range from filter form(1-100, 101-200, 201-300, 301-400, 401-500)
+ * @return array
+ */
 function extractPrice(string $priceRange): array {
 	return array_map(fn($price): int => (int)trim($price), explode("-", $priceRange));
 }
 
-function filterGet(): void {
-	$_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-}
-
-function filterPost(): void {
-	$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-}
-
+/**
+ * Returns user chosen services with their prices.
+ * @param array $userServices
+ * @param DBUtils $utils - instance of DBUtils class
+ * @return array
+ */
 function mapServicesToCosts(array $userServices, DBUtils $utils): array {
+	// Get all services with their prices from database
 	$allServices = $utils->findServicesPrices();
 	$result = array();
 	foreach ($allServices as $service) {
+		// If user has chosen service, add it to result array, containing service name and price from database
 		if (in_array($service['name'], $userServices)) {
 			$result[$service['name']] = $service['price'];
 		}
@@ -75,120 +109,62 @@ function mapServicesToCosts(array $userServices, DBUtils $utils): array {
 	return $result;
 }
 
-function prepareAdminLoginData(): array {
-	return [
-		'title' => 'Admin Login',
-		'email' => '',
-		'pass' => '',
-		'email_err' => '',
-		'pass_err' => ''
-	];
-}
-
-function prepareAddPostData(): array {
-	return [
-		'title' => 'Add Post',
-		'post_title' => '',
-		'body' => '',
-		'post_title_err' => '',
-		'body_err' => ''
-	];
-}
-
-function preparePost(array $data, Post $postModel,string $adminName): array {
-	$id = $postModel->getGenerator()->generate(Post::$idLength);
-	return [
-		'id' => $id,
-		'user_email' => $_SESSION['admin_email'],
-		'post_title' => $data['post_title'],
-		'body' => $data['body'],
-		'img' => processImage($data, $adminName, $id)
-	];
-}
-
-function preparePostDashboardData(Post $postModel): array {
-	return [
-		'title' => 'Posts dashboard',
-		'posts' => $postModel->getAdminPosts()
-	];
-}
-
-function mapImagePathToPhoto(string $path): string {
+/**
+ * Extends short database image path with full path to image.
+ * @param string $path
+ * @return string
+ */
+function bakeBlogImagePath(string $path): string {
 	return URL_ROOT . "/public/img/blog/" . $path;
 }
 
-function prepareAdminUsersData(User $userModel): array {
-	return [
-		'title' => 'Users dashboard',
-		'users' => $userModel->fetchUsers()
-	];
-}
-
-function prepareBookingDashboardData(Booking $bookingModel): array {
-	return [
-		'title' => 'Bookings dashboard',
-		'bookings' => $bookingModel->fetchAll()
-	];
-}
-
-function prepareShowBookingData(Booking $bookingModel, string $res_id): array {
-	return [
-		'title' => 'Booking ' . $res_id,
-		'booking' => $bookingModel->fetchSingle($res_id)
-	];
-}
-
+/**
+ * Function to process blog post form image.
+ * Generally, it checks if image was uploaded and if so, it saves its thumbnail
+ * and returns on success its path relative to /public/img/blog else null.
+ * If not uploaded, returns null.
+ * @param array $data
+ * @param string $adminName - name of admin who is creating blog post without @ ending
+ * @param string $id - blog post id generated by RandomStringGenerator
+ * @return string|null
+ */
 function processImage(array $data, string $adminName, string $id): ?string {
 	if ($data['image'] == null)
 		return null;
 	else {
 		$userName = $adminName;
 		$blogPath = "../public/img/blog/";
+		// Directory where posts images are saved for each admin
 		$userDir = $blogPath . $userName;
 		$userDirExists = file_exists($userDir) and is_dir($userDir);
+		// If directory for admin does not exist, create it
 		if (!$userDirExists)
 			mkdir($userDir, 0777, true);
-		$img_path = "/post_" . $id . ".jpg";
-		$success = createThumb($_FILES['image']["tmp_name"], $userDir . $img_path);
-		return $success ? $userName . $img_path : null;
+		$img_name = "/post_" . $id . ".jpg";
+		$success = createThumb($_FILES['image']["tmp_name"], $userDir . $img_name);
+		return $success ? $userName . $img_name : null;
 	}
 }
 
+/**
+ * Function to create thumbnail of image. Returns true if successful, false otherwise.
+ * @param $sourceImagePath
+ * @param $destImagePath
+ * @return bool
+ */
 function createThumb($sourceImagePath, $destImagePath): bool {
 	$sourceImage = imagecreatefromjpeg($sourceImagePath);
 	$orgWidth = imagesx($sourceImage);
 	$orgHeight = imagesy($sourceImage);
+	// New width and height of thumbnail
 	$thumbWidth = 720;
 	$thumbHeight = 480;
 	$destImage = imagecreatetruecolor($thumbWidth, $thumbHeight);
+	// Perform image resize
 	$success = imagecopyresampled($destImage, $sourceImage, 0, 0, 0, 0, $thumbWidth, $thumbHeight, $orgWidth, $orgHeight);
 	imagejpeg($destImage, $destImagePath);
 	imagedestroy($sourceImage);
 	imagedestroy($destImage);
 	return $success;
-}
-
-function prepareFilteredBookings(Booking $bookingModel, string $status): array {
-	return [
-		'title' => 'Bookings dashboard',
-		'bookings' => $bookingModel->filter($status)
-	];
-}
-
-function prepareEditUserData(User $userModel, string $email): array {
-	return [
-		'title' => 'Edit User',
-		'user' => $userModel->findUser($email)
-	];
-}
-
-function userFormData(): array {
-	filterPost();
-	return [
-		'email' => empty(trim($_POST['email'])) ? null : trim($_POST['email']),
-		'first_name' => empty(trim($_POST['first_name'])) ? null : trim($_POST['first_name']),
-		'last_name' => empty(trim($_POST['last_name'])) ? null : trim($_POST['last_name']),
-		'password' => empty(trim($_POST['pass'])) ? null : sha1(trim($_POST['pass']))
-	];
 }
 

@@ -14,8 +14,7 @@ class BookingService extends Service {
 		$this->utils = new DBUtils();
 	}
 
-	public function index() : array {
-		filterGet();
+	public function index(): array {
 		$data = [
 			'title' => 'Booking',
 			'arrival' => $_SESSION['arrival'] ?? date_create()->format("Y-m-d"),
@@ -26,8 +25,10 @@ class BookingService extends Service {
 			'departure_err' => '',
 		];
 
-		// Check if redirected from main page with filled formular and validate formular
-		if (isset($_GET['arrival'])) processArrivalDeparture($data);
+		// Check if redirected from main page with filled form and validate the data
+		if (isset($_GET['arrival'])) {
+			processArrivalDeparture($data);
+		}
 
 		$data['nights'] = extractDayFromDate($data['departure']) - extractDayFromDate($data['arrival']);
 		$data['rooms'] = $this->roomModel->findAllAvailable($data['arrival'], $data['departure'], $data['guests']);
@@ -35,8 +36,7 @@ class BookingService extends Service {
 		return $data;
 	}
 
-	public function filter() : array {
-		filterGet();
+	public function filter(): array {
 		$data = [
 			'title' => 'Booking',
 			'arrival' => $_GET['arrival'],
@@ -50,9 +50,7 @@ class BookingService extends Service {
 		return $data;
 	}
 
-	public function guests() : array {
-		filterGet();
-
+	public function guests(): array {
 		$data = [
 			'title' => 'Guest info',
 			'first_name' => '',
@@ -84,7 +82,7 @@ class BookingService extends Service {
 		return $data;
 	}
 
-	public function checkout() : array {
+	public function checkout(): array {
 		$data = [
 			'title' => 'Checkout',
 			'booking' => $_SESSION['booking'],
@@ -94,10 +92,9 @@ class BookingService extends Service {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$bookingCreated = $this->bookingModel->createBooking($this->roomModel);
 			if ($bookingCreated) {
-				flash("booking_created","You have successfully made a booking!");
+				flash("booking_created", "You have successfully made a booking!");
 				redirect("pages/index");
-			}
-			else die("ERROR");
+			} else die("ERROR");
 		}
 
 		return $data;

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Base class for all services
+ * Has model method to get model instance
+ */
 class Service {
 
 	// Load model

@@ -9,6 +9,7 @@ require_once APPROOT . '/views/includes/navbar.php'
                     <div class="card-body p-5 text-center">
                         <?php flash("register_success"); ?>
 						<?php flash("user_inactive"); ?>
+                        <?php flash("user_login_needed"); ?>
                         <form class="mb-md-2 mt-md-4 pb-5" method="post"
                               action="<?php echo URL_ROOT . '/users/login' ?>">
                             <h2 class="fw-bold mb-2 text-uppercase text-center">Login</h2>

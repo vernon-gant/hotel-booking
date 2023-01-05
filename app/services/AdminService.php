@@ -50,7 +50,7 @@ class AdminService extends Service {
 
 	public function editUser(string $email) : void {
 		$baseUser = $this->userModel->findUser($email);
-		$formData = userFormData();
+		$formData = prepareUserFormData();
 		if (validChangeEmail($baseUser, $this->userModel, $formData['email'])) {
 			$success = $this->userModel->changeUser($baseUser, $formData);
 			if ($success) {
@@ -58,7 +58,7 @@ class AdminService extends Service {
 				redirect("admin/users/dashboard");
 			} else die("Something went wrong...");
 		} else {
-			flash("incorrect_email", "This user already exists! Choose other email...", "alert alert-danger text-center mt-5");
+			flash("incorrect_email", "This user already exists! Choose other email...", "alert-danger");
 			redirect("admin/users/edit/" . $baseUser->email);
 		}
 

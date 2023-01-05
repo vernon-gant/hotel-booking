@@ -77,7 +77,7 @@ class UserService extends Service {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			validateChangeProfile($baseUser, $data, $this->userModel);
 			if (validRegisterOrChangeInput($data) and empty($data['old_pass_err'])) {
-				$formData = userFormData();
+				$formData = prepareUserFormData();
 				$success = $this->userModel->changeUser($baseUser, $formData);
 				if ($success) {
 					flash("user_change_success", "Your profile was successfully changed!");

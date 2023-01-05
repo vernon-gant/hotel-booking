@@ -6,6 +6,8 @@ require_once APPROOT . '/views/includes/navbar.php';
         <div class="row my-5">
             <div class="col-8 px-0 shadow mx-auto rounded-pill d-none d-md-block">
                 <?php flash("booking_created");?>
+				<?php flash("booking_rejected");?>
+				<?php flash("user_logout_needed");?>
                 <form method="get" action="<?php echo URL_ROOT?>/bookings" class="shadow
                 rounded-pill px-0 overflow-hidden row mx-0">
                     <div class="col-9 overflow-hidden px-0">
