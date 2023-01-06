@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *
+ */
 class BookingService extends Service {
 
 	private Room $roomModel;
@@ -14,6 +17,9 @@ class BookingService extends Service {
 		$this->utils = new DBUtils();
 	}
 
+	/**
+	 * @return array
+	 */
 	public function index(): array {
 		$data = [
 			'title' => 'Booking',
@@ -36,6 +42,9 @@ class BookingService extends Service {
 		return $data;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function filter(): array {
 		$data = [
 			'title' => 'Booking',
@@ -50,25 +59,20 @@ class BookingService extends Service {
 		return $data;
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public function guests(): array {
 		$data = [
 			'title' => 'Guest info',
-			'first_name' => '',
-			'last_name' => '',
-			'address' => '',
-			'city' => '',
-			'country' => '',
-			'zip' => '',
-			'dob' => '',
-			'phone' => '',
-			'fname_err' => '',
-			'lname_err' => '',
-			'address_err' => '',
-			'city_err' => '',
-			'country_err' => '',
-			'zip_err' => '',
-			'dob_err' => '',
-			'phone_err' => ''
+			'first_name' => isset($_POST['first_name']) ? trim($_POST['first_name']) : "",
+			'last_name' => isset($_POST['last_name']) ? trim($_POST['last_name']) : "",
+			'address' => isset($_POST['address']) ? trim($_POST['address']) : "",
+			'city' => isset($_POST['city']) ? trim($_POST['city']) : "",
+			'country' => isset($_POST['country']) ? trim($_POST['country']) : "",
+			'zip' =>isset($_POST['country']) ? trim($_POST['country']) : "",
+			'dob' =>isset($_POST['dob']) ? trim($_POST['dob']) : "",
+			'phone' =>isset($_POST['phone']) ? trim($_POST['phone']) : "",
 		];
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -82,6 +86,9 @@ class BookingService extends Service {
 		return $data;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function checkout(): array {
 		$data = [
 			'title' => 'Checkout',

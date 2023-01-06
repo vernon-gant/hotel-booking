@@ -1,11 +1,25 @@
 <?php
 
+/**
+ * Booking DAO
+ */
 class Booking {
 
+	/**
+	 * Database handler instance
+	 * @var Database
+	 */
 	private Database $db;
 
+	/**
+	 * To generate id for booking
+	 * @var RandomStringGenerator
+	 */
 	private RandomStringGenerator $generator;
 
+	/**
+	 * @var int
+	 */
 	private static int $idLength = 10;
 
 	public function __construct() {
@@ -13,6 +27,11 @@ class Booking {
 		$this->generator = new RandomStringGenerator();
 	}
 
+	/**
+	 * Function to create booking
+	 * @param Room $roomModel
+	 * @return array
+	 */
 	private function generateBookingData(Room $roomModel): array {
 		return [
 			'bookingID' => $this->generator->generate(Booking::$idLength),
@@ -26,6 +45,14 @@ class Booking {
 		];
 	}
 
+	/**
+	 * Complex method to create booking
+	 * Firstly inserts reservation data into reservation table
+	 * Then checks if there are any services selected and inserts them into reservation_services table
+	 * Finally creates a new entry in reservation_events table with new status
+	 * @param Room $roomModel
+	 * @return bool
+	 */
 	public function createBooking(Room $roomModel): bool {
 		$data = $this->generateBookingData($roomModel);
 		$this->db->query("insert into reservations
@@ -45,6 +72,13 @@ class Booking {
 		return false;
 	}
 
+	/**
+	 * Adds a new status event to the database
+	 * @param string $bookingID
+	 * @param string $status
+	 * @param string $details
+	 * @return bool
+	 */
 	public function addEvent(string $bookingID, string $status, string $details): bool {
 		$this->db->query("insert into 
     						  reservation_events (res_id, user_email, status, details)
@@ -52,6 +86,11 @@ class Booking {
 		return $this->db->affectedRows() > 0;
 	}
 
+	/**
+	 * Loop through services and add them to the database
+	 * @param string $bookingID
+	 * @return bool
+	 */
 	public function addServices(string $bookingID): bool {
 		foreach ($_SESSION['booking']['services'] as $name => $price) {
 			$this->db->query("INSERT INTO 
@@ -63,6 +102,10 @@ class Booking {
 		return true;
 	}
 
+	/**
+	 * Method to insert guest data into database
+	 * @return int
+	 */
 	public function createGuest(): int {
 		$this->db->query("INSERT INTO 
     						  motelx.guests (first_name, last_name, address, city, dob, phone)
@@ -76,6 +119,11 @@ class Booking {
 		return $this->db->lastInsertID();
 	}
 
+	/**
+	 * Same as below but for single booking
+	 * @param string $resId
+	 * @return mixed
+	 */
 	public function fetchSingle(string $resId): mixed {
 		$this->db->query("SELECT r.res_id,
        						  r.user_email,
@@ -111,6 +159,11 @@ class Booking {
 		return $this->db->singleRow();
 	}
 
+	/**
+	 * Method for fetching all bookings
+	 * Where clause is used for picking the latest status update event for each booking
+	 * @return array|null
+	 */
 	public function fetchAll(): ?array {
 		$this->db->query("SELECT r.res_id,
 							         r.user_email,
@@ -141,13 +194,26 @@ class Booking {
 		else return null;
 	}
 
-	public function changeStatus(string $res_id, string $status) : bool {
+	/**
+	 * Method to update the status of a reservation by
+	 * inserting a new event into the reservation_events table
+	 * @param string $res_id
+	 * @param string $status
+	 * @return bool
+	 */
+	public function changeStatus(string $res_id, string $status): bool {
 		$this->db->query("INSERT INTO reservation_events (res_id, user_email, status, details)
-							  VALUES (?,?,?,?)",$res_id,$_SESSION['admin_email'],$status,"");
+							  VALUES (?,?,?,?)", $res_id, $_SESSION['admin_email'], $status, "");
 		return $this->db->affectedRows() > 0;
 	}
 
-	public function filter(string $status) : ?array {
+	/**
+	 * Method to fetch bookings of specific status
+	 * Used in admin dashboard
+	 * @param string $status
+	 * @return array|null
+	 */
+	public function filter(string $status): ?array {
 		$this->db->query("SELECT r.res_id,
 							         r.user_email,
 							         g.first_name,
@@ -172,7 +238,7 @@ class Booking {
 							                         where re1.res_id = re2.res_id)
 							  		AND re1.status = ?
 							  GROUP BY r.res_id, r.transaction_date
-							  order by r.transaction_date",$status);
+							  order by r.transaction_date", $status);
 		if ($this->db->rowCount() > 0)
 			return $this->db->resultSet();
 		else return null;

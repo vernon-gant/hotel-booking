@@ -210,7 +210,7 @@ require_once APPROOT . '/views/includes/navbar.php'
                         </fieldset>
                     </div>
                     <div class="mb-3 border-bottom border-3">
-                        <h6 class="mb-2">Price</h6>
+                        <h6 class="mb-2">Price for night</h6>
                         <fieldset class="ml-md-2">
                             <div class="form-inline border rounded p-sm-2 my-2">
                                 <input type="radio" name="price" id="1" value="0-100"

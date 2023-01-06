@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *
+ */
 class UserService extends Service {
 
 	private User $userModel;
@@ -8,13 +11,14 @@ class UserService extends Service {
 		$this->userModel = $this->model('User');
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public function login(): array {
 		$data = [
 			'title' => 'Login',
-			'email' => '',
-			'pass' => '',
-			'email_err' => '',
-			'pass_err' => '',
+			'email' => isset($_POST['email']) ? trim($_POST['email']) : "",
+			'pass' => isset($_POST['pass']) ? sha1(trim($_POST['pass'])) : "",
 		];
 		if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_SESSION['arrival'])) {
 			$_SESSION['bookingRedirect'] = true;
@@ -37,19 +41,17 @@ class UserService extends Service {
 		return $data;
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public function registration(): array {
 		$data = [
 			'title' => 'Register',
-			'first_name' => '',
-			'last_name' => '',
-			'email' => '',
-			'pass' => '',
-			'pass_repeat' => '',
-			'fname_err' => '',
-			'lname_err' => '',
-			'email_err' => '',
-			'pass_err' => '',
-			'pass_repeat_err' => ''
+			'first_name' => trim($_POST['first_name']),
+			'last_name' => trim($_POST['last_name']),
+			'email' => trim($_POST['email']),
+			'pass' => trim($_POST['pass']),
+			'pass_repeat' => trim($_POST['pass_repeat']),
 		];
 		// Check for POST
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -70,14 +72,24 @@ class UserService extends Service {
 		return $data;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function profile(): array {
-		$data = array();
 		$baseUser = $this->userModel->findUser($_SESSION['user_email']);
-		prepareEditProfileData($data, $baseUser);
+		$data = [
+			'title' => 'Profile',
+			'first_name' => $baseUser->first_name,
+			'last_name' => $baseUser->last_name,
+			'email' => $baseUser->email,
+			'pass' => '',
+			'pass_repeat' => '',
+			'old_pass' => '',
+		];
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			validateChangeProfile($baseUser, $data, $this->userModel);
 			if (validRegisterOrChangeInput($data) and empty($data['old_pass_err'])) {
-				$formData = prepareUserFormData();
+				$formData = $this->userModel->prepareUserEditData();
 				$success = $this->userModel->changeUser($baseUser, $formData);
 				if ($success) {
 					flash("user_change_success", "Your profile was successfully changed!");
@@ -89,13 +101,20 @@ class UserService extends Service {
 		return $data;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function bookings(): array {
-		$data = array();
 		$bookings = $this->userModel->fetchBookings();
-		prepareUserBookingsData($data, $bookings);
-		return $data;
+		return [
+			'title' => 'Bookings',
+			'bookings' => $bookings
+		];
 	}
 
+	/**
+	 * @return void
+	 */
 	public function logout(): void {
 		$this->userModel->logout("user");
 	}

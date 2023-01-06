@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Room DAO
+ */
 class Room {
 
 	private Database $db;
@@ -8,6 +11,14 @@ class Room {
 		$this->db = new Database();
 	}
 
+	/**
+	 * Main query of the whole application
+	 * Finds free rooms for the given date range and given number of people
+	 * @param string $arrival
+	 * @param string $departure
+	 * @param int $guests
+	 * @return array|null
+	 */
 	public function findAllAvailable(string $arrival, string $departure, int $guests): ?array {
 		$this->db->query("SELECT room_type, description, price * (EXTRACT(DAY FROM ?) - EXTRACT(DAY FROM ?)) as cost, pets_allowed
 						      FROM `rooms` JOIN room_types rt on rt.name = rooms.room_type
@@ -24,6 +35,11 @@ class Room {
 		else return null;
 	}
 
+	/**
+	 * Second core query of the application
+	 * Finds next free room number for the given room type
+	 * @return int
+	 */
 	public function findNextFree(): int {
 		$this->db->query("SELECT room_num
 							  FROM `rooms` JOIN room_types rt on rt.name = rooms.room_type
@@ -43,6 +59,13 @@ class Room {
 			return $this->db->singleRow()->room_num;
 	}
 
+	/**
+	 * Filters rooms by specified criteria
+	 * Also merges filters with main data array
+	 * Uses FilterStatementBuilder to build the query
+	 * @param array $data
+	 * @return array|null - array of rooms or null if no rooms found
+	 */
 	public function filterRooms(array &$data): ?array {
 		$filters = [
 			'price' => isset($_GET['price']) ? extractPrice($_GET['price']) : null,

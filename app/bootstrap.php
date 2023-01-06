@@ -5,8 +5,7 @@ require_once 'config/config.php';
 require_once 'helpers/general.php';
 require_once 'helpers/validation.php';
 require_once 'helpers/session.php';
-require_once 'helpers/dataPreparing.php';
-// Autoload core libraries
+// Autoload all classes
 spl_autoload_register(function ($className) {
 	$path_to_file = APPROOT . '/libraries/' . $className . '.php';
 	if (file_exists($path_to_file)) {

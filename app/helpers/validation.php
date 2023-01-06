@@ -1,11 +1,6 @@
 <?php
 
 function validateLoginInput(array &$data, User $userModel): void {
-	$data = [
-		'email' => trim($_POST['email']),
-		'pass' => sha1(trim($_POST['pass'])),
-	];
-
 	// Check email errors
 	if (empty($data['email'])) {
 		$data['email_err'] = 'Please, enter your email';
@@ -43,19 +38,10 @@ function validUser(array $data): bool {
 }
 
 function validateRegisterInput(array &$data, User $userModel): void {
-	$data = [
-		'first_name' => trim($_POST['first_name']),
-		'last_name' => trim($_POST['last_name']),
-		'email' => trim($_POST['email']),
-		'pass' => trim($_POST['pass']),
-		'pass_repeat' => trim($_POST['pass_repeat']),
-	];
-
 	checkEmptyRegisterFields($data);
 	validateRegisterPassword($data);
 	validateEmail($data);
 	validateName($data);
-
 	if ($userModel->emailExists($data['email'], "User")) {
 		$data['email_err'] = 'Email is already taken';
 	}
@@ -131,8 +117,6 @@ function validRegisterOrChangeInput(array $data): bool {
 }
 
 function validateArrivalDeparture(array &$data): void {
-	$_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
 	$data['arrival'] = trim($_GET['arrival']);
 	$data['departure'] = trim($_GET['departure']);
 
@@ -169,17 +153,6 @@ function validGuest(array $data): bool {
 }
 
 function validateGuest(array &$data): void {
-	$data = [
-		'first_name' => trim($_POST['first_name']),
-		'last_name' => trim($_POST['last_name']),
-		'address' => trim($_POST['address']),
-		'city' => trim($_POST['city']),
-		'country' => trim($_POST['country']),
-		'zip' => trim($_POST['country']),
-		'dob' => trim($_POST['dob']),
-		'phone' => trim($_POST['phone'])
-	];
-
 	checkEmptyGuestFields($data);
 	validateName($data);
 	validateGuestAddress($data);
@@ -244,9 +217,6 @@ function validateGuestDob(array &$data): void {
 }
 
 function validateAdminLogin(array &$data, User $userModel): void {
-	;
-	$data['email'] = trim($_POST['email']);
-	$data['pass'] = empty($_POST['pass']) ? "" : sha1($_POST['pass']);
 	// Check email errors
 	if (empty($data['email'])) {
 		$data['email_err'] = 'Please, enter your email';
@@ -267,10 +237,7 @@ function validateAdminLogin(array &$data, User $userModel): void {
 	}
 }
 
-function processPost(array &$data): void {
-	$data['post_title'] = trim($_POST['post_title']);
-	$data['body'] = trim($_POST['body']);
-	$data['image'] = $_FILES['image'] ?? null;
+function validatePost(array &$data): void {
 	if (empty($data['post_title'])) {
 		$data['post_title_err'] = 'Please, enter post title';
 	}
@@ -283,8 +250,9 @@ function validPost(array $data): bool {
 	return empty($data['post_title_err']) and empty($data['body_err']);
 }
 
-function validChangeEmail(mixed $baseUser, User $userModel,string $email): bool {
-	if ($baseUser->email == $email) return true;
+function validChangeEmail(mixed $baseUser, User $userModel, string $email): bool {
+	if ($baseUser->email == $email)
+		return true;
 	else {
 		$userExists = $userModel->emailExists($email, "User");
 		$adminExists = $userModel->emailExists($email, "Admin");
@@ -292,7 +260,7 @@ function validChangeEmail(mixed $baseUser, User $userModel,string $email): bool 
 	}
 }
 
-function validateChangeProfile(mixed $baseUser, array &$data,User $userModel) : void {;
+function validateChangeProfile(mixed $baseUser, array &$data, User $userModel): void {
 	$data['email'] = empty(trim($_POST['email'])) ? null : trim($_POST['email']);
 	$data['first_name'] = empty(trim($_POST['first_name'])) ? null : trim($_POST['first_name']);
 	$data['last_name'] = empty(trim($_POST['last_name'])) ? null : trim($_POST['last_name']);
@@ -301,35 +269,14 @@ function validateChangeProfile(mixed $baseUser, array &$data,User $userModel) : 
 	$data['pass_repeat'] = empty(trim($_POST['pass_repeat'])) ? null : trim($_POST['pass_repeat']);
 
 	if (!empty($data['pass'])) {
-		if (empty($data['old_pass'])) $data['old_pass_err'] = "You must enter your old password to set a new one!";
-		elseif ($data['old_pass'] != $baseUser->password) $data['old_pass_err'] = "Wrong password!";
+		if (empty($data['old_pass']))
+			$data['old_pass_err'] = "You must enter your old password to set a new one!";
+		elseif ($data['old_pass'] != $baseUser->password)
+			$data['old_pass_err'] = "Wrong password!";
 		else validateRegisterPassword($data);
 	}
-	if (!empty($data['first_name']) or !empty($data['last_name'])) validateName($data);
-	if (!validChangeEmail($baseUser,$userModel,$data['email'])) $data['email_err'] = "This user already exists! Choose other email...";
-}
-
-function prepareEditProfileData(array &$data, mixed $user) : void {
-	$data = [
-		'title' => 'Profile',
-		'first_name' => $user->first_name,
-		'last_name' => $user->last_name,
-		'email' => $user->email,
-		'pass' => '',
-		'pass_repeat' => '',
-		'old_pass' => '',
-		'old_pass_err' => '',
-		'fname_err' => '',
-		'lname_err' => '',
-		'email_err' => '',
-		'pass_err' => '',
-		'pass_repeat_err' => ''
-	];
-}
-
-function prepareUserBookingsData(array &$data, mixed $bookings) : void {
-	$data = [
-		'title' => 'Bookings',
-		'bookings' => $bookings
-	];
+	if (!empty($data['first_name']) or !empty($data['last_name']))
+		validateName($data);
+	if (!validChangeEmail($baseUser, $userModel, $data['email']))
+		$data['email_err'] = "This user already exists! Choose other email...";
 }

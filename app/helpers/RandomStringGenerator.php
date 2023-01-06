@@ -1,11 +1,21 @@
 <?php
 
+/**
+ * Class for generating random strings
+ * Used for generating ids for post and bookings
+ */
 class RandomStringGenerator
 {
-	/** @var string */
+	/**
+	 * Allowed characters for the random string
+	 * @var string
+	 */
 	protected string $alphabet;
 
-	/** @var int */
+	/**
+	 * Length of the random string
+	 * @var int
+	 */
 	protected int $alphabetLength;
 
 
@@ -25,6 +35,7 @@ class RandomStringGenerator
 	}
 
 	/**
+	 * Define the allowed characters for the random string
 	 * @param string $alphabet
 	 */
 	public function setAlphabet(string $alphabet): void {
@@ -33,6 +44,8 @@ class RandomStringGenerator
 	}
 
 	/**
+	 * Function for generating a random string
+	 * Loop length times and pick a random character from the alphabet
 	 * @param int $length
 	 * @return string
 	 */
@@ -48,6 +61,7 @@ class RandomStringGenerator
 	}
 
 	/**
+	 * Function for generating a random integer using bits shifting
 	 * @param int $min
 	 * @param int $max
 	 * @return int

@@ -23,7 +23,7 @@ class Admin extends Controller {
 	 * admin index page
 	 * @return void
 	 */
-	public function index() {
+	public function index(): void {
 		$data = $this->adminService->index();
 		$this->view("admin/index",$data);
 	}
@@ -34,7 +34,7 @@ class Admin extends Controller {
 	 * Link to this method is /admin/posts/{action}
 	 * @return void
 	 */
-	public function posts() {
+	public function posts(): void {
 		$methodArgs = func_get_args();
 		switch (true) {
 			case in_array("add", $methodArgs) :
@@ -87,6 +87,7 @@ class Admin extends Controller {
 				case 'POST':
 				{
 					$this->adminService->editUser($methodArgs[1]);
+					return;
 				}
 			}
 		} else {
@@ -125,17 +126,19 @@ class Admin extends Controller {
 	}
 
 	/**
+	 * Logs in admin
 	 * @return void
 	 */
-	public function login() {
+	public function login(): void {
 		$data = $this->adminService->login();
 		$this->view("admin/login",$data);
 	}
 
 	/**
+	 * Logs out admin
 	 * @return void
 	 */
-	public function logout() {
+	public function logout(): void {
 		$this->adminService->logout("admin");
 	}
 

@@ -4,7 +4,7 @@ require_once APPROOT . '/views/includes/navbar.php'
 ?>
 <div class="container py-5">
     <div class="row">
-        <div class="col-sm-11 col-md-10 col-lg-9 mx-auto">
+        <div class="col-sm-11 col-md-11 mx-auto">
             <nav class="navbar navbar-light bg-light">
                 <ul class="navbar-nav col-12 d-flex flex-row justify-content-around">
                     <li class="active nav-item">
@@ -23,11 +23,13 @@ require_once APPROOT . '/views/includes/navbar.php'
                             <tr>
                                 <th class="text-center">Reservation ID</th>
                                 <th class="text-center">Room No.</th>
+                                <th class="text-center">Room Type</th>
                                 <th class="text-center">Guests</th>
                                 <th class="text-center">Arrival</th>
                                 <th class="text-center">Departure</th>
                                 <th class="text-center">Services</th>
                                 <th class="text-center pb-1">Status</th>
+                                <th class="text-center pb-1">Transaction Date</th>
                                 <th class="text-center">Total paid</th>
                             </tr>
                             </thead>
@@ -37,17 +39,18 @@ require_once APPROOT . '/views/includes/navbar.php'
                                 <tr>
                                     <td class="text-center"><?php echo $booking['res_id'] ?></td>
                                     <td class="text-center"><?php echo $booking['room_num'] ?></td>
+                                    <td class="text-center"><?php echo $booking['room_type'] ?></td>
                                     <td class="text-center"><?php echo $booking['guests'] ?></td>
                                     <td class="text-center"><?php echo date_format(date_create($booking['arrival']), "d/m/Y") ?></td>
                                     <td class="text-center"><?php echo date_format(date_create($booking['departure']), "d/m/Y") ?></td>
                                     <td class="text-center"><?php echo $booking['services'] ?></td>
-                                    <td class="text-center
-                                    <?php echo match ($booking['status']) {
-										'new' => "bg-success",
-										'confirmed' => "bg-primary",
-										'canceled' => "bg-danger"
-									}
-									?> text-white"><?php echo $booking['status'] ?></td>
+                                    <td class="text-center <?php echo match ($booking['status']) {
+                                                'new' => "bg-success",
+												'confirmed' => "bg-primary",
+												'canceled' => "bg-danger"} ?> text-white">
+                                        <?php echo $booking['status'] ?>
+                                    </td>
+                                    <td class="text-center"><?php echo date_format(date_create($booking['transaction_date']), "d/m/Y h:m:s") ?></td>
                                     <td class="text-center"><?php echo $booking['total_price'] ?>€</td>
                                 </tr>
 								<?php if ($index == count($data['bookings']) - 1)

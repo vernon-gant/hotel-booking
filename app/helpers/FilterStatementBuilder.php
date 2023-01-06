@@ -34,7 +34,7 @@ class FilterStatementBuilder {
 
 	/**
 	 * Function to add price filter to query
-	 * and return new FilterStatementBuilder object
+	 * and pushes low and max price to args array
 	 * @param int $from
 	 * @param int $to
 	 * @return void
@@ -46,7 +46,7 @@ class FilterStatementBuilder {
 
 	/**
 	 * Function to add floor filter to query
-	 * and return new FilterStatementBuilder object
+	 * and push floor to args array
 	 * @param int $floor
 	 * @return void
 	 */
@@ -57,7 +57,7 @@ class FilterStatementBuilder {
 
 	/**
 	 * Function to add pets filter to query
-	 * and return new FilterStatementBuilder object
+	 * and push true or false to args array
 	 * @param int $pets
 	 * @return void
 	 */

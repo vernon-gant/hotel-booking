@@ -19,7 +19,8 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
                         </div>
                         <p class="card-text"><?php
 							echo $post['body']; ?></p>
-                        <a href="<?php echo URL_ROOT; ?>/posts/show/<?php echo $post['id']; ?>" class="btn btn-dark">More</a>
+<!--						--><?php //echo URL_ROOT; ?><!--/posts/show/--><?php //echo $post['id']; ?>
+                        <a href="#" class="btn btn-dark">More</a>
                     </div>
 				<?php endforeach; ?>
 			<?php else: ?>
