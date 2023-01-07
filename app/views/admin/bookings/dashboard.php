@@ -12,6 +12,7 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
                     <thead>
                     <tr>
                         <th class="text-center">Reservation ID</th>
+                        <th class="text-center">Transaction date</th>
                         <th class="text-center">User Email</th>
                         <th class="text-center">Room</th>
                         <th class="text-center">Guests</th>
@@ -41,6 +42,7 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
 								echo "<tbody>" ?>
                             <tr>
                                 <td class="text-center"><?php echo $booking['res_id'] ?></td>
+                                <td class="text-center"><?php echo $booking['transaction_date'] ?></td>
                                 <td class="text-center"><?php echo $booking['user_email'] ?></td>
                                 <td class="text-center"><?php echo $booking['room_num'] ?></td>
                                 <td class="text-center"><?php echo $booking['guests'] ?></td>

@@ -47,11 +47,11 @@ class UserService extends Service {
 	public function registration(): array {
 		$data = [
 			'title' => 'Register',
-			'first_name' => trim($_POST['first_name']),
-			'last_name' => trim($_POST['last_name']),
-			'email' => trim($_POST['email']),
-			'pass' => trim($_POST['pass']),
-			'pass_repeat' => trim($_POST['pass_repeat']),
+			'first_name' => isset($_POST['first_name']) ? trim($_POST['first_name']) : "",
+			'last_name' => isset($_POST['last_name']) ? trim($_POST['last_name']) : "",
+			'email' => isset($_POST['email']) ? trim($_POST['email']) : "",
+			'pass' => isset($_POST['pass']) ? trim($_POST['pass']) : "",
+			'pass_repeat' => isset($_POST['pass_repeat']) ? trim($_POST['pass_repeat']) : "",
 		];
 		// Check for POST
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {

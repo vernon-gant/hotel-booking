@@ -53,10 +53,10 @@
                             <div data-bs-toggle="dropdown" aria-haspopup="true"
                                  aria-expanded="false"
                                  class="align-items-center justify-content-center d-lg-block">
-                                <i class="fa-regular fa-user me-1"></i>
+                                <i class="fa-regular fa-user me-1 text-white"></i>
                                 <span class="mb-0 text-sm font-weight-bold footer-link
                                 text-center align-self-center nav-link-color">
-                                    <?php echo $_SESSION['user_first_name'] . " " . $_SESSION['user_last_name'] ?>
+                                    Hi <span class="fw-bold"><?php echo $_SESSION['user_first_name'] . " " . $_SESSION['user_last_name'] ?></span>!
                                 </span>
                             </div>
                             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">

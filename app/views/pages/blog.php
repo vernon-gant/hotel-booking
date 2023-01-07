@@ -10,7 +10,7 @@ require_once APPROOT . '/views/includes/navbar.php'
                     <?php if ($index % 3 == 0) echo "<div class='row mx-auto'>"?>
 
                         <div class="col-12 col-md-4 mx-auto d-flex align-items-stretch mb-3">
-                            <div class="card">
+                            <div class="card w-100">
                                 <div class="card-block d-flex flex-column justify-content-between h-100">
 					    			<?php if (isset($post['img'])) echo '<img class="card-img-top" alt="post photo" src="' . bakeBlogImagePath($post["img"]) .'">'?>
                                     <h4 class="card-title text-center my-2 <?php if (!isset($post['img'])) echo "p-4" ?>"><?php echo $post['title']?></h4>
