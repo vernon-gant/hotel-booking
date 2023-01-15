@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2022 at 01:55 PM
+-- Generation Time: Jan 15, 2023 at 09:19 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -42,15 +42,7 @@ CREATE TABLE `guests` (
 --
 
 INSERT INTO `guests` (`guest_id`, `first_name`, `last_name`, `address`, `city`, `dob`, `phone`) VALUES
-(17, 'Daniil', 'Zakaka', 'Maafe SChn G 11', 'workss', '2001-06-14', '+79107796812'),
-(18, 'Daniil', 'Fisher', 'Maafe SChn G 11', 'Wien', '2001-06-14', '+79107796812'),
-(19, 'Daniil', 'adfAef', 'Maafe SChn G 11', 'dbb', '2001-06-14', '+79107796812'),
-(20, 'Daniil', '/adfAef', 'Maafe SChn G 11', 'sdgerg', '2001-06-14', '+79107796812'),
-(21, 'Daniil', 'adfAef', 'Maafe SChn G 11', 'Wien', '2001-08-14', '+79107796812'),
-(22, 'Daniil', 'Slepen', 'Maafe SChn G 11', 'Wien', '2001-06-14', '+79107796812'),
-(23, 'Daniil', 'Sleptsov', 'Maafe SChn G 11', 'sverbvg', '2001-06-14', '+79107796812'),
-(24, 'Daniil', 'Sleptsov', 'Matthias Sch&ouml;nerer Gasse 11', 'Wien', '2001-06-14', '+79107796812'),
-(25, 'Daniil', 'Wojewnik', 'Maafe SChn G 11', 'Wien', '2001-06-14', '+79107796812');
+(32, 'Aleksandr', 'Zakharov', 'Matthias Sch&ouml;nerer Gasse 11', 'Wien', '2001-06-14', '+79107796812');
 
 -- --------------------------------------------------------
 
@@ -66,13 +58,6 @@ CREATE TABLE `posts` (
   `img` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `user_email`, `title`, `body`, `img`, `created_at`) VALUES
-('lkhogepawl', 'admin@gmail.com', 'Russia envador', 'afwefewf', 'admin/post_lkhogepawl.jpg', '2022-11-22 15:21:35');
 
 -- --------------------------------------------------------
 
@@ -97,13 +82,7 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`res_id`, `user_email`, `guest_id`, `room_num`, `guests`, `arrival`, `departure`, `total_price`, `transaction_date`) VALUES
-('3Y04A5IPFB', 'shkvark@gmail.com', 24, 4, 4, '2022-12-01', '2022-12-03', 845, '2022-12-01 11:28:33'),
-('AZ6SJ77CF5', 'admin@gmail.com', 19, 1, 1, '2022-11-15', '2022-11-17', 145, '2022-11-15 13:42:53'),
-('D1EEYGD051', 'admin@gmail.com', 21, 7, 1, '2022-11-15', '2022-11-17', 145, '2022-11-15 13:50:20'),
-('EMWE6A0GPM', 'admin@gmail.com', 23, 12, 1, '2022-11-15', '2022-11-17', 145, '2022-11-15 13:53:09'),
-('OB7XO27RKA', 'admin@gmail.com', 22, 9, 1, '2022-11-15', '2022-11-17', 145, '2022-11-15 13:51:56'),
-('VWXAV0DH9J', 'admin@gmail.com', 20, 2, 1, '2022-11-15', '2022-11-17', 145, '2022-11-15 13:43:56'),
-('YNOXCVHM41', 'ibo@gmail.com', 25, 6, 1, '2022-12-05', '2022-12-07', 245, '2022-12-05 13:31:49');
+('N136O3NN3C', 'aleks@gmail.com', 32, 4, 3, '2023-01-15', '2023-01-17', 845, '2023-01-15 08:17:27');
 
 -- --------------------------------------------------------
 
@@ -124,32 +103,8 @@ CREATE TABLE `reservation_events` (
 --
 
 INSERT INTO `reservation_events` (`res_id`, `user_email`, `status`, `details`, `created_at`) VALUES
-('3Y04A5IPFB', 'shkvark@gmail.com', 'new', 'New booking created by user shkvark@gmail.com', '2022-12-01 11:28:33'),
-('3Y04A5IPFB', 'admin@gmail.com', 'new', '', '2022-12-01 11:40:15'),
-('3Y04A5IPFB', 'admin@gmail.com', 'new', '', '2022-12-01 11:41:45'),
-('3Y04A5IPFB', 'admin@gmail.com', 'confirmed', '', '2022-12-01 11:37:30'),
-('3Y04A5IPFB', 'admin@gmail.com', 'confirmed', '', '2022-12-01 11:40:17'),
-('3Y04A5IPFB', 'admin@gmail.com', 'confirmed', '', '2022-12-01 11:42:07'),
-('3Y04A5IPFB', 'admin@gmail.com', 'canceled', '', '2022-12-01 11:37:41'),
-('3Y04A5IPFB', 'admin@gmail.com', 'canceled', '', '2022-12-01 11:40:13'),
-('3Y04A5IPFB', 'admin@gmail.com', 'canceled', '', '2022-12-01 11:40:20'),
-('3Y04A5IPFB', 'admin@gmail.com', 'canceled', '', '2022-12-01 11:42:09'),
-('AZ6SJ77CF5', 'admin@gmail.com', '', '', '2022-11-25 09:13:21'),
-('AZ6SJ77CF5', 'admin@gmail.com', '', '', '2022-11-25 09:16:34'),
-('AZ6SJ77CF5', 'admin@gmail.com', 'new', ' ', '2022-11-15 13:42:53'),
-('AZ6SJ77CF5', 'admin@gmail.com', 'canceled', '', '2022-11-21 12:27:47'),
-('AZ6SJ77CF5', 'admin@gmail.com', 'canceled', '', '2022-11-25 09:18:36'),
-('D1EEYGD051', 'admin@gmail.com', 'new', ' ', '2022-11-15 13:50:20'),
-('D1EEYGD051', 'admin@gmail.com', 'new', '', '2022-11-25 09:18:56'),
-('D1EEYGD051', 'admin@gmail.com', 'confirmed', '', '2022-11-21 12:27:47'),
-('D1EEYGD051', 'admin@gmail.com', 'canceled', '', '2022-11-25 09:18:58'),
-('EMWE6A0GPM', 'admin@gmail.com', 'new', ' ', '2022-11-15 13:53:09'),
-('EMWE6A0GPM', 'admin@gmail.com', 'new', '', '2022-11-25 09:18:09'),
-('EMWE6A0GPM', 'admin@gmail.com', 'confirmed', '', '2022-11-21 12:27:47'),
-('OB7XO27RKA', 'admin@gmail.com', 'new', ' ', '2022-11-15 13:51:56'),
-('VWXAV0DH9J', 'admin@gmail.com', 'new', ' ', '2022-11-15 13:43:56'),
-('VWXAV0DH9J', 'admin@gmail.com', 'confirmed', '', '2022-11-25 09:18:50'),
-('YNOXCVHM41', 'ibo@gmail.com', 'new', 'New booking created by user ibo@gmail.com', '2022-12-05 13:31:49');
+('N136O3NN3C', 'aleks@gmail.com', 'new', 'New booking created by user aleks@gmail.com', '2023-01-15 08:17:27'),
+('N136O3NN3C', 'admin@gmail.com', 'confirmed', '', '2023-01-15 08:19:02');
 
 -- --------------------------------------------------------
 
@@ -167,27 +122,9 @@ CREATE TABLE `reservation_services` (
 --
 
 INSERT INTO `reservation_services` (`res_id`, `service_name`) VALUES
-('3Y04A5IPFB', 'breakfast'),
-('3Y04A5IPFB', 'parking'),
-('3Y04A5IPFB', 'pets'),
-('AZ6SJ77CF5', 'breakfast'),
-('AZ6SJ77CF5', 'parking'),
-('AZ6SJ77CF5', 'pets'),
-('D1EEYGD051', 'breakfast'),
-('D1EEYGD051', 'parking'),
-('D1EEYGD051', 'pets'),
-('EMWE6A0GPM', 'breakfast'),
-('EMWE6A0GPM', 'parking'),
-('EMWE6A0GPM', 'pets'),
-('OB7XO27RKA', 'breakfast'),
-('OB7XO27RKA', 'parking'),
-('OB7XO27RKA', 'pets'),
-('VWXAV0DH9J', 'breakfast'),
-('VWXAV0DH9J', 'parking'),
-('VWXAV0DH9J', 'pets'),
-('YNOXCVHM41', 'breakfast'),
-('YNOXCVHM41', 'parking'),
-('YNOXCVHM41', 'pets');
+('N136O3NN3C', 'breakfast'),
+('N136O3NN3C', 'parking'),
+('N136O3NN3C', 'pets');
 
 -- --------------------------------------------------------
 
@@ -295,21 +232,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`email`, `password`, `first_name`, `last_name`, `role`, `created_at`, `status`) VALUES
 ('admin@gmail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Admin', 'Admin', 'Admin', '2022-10-29 09:51:40', 'active'),
-('aleks1@gmail.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Ibo', 'Zakzak', 'User', '2022-10-29 16:49:39', 'active'),
-('daniil@gmail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Daniil', 'Sleptsov', 'Admin', '2022-11-17 18:34:30', 'active'),
-('gamil@sg.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Kok', 'Cec', 'User', '2022-10-31 09:33:54', 'active'),
-('garoshinvien@gmail.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Daniil', 'Slepen', 'User', '2022-10-31 12:26:02', 'active'),
-('ibo@gmail.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Ibrahim', 'Moalim', 'User', '2022-11-20 10:37:45', 'active'),
-('info@levus.co', '166602b8fd26ca36c7ce2fc701eb998365c50654', 'Daniil', 'Sleptsov', 'User', '2022-11-11 08:36:32', 'active'),
-('infolfhfjzjftj@levus.co', '235aa633f6490359c9267ee2f8d2f4720d933924', 'Daniil', 'Slepen', 'User', '2022-11-11 08:45:06', 'active'),
-('infolfhftj@levus.co', '235aa633f6490359c9267ee2f8d2f4720d933924', 'Daniil', 'Slepen', 'User', '2022-11-11 08:41:17', 'active'),
-('infolol@levus.co', '166602b8fd26ca36c7ce2fc701eb998365c50654', 'Daniil', 'Slepen', 'User', '2022-11-11 08:39:49', 'active'),
-('lalka@gmail.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Kok', 'Coc', 'User', '2022-10-31 09:44:21', 'active'),
-('piotr_wojewnik@gmail.com', '51abb9636078defbf888d8457a7c76f85c8f114c', 'Piotr', 'Wojewnik', 'User', '2022-11-06 09:49:42', 'active'),
-('rebi@gmail.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Andrei', 'Ribin', 'User', '2022-10-31 09:32:13', 'active'),
-('shkvark@gmail.com', '166602b8fd26ca36c7ce2fc701eb998365c50654', 'Mark', 'Vlasov', 'User', '2022-12-01 11:00:24', 'active'),
-('slep@gmail.com', '8033a7f55d17f679ee0cdef9f9841679476f46f9', 'Daniil', 'Slepen', 'User', '2022-10-31 12:24:20', 'active'),
-('zeliha@gmail.com', '67ef0151b52bb47bee3d84986b073388b876e38f', 'Vural', 'Zeliha', 'User', '2022-10-29 09:55:27', 'active');
+('aleks@gmail.com', '235aa633f6490359c9267ee2f8d2f4720d933924', 'Aleksandr', 'Zakharov', 'User', '2023-01-15 08:15:14', 'active');
 
 --
 -- Indexes for dumped tables
@@ -384,7 +307,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `guests`
 --
 ALTER TABLE `guests`
-  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Constraints for dumped tables
