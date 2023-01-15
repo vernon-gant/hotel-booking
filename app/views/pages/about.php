@@ -7,7 +7,7 @@ require_once APPROOT . '/views/includes/navbar.php'
 		<section class="container-fluid d-flex flex-column align-items-start">
 			<div class="row d-inline-block my-1 py-1">
 				<div class="d-flex flex-column my-1">
-					<span class="fw-bold">Firmenname</span>
+					<span class="fw-bold">Company name</span>
 					<span class="fw-normal px-3 py-2">Motel X</span>
 				</div>
 			</div>
@@ -28,47 +28,47 @@ require_once APPROOT . '/views/includes/navbar.php'
 			</div>
 			<div class="row d-inline-block my-1 py-lg-1">
 				<div class="d-flex flex-column my-1">
-					<span class="fw-bold">Rechtsform</span>
-					<span class="fw-normal px-3 py-2">Gesellschaft mit beschränkter Haftung</span>
+					<span class="fw-bold">Legal form</span>
+					<span class="fw-normal px-3 py-2">Limited liability company</span>
 				</div>
 			</div>
 			<div class="row d-inline-block my-1 py-lg-1">
 				<div class="d-flex flex-column my-1">
-					<span class=" fw-bold">Firmenbuchnummer</span>
+					<span class=" fw-bold">Company registration number</span>
 					<span class="fw-normal px-3 py-2">FN123456k</span>
 				</div>
 			</div>
 			<div class="row d-inline-block my-1 py-lg-1">
 				<div class="d-flex flex-column my-1">
-					<span class="fw-bold">Firmenbuchgericht</span>
-					<span class="fw-normal px-3 py-2">Handelsgericht Wien</span>
+					<span class="fw-bold">Company registration court</span>
+					<span class="fw-normal px-3 py-2">Commercial Court Vienna</span>
 				</div>
 			</div>
 			<div class="row d-inline-block my-1 py-lg-1">
 				<div class="d-flex flex-column my-1">
-					<span class="fw-bold">UID-Nummer</span>
+					<span class="fw-bold">VAT number</span>
 					<span class="fw-normal px-3 py-2">ATU99999999</span>
 				</div>
 			</div>
 			<div class="row d-inline-block my-1 py-lg-1">
 				<div class="d-flex flex-column my-1">
-					<span class="fw-bold">Geschäftsführer</span>
+					<span class="fw-bold">Managing Director</span>
 					<span class="fw-normal px-3 py-2">Aldin Zehinovic</span>
 				</div>
 			</div>
-			<div class="row d-inline-block my-1 py-lg-1 w-50">
-				<div class="d-flex flex-column my-1 align-items-start">
-					<span class="fw-bold">Gesellschaftsanteile</span>
-					<div class="d-flex flex-row p-3 flex-lg-shrink-0">
-						<div class="d-flex flex-column align-items-center p-1">
+			<div class="row my-1 py-lg-1 w-50">
+				<div class="d-flex flex-column my-1 align-items-start container">
+					<div class="fw-bold mb-3">Shares in the company</div>
+					<div class="row">
+						<div class="col-4 d-flex flex-column justify-content-center">
 							<img alt="Photo of Aldin"
-							     class="img-fluid rounded"
-							     src="<?php echo URL_ROOT?>/img/team/aleks-photo.jpg">
+							     class="img-fluid rounded team"
+							     src="<?php echo URL_ROOT?>/img/team/aldin.jpeg">
 							<span class="w-auto my-1 text-center">Aldin Zehinovic (50%)</span>
 						</div>
-						<div class="d-flex flex-column align-items-center p-1 mx-5">
+						<div class="col-4 d-flex flex-column justify-content-center">
 							<img alt="Photo of Aleks"
-							     class="img-fluid rounded"
+							     class="img-fluid rounded team"
 							     src="<?php echo URL_ROOT?>/img/team/aleks-photo.jpg">
 							<span class="w-auto my-1 text-center">Aleksandr Zakharov (50%)</span>
 						</div>

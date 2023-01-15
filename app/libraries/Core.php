@@ -30,9 +30,9 @@ class Core {
 		if (file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
 			// If exists set as controllers
 			$this->currentController = ucwords($url[0]);
-			// Unset 0 Index
-			unset($url[0]);
 		}
+		// Unset 0 Index
+		unset($url[0]);
 
 		// Require the controllers
 		require_once '../app/controllers/' . $this->currentController . '.php';
@@ -43,9 +43,9 @@ class Core {
 		// Check for second part of url
 		if (isset($url[1]) and method_exists($this->currentController, $url[1])) {
 			$this->currentMethod = $url[1];
-			// Unset method in array
-			unset($url[1]);
 		}
+		// Unset method in array
+		unset($url[1]);
 		$params = $url ? array_values($url) : [];
 		call_user_func_array([$this->currentController, $this->currentMethod], $params);
 	}
