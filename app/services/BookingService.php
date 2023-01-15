@@ -25,10 +25,7 @@ class BookingService extends Service {
 			'title' => 'Booking',
 			'arrival' => $_SESSION['arrival'] ?? date_create()->format("Y-m-d"),
 			'departure' => $_SESSION['departure'] ?? date_create()->modify("+2 days")->format("Y-m-d"),
-			'nights' => 2,
 			'guests' => $_GET['guests'] ?? 1,
-			'arrival_err' => '',
-			'departure_err' => '',
 		];
 
 		// Check if redirected from main page with filled form and validate the data
@@ -36,7 +33,7 @@ class BookingService extends Service {
 			processArrivalDeparture($data);
 		}
 
-		$data['nights'] = extractDayFromDate($data['departure']) - extractDayFromDate($data['arrival']);
+		$data['nights'] = computeNights($data['departure'],$data['arrival']);
 		$data['rooms'] = $this->roomModel->findAllAvailable($data['arrival'], $data['departure'], $data['guests']);
 
 		return $data;
@@ -52,8 +49,6 @@ class BookingService extends Service {
 			'departure' => $_GET['departure'],
 			'nights' => $_GET['nights'],
 			'guests' => $_GET['guests'],
-			'arrival_err' => '',
-			'departure_err' => '',
 		];
 		$data['rooms'] = $this->roomModel->filterRooms($data);
 		return $data;

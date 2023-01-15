@@ -171,7 +171,7 @@ class User {
 							                         where re1.res_id = re2.res_id)
 							  AND r.user_email = ?
 							  GROUP BY r.res_id, r.transaction_date
-							  order by r.transaction_date",$_SESSION['user_email']);
+							  order by r.transaction_date desc",$_SESSION['user_email']);
 		if ($this->db->rowCount() > 0) return $this->db->resultSet();
 		else return null;
 	}

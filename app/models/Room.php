@@ -20,7 +20,7 @@ class Room {
 	 * @return array|null
 	 */
 	public function findAllAvailable(string $arrival, string $departure, int $guests): ?array {
-		$this->db->query("SELECT room_type, description, price * (EXTRACT(DAY FROM ?) - EXTRACT(DAY FROM ?)) as cost, pets_allowed
+		$this->db->query("SELECT room_type, description, price * DATEDIFF(?,?) as cost, pets_allowed
 						      FROM `rooms` JOIN room_types rt on rt.name = rooms.room_type
 							  WHERE room_num not IN (
 							      SELECT room_num
@@ -75,7 +75,7 @@ class Room {
 		$data = array_merge($data, $filters);
 
 		$statementBuilder = (new FilterStatementBuilder
-		("SELECT room_type, description, price * (EXTRACT(DAY FROM ?) - EXTRACT(DAY FROM ?)) as cost, pets_allowed
+		("SELECT room_type, description, price * DATEDIFF(?,?) as cost, pets_allowed
 						      FROM `rooms` JOIN room_types rt on rt.name = rooms.room_type
 							  WHERE room_num not IN (
 							      SELECT room_num

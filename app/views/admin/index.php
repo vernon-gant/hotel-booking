@@ -7,10 +7,9 @@ require_once APPROOT . '/views/includes/admin_sidebar.php';
         <div class="container-fluid py-5 d-flex flex-column align-items-center">
             <?php flash('admin_logout_needed'); ?>
             <h1 class="fw-bold">Admin Page</h1>
-            <p class="col-md-8 fs-4">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Autem cum dolor dolore ea eveniet excepturi expedita, minus modi mollitia nostrum, obcaecati perferendis quis
-                recusandae repellendus rerum sit suscipit tempore, vitae?
+            <p class="col-md-8 fs-4 text-center">
+                This is the admin page. You can manage users, bookings and blog posts from here.
+                Log out from the admin page to return to the user page.
             </p>
         </div>
     </div>

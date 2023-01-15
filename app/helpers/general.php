@@ -43,14 +43,18 @@ function processArrivalDeparture(&$data): void {
 	}
 }
 
+
 /**
- * Function to retrieve day from date, needed for computing number of days between arrival and departure
- * @param $date
+ * Function to compute number of days between two dates
+ * @param $arrival
+ * @param $departure
  * @return int
  */
-function extractDayFromDate($date): int {
-	$date = DateTime::createFromFormat("Y-m-d", $date);
-	return (int)$date->format("d");
+function computeNights($departure, $arrival): int {
+	$arrival = DateTime::createFromFormat("Y-m-d", $arrival);
+	$departure = DateTime::createFromFormat("Y-m-d", $departure);
+	$interval = $arrival->diff($departure);
+	return (int)$interval->format("%a");
 }
 
 /**

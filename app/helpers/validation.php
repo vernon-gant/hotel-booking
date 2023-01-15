@@ -127,17 +127,16 @@ function validateArrivalDeparture(array &$data): void {
 		$data['arrival_err'] = 'Please, enter your arrival date';
 	}
 	if (empty($data['departure'])) {
-		$data['departure_err'] = 'Please, enter your departure date your password';
+		$data['departure_err'] = 'Please, enter your departure date';
 	}
 
 	$arrival = date_create($data['arrival']);
 	$departure = date_create($data['departure']);
 
-	if (date_diff($arrival, $departure)->invert == 1 || date_diff($departure, $arrival)->days == 0) {
+	if (date_diff(date_create(), $arrival)->invert == 1 && date_diff(date_create(), $arrival)->days > 0) {
+		$data['arrival_err'] = 'Please, make sure your arrival date is today or later';
+	} elseif (date_diff($arrival, $departure)->invert == 1 || date_diff($departure, $arrival)->days == 0) {
 		$data['arrival_err'] = 'Please, make sure your arrival is before your departure';
-	} elseif (date_diff(date_create(), $arrival)->invert == 1 && date_diff(date_create(), $arrival)
-			->days > 0) {
-		$data['arrival_err'] = 'Please, make sure your arrival date is correct!';
 	}
 }
 
