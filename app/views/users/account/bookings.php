@@ -11,7 +11,7 @@ require_once APPROOT . '/views/includes/navbar.php'
                         <a class="nav-link" href="<?php echo URL_ROOT . "/users/account/profile" ?>">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URL_ROOT . "/users/account/" ?>">Bookings</a>
+                        <a class="nav-link" href="<?php echo URL_ROOT . "/users/account/bookings" ?>">Bookings</a>
                     </li>
                 </ul>
             </nav>
