@@ -37,7 +37,3 @@ To set up the project, follow these steps:
 3. Create a new database in your MySQL server.
 4. Edit the configuration file to update the database connection details.
 5. Import the data from the provided SQL file into your newly created database.
-
-## Author
-
-This project was created by me :)
